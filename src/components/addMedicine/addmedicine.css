@@ -1,0 +1,78 @@
+.addmeds{
+    flex: 4;
+    padding: 10px;
+    background-color: #202020;
+}
+
+.addMedsTitle{
+    background-color: #2b2b2b;
+    margin-top: 10px;
+    padding: 10px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
+}
+.heading{
+    font-weight: 600;
+    margin-top: 20px;
+    color: #bbbbbb;
+    align-items: center;
+    justify-content:center;
+}
+.MedsForm{
+    margin-left: 30%;
+    flex-wrap: wrap;    
+}
+.newMedsItem{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+.newMedsItem>label{
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: gray;
+}
+.newMedsItem>input{
+    height: 20px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.newMedsBtn{
+    width: 300px;
+    height: 40px;
+    border: none;
+    background-color: rgb(60, 153, 156);
+    margin-right: 10px;
+    color: white;
+    padding: 7px 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+.newMedsBtnReset{
+    width: 200px;
+    height: 40px;
+    border: none;
+    background-color: tomato;
+    color: white;
+    padding: 7px 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+
+}
+.errors{
+    padding: 10px;
+    color: rgb(172, 50, 50);
+    font-size: 16px;
+}

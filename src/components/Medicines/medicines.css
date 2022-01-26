@@ -1,0 +1,50 @@
+.medicine{
+    flex: 4;
+    padding: 10px;
+    background-color: #202020;
+}
+.medicineTop{
+    padding: 10px;
+    height: 50px;
+    background-color: #2b2b2b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
+}
+.searchInput>input{
+    background-color: #202020;
+    height: 30px;
+    border-radius: 10px;
+    width: 300px;
+    margin-bottom: 10px;
+    border: none;
+    padding: 5px;
+    border-bottom: 1px solid gray;
+
+}
+.medicineBottom{
+    padding: 10px;
+    margin-top: 10px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
+}
+.medicineTable{
+    padding: 10px;
+    width: 98%;
+    height: 525px;
+}
+.medListEdit{
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color:white;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.medListDelete{
+    color: tomato;
+    cursor: pointer;
+}

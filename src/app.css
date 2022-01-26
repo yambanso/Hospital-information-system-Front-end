@@ -1,0 +1,10 @@
+a:link{
+    text-decoration: none;
+    color: inherit;
+}
+.MuiDataGrid-root .MuiDataGrid-columnHeaderWrapper{
+    color: white;
+}
+.MuiTablePagination-root{
+    color: white;
+}
