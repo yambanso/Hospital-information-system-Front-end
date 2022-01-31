@@ -21,13 +21,15 @@ export const userColumns = [
 export const userRows = [
   { id: 1, name: 'Jon Snow', email : 'Jon@gmail.com', Role: "Admin" },
   { id: 2, name: 'Cersei Lannister', email : 'Cersei@yahoo.com', Role: "Pharmacists" },
-  { id: 3, name: 'Jaime Lannister', email : 'Jaime@gmail.com', Role: "Receptionist" },
-  { id: 4, name: 'Arya Stark', email: 'Arya@gmail.com', Role: "Lab Technician" },
-  { id: 5, name: 'Daenerys Targaryen', email: 'Daenerys@gmail.com', Role: "Doctor" },
-  { id: 6, name: 'Hana Melisandre', email: 'Hana@gmail.com', Role: "Doctor" },
-  { id: 7, name: 'Ferrara Clifford', email: 'Ferrara@gmail.com', Role: "Lab Technician"},
-  { id: 8, name: 'RossiniFrances', email: 'Rossini@gmail.com', Role: "Pharmacists" },
-  { id: 9, name: 'Harvey Roxie', email: 'Harvey@gmail.com', Role: "Admin" },
+  { id: 3, name: 'Daenerys Targaryen', email: 'Daenerys@gmail.com', Role: "Doctor" },
+  { id: 4, name: 'Jaime Lannister', email : 'Jaime@gmail.com', Role: "Receptionist" },
+  { id: 5, name: 'Arya Stark', email: 'Arya@gmail.com', Role: "Lab Technician" },
+  { id: 6, name: 'Daenerys Targaryen', email: 'Daenerys@gmail.com', Role: "Doctor" },
+  { id: 7, name: 'Hana Melisandre', email: 'Hana@gmail.com', Role: "Doctor" },
+  { id: 8, name: 'Ferrara Clifford', email: 'Ferrara@gmail.com', Role: "Lab Technician"},
+  { id: 9, name: 'RossiniFrances', email: 'Rossini@gmail.com', Role: "Pharmacists" },
+  { id: 10, name: 'Daenerys Targaryen', email: 'Daenerys@gmail.com', Role: "Doctor" },
+  { id: 11, name: 'Harvey Roxie', email: 'Harvey@gmail.com', Role: "Admin" },
 ];
 
 export const patientsColumns = [
@@ -97,3 +99,15 @@ export const servicesRows =[
   
   
   ]
+export const consultationHistory = [
+  {id : 1, patient_id : 4, Description : 'headache sore throat back pains',lab_results: 'Malaria = positive',visit_day: '31-01-2022'},
+  {id : 2, patient_id : 3, Description : 'headache',lab_results: null,visit_day: '14-01-2022'},
+  {id : 3, patient_id : 1, Description : 'coughing', lab_results: null,visit_day: '10-01-2022'},
+  {id : 4, patient_id : 6, Description : 'headache, coughin',lab_results: "TB : Positive",visit_day: '14-12-2021'},
+  {id : 5, patient_id : 26, Description : 'headache sore throat back pains',lab_results: 'Malaria = positive',visit_day: '31-10-2021'},
+  {id : 6, patient_id : 783, Description : 'headache',lab_results: null,visit_day: '08-06-2021'},
+  {id : 7, patient_id : 46, Description : 'coughing', lab_results: null,visit_day: '10-04-2021'},
+  {id : 8, patient_id : 74, Description : 'headache, coughin',lab_results: "TB : Positive",visit_day: '14-01-2021'}
+
+]
+            

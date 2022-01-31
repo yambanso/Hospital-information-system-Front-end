@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import {Link} from 'react-router-dom'
+import { AccessTime } from '@material-ui/icons'
 import { DataGrid } from '@material-ui/data-grid';
 import { patientsRows } from '../../data/tableData';
 import './patients.css'
@@ -51,10 +53,26 @@ export default function Patients() {
           field: 'address',
           headerName: 'Address',
           width: 130,
-        },
+        },{
+          field: 'actions',
+          headerName: 'Actions',
+          width: 300,
+          renderCell  : (params)=>{
+           return(
+                  <>
+                  <Link to={"/Admin/Patient_history/"+params.id}>
+                    <button className="displayBtn">
+                    <AccessTime className='displayIcon'/>
+                    History
+                 </button>
+                  </Link>
+                  </>
+                  )
+          }
+      }
     ];
 
-
+    
   return (
     <div className='patients'>
         <div className="patientTop">

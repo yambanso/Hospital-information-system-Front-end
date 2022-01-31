@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import {Link} from 'react-router-dom'
 import { DataGrid } from '@material-ui/data-grid'
 import { DeleteOutline, Visibility } from '@material-ui/icons'
 import { userRows } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
+import Display from "./Display"
 import './users.css'
 
 export default function Adminuser() {
@@ -15,7 +17,9 @@ export default function Adminuser() {
     const handleChange = (name) =>{
         setdata(data.filter((item) => item.name.toLowerCase().includes(name)));
     }
-    
+
+
+
      const userColumn = [
             { field: 'id', headerName: 'ID', width: 90 },
             {
@@ -36,14 +40,18 @@ export default function Adminuser() {
             {
                 field: 'actions',
                 headerName: 'Actions',
-                width: 150,
+                width: 300,
                 renderCell  : (params)=>{
                     const role = params.row.Role;
+                    
                     return(
                         <>
+                        <Link to={"/Admin/Consultation_history/"+params.row.id}>
+                            <Display role={role}/>
+                            </Link>
                             <button className="userListEdit">Edit</button>
 
-                                   
+                                
                             <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>
 
                             
@@ -52,6 +60,7 @@ export default function Adminuser() {
                 }
             }
      ];
+
 
      const classes = useStyles();
          
