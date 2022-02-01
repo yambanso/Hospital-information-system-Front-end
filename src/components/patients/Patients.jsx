@@ -21,6 +21,7 @@ export default function Patients() {
           field: 'name',
           headerName: 'Name',
           width: 150,
+          valueGetter: (params)=>  params.row.firstname + " " + params.row.surname,
           
         },
         {

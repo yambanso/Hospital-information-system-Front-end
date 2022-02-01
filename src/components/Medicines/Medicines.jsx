@@ -4,6 +4,7 @@ import { DataGrid } from '@material-ui/data-grid'
 import { DeleteOutline } from '@material-ui/icons'
 import { medicineRows } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
+import { Link } from 'react-router-dom';
 
 
 
@@ -29,7 +30,7 @@ export default function Medicines() {
         },
         {
           field: 'Price',
-          headerName: 'Price',
+          headerName: 'Price (Kwacha)',
           width: 150,
         },
         {
@@ -40,7 +41,9 @@ export default function Medicines() {
                 
                 return(
                     <>
-                        <button className="medListEdit">Edit</button>
+                        <Link to={"/Admin/Edit_medicine/"+params.row.id} state={{item : params.row}}
+                        >
+                        <button className="medListEdit">Edit</button></Link>
 
                                
                         <DeleteOutline className='medListDelete' onClick={()=>handleDelete(params.row.id)}/>

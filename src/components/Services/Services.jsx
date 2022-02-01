@@ -4,6 +4,7 @@ import { DeleteOutline } from '@material-ui/icons'
 import { servicesRows } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
 import './services.css'
+import { Link } from 'react-router-dom'
 
 
 
@@ -40,7 +41,10 @@ export default function Services() {
                 
                 return(
                     <>
-                        <button className="medListEdit">Edit</button>
+                        <Link to={"/Admin/Edit_service/"+params.row.id} state={{item : params.row}}>
+                            <button className="medListEdit">Edit</button>
+                            </Link>
+                            
 
                                
                         <DeleteOutline className='medListDelete' onClick={()=>handleDelete(params.row.id)}/>

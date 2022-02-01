@@ -56,7 +56,7 @@ const onSubmit = (data) => console.log(data);
                 <span className='errors'>{errors.next_of_kin_contact?.message}</span>
 
                 <div className="newPatientItem">
-                    <label >Next of Kin contact</label>
+                    <label >Patients Date of Birth</label>
                     <input type="Date" name="Dob" placeholder='enter Date of birth'  {...register("Dob",{required: "Required"})}/>
                 </div>
                 <span className='errors'>{errors.Dob?.message}</span>
