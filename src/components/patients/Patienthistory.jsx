@@ -1,14 +1,15 @@
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import { DataGrid } from '@material-ui/data-grid'
 import {  PermIdentity, Visibility } from '@material-ui/icons'
 import { consultationHistory } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
 import './patients.css'
 
-export default function Patienthistory() {
-    
+export default function Patienthistory(props) {
 
+    const location = useLocation();
     
+        
      const userColumn = [
             { field: 'id', headerName: 'ID', width: 100 },
             {
@@ -39,7 +40,7 @@ export default function Patienthistory() {
                                        
                     return(
                         <>
-                          <Link to={"/Admin/Visit_Details/"+params.id}>                          
+                          <Link to={"/Admin/Visit_Details/"+params.id} state={{item : params.row}}>                          
                            <button className="displayBtn">
                                 <Visibility className='displayIcon'/>
                                     Details
@@ -63,11 +64,16 @@ export default function Patienthistory() {
              <div className="middle">
                  <div className="Dflex">
                      <PermIdentity className="icon"/>
-                     <span className="name">Jimmy Maloya</span>
+                     <span className="name">{location.state.item.firstname}  {location.state.item.surname}</span>
                  </div>
                  <div className="Dflex">
                  <span className="name">Date of Birth : </span>
-                     <span className="name">07-04-1998</span>
+                     <span className="name">{location.state.item.Dob}</span>
+                 </div>
+
+                 <div className="Dflex">
+                 <span className="name"> Medical Scheme : </span>
+                     <span className="name">{location.state.item.Medical_scheme}</span>
                  </div>
              </div>
             <div className="userBottom">

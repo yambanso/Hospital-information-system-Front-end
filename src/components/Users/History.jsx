@@ -42,7 +42,7 @@ export default function History() {
                     
                     return(
                         <>
-                            <Link to={"/Admin/Visit_Details/"+params.id}>
+                            <Link to={"/Admin/Visit_Details/"+params.id } state={{item : params.row}}>
                                 <button className="displayBtn">
                                 <Visibility className='displayIcon'/>
                                     Details

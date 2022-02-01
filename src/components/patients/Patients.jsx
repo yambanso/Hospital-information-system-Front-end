@@ -61,7 +61,7 @@ export default function Patients() {
           renderCell  : (params)=>{
            return(
                   <>
-                  <Link to={"/Admin/Patient_history/"+params.id}>
+                  <Link to={"/Admin/Patient_history/"+params.id} state={{item:params.row}}>
                     <button className="displayBtn">
                     <AccessTime className='displayIcon'/>
                     History

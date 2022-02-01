@@ -1,8 +1,12 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import imge  from '../../data/patient.jpg'
 import './visit.css'
 
-export default function VisitDay() {
+export default function VisitDay(props) {
+
+  const location = useLocation();
+  console.log(location.state.item);
   return (
       <div className='visit'>
 
@@ -17,20 +21,39 @@ export default function VisitDay() {
                     <span className="heading"> Visit Details </span>
 
                     <div className="details">
-                        <span className="detal"> Description   :</span>
-                        <span className="detail"> Headaches <br/> Sore Throat <br/> coughing</span>
+                        <span className="detal">Consultation Day :  {location.state.item.visit_day}</span>
                         </div>
 
 
                     <div className="details">
-                        <span className="detal"> Lab Results   :</span>
-                        <span className="detail"> Malaria  Positive</span>
+                        <span className="detal"> Description   </span>                        
+                        </div>
+
+                        
+                    <div className="details">
+                        <span className="detail">{location.state.item.Description}</span>
+                        </div>
+
+
+                    <div className="details">
+                        <span className="detal"> Lab Results   </span>
+                                            </div>
+                        <div className="details">
+                    
+                        <span className="detail"> {location.state.item.lab_results}</span>
+                        </div>
+
+
+                        <div className="details">
+                        <span className="detal"> Prescription   </span>
+                        
                         </div>
 
                         <div className="details">
-                        <span className="detal"> Prescription   :</span>
+                        
                         <span className="detail"> Lofnac <br/> Aspirin <br/> Dacold </span>
                         </div>
+
 
         </div>   
         </div>  
