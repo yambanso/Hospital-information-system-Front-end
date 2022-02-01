@@ -42,6 +42,7 @@ export default function Adminuser() {
                 headerName: 'Actions',
                 width: 300,
                 renderCell  : (params)=>{
+                    
                     const role = params.row.Role;
                     
                     return(
@@ -49,7 +50,12 @@ export default function Adminuser() {
                         <Link to={"/Admin/Consultation_history/"+params.row.id}>
                             <Display role={role}/>
                             </Link>
+                        <Link 
+                            to={"/Admin/Edit_user/"+params.row.id} 
+                            state={{item : params.row}}
+                        >
                             <button className="userListEdit">Edit</button>
+                            </Link>
 
                                 
                             <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>

@@ -66,6 +66,14 @@ export default function Patients() {
                     History
                  </button>
                   </Link>
+
+                  <Link 
+                            to={"/Admin/Edit_patient/"+params.row.id} 
+                            state={{item : params.row}}
+                        >
+                            <button className="ListEdit">Edit</button>
+                            </Link>
+
                   </>
                   )
           }

@@ -1,7 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Addmeds from '../components/addMedicine/Addmeds'
 import AddPatient from '../components/addPatient/AddPatient'
+import EdditPatient from '../components/addPatient/EdditPatient'
 import Adduser from '../components/addUser/Adduser'
+import Edituser from '../components/addUser/Edituser'
 import Medicines from '../components/Medicines/Medicines'
 import Patienthistory from '../components/patients/Patienthistory'
 import Patients from '../components/patients/Patients'
@@ -27,10 +29,14 @@ export default function Admin() {
                     <Route path="/Admin/users" element={<Adminuser />}/>
 
                     <Route path="/Admin/new_user" element={<Adduser />}/>
+
+                    <Route path="/Admin/Edit_user/:user_ID" element={<Edituser />}/>
                 
                     <Route path="/Admin/patients" element={<Patients />}/>
 
                     <Route path="/Admin/new_patient" element={<AddPatient />}/>
+
+                    <Route path="/Admin/Edit_patient/:patient_ID" element={<EdditPatient />}/>
 
                     <Route path="/Admin/medicines" element={<Medicines />}/>
 

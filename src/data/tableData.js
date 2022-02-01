@@ -58,15 +58,15 @@ export const patientsColumns = [
 ];
 
 export const patientsRows = [
-  { id: 1, name: 'Jon Snow',Dob:"22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber : '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" },
-  { id: 2, name: 'Cersei Lannister',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber : '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" },
-  { id: 3, name: 'Jaime Lannister',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber : '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" },
-  { id: 4, name: 'Arya Stark',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" },
-  { id: 5, name: 'Daenerys Targaryen',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" },
-  { id: 6, name: 'Hana Melisandre',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" },
-  { id: 7, name: 'Ferrara Clifford',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" },
-  { id: 8, name: 'RossiniFrances',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" },
-  { id: 9, name: 'Harvey Roxie',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" },
+  { id: 1, firstname: 'Jon',surname: 'Snow',Dob:"22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber : '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi",blood_group:"A" },
+  { id: 2, firstname: 'Cersei' ,surname: 'Lannister',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber : '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" ,blood_group:"O"},
+  { id: 3, firstname: 'Jaime', surname: 'Lannister',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber : '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" ,blood_group:"AB"},
+  { id: 4, firstname: 'Arya', surname: ' Stark',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi",blood_group:"A" },
+  { id: 5, firstname: 'Daenerys',surname: ' Targaryen',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi",blood_group:"B" },
+  { id: 6, firstname: 'Hana',surname: ' Melisandre',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" ,blood_group:"AB"},
+  { id: 7, firstname: 'Ferrara',surname: ' Clifford',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" ,blood_group:"A"},
+  { id: 8, firstname: 'Rossini', surname: 'Frances',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" ,blood_group:"B"},
+  { id: 9, firstname: 'Harvey',surname: ' Roxie',Dob: "22-May-2000",next_of_kin_contact: '+265888989965', Phonenumber: '+265 881 024 444',Medical_scheme: "unimed", address: "Blantyre | Malawi" ,blood_group:"O"},
 ];
 
 export const medicineRows =[
