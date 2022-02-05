@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import './sign_in.css'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -6,6 +6,8 @@ import {useForm} from 'react-hook-form'
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { loginCall } from '../apiCalls';
+import { CircularProgress } from '@material-ui/core';
+
 
 
 const schema = yup.object().shape({
@@ -14,18 +16,20 @@ const schema = yup.object().shape({
     })
 
 
-export default function Sign_in() {
-
+export default function Sign_in(props) {
+    const[isNull, setIsNull] = useState(true) 
     const {register, handleSubmit, formState:{errors} }  = useForm({
         resolver : yupResolver(schema),
     });
 
     const {user,isFetching,error, dispatch} = useContext(AuthContext);
 
-
-    const onSubmit = (data) => loginCall({email : data.email, password : data.password}, dispatch);
-
-    //console.log(user)
+    
+    const onSubmit = (data) => {
+        loginCall({email : data.email, password : data.password}, dispatch);
+    }
+    
+     {user != null ? props.upRole(user.user.Role) : props.upRole(null)}
     
   return(
     <div className='signin'>
@@ -46,9 +50,10 @@ export default function Sign_in() {
                     <input type="password" name="password" placeholder='enter password'  {...register("password",{required: "Required"})}/>
                 </div>
                 <span className='errors'>{errors.password?.message}</span>
+                <span className='errors'>{error ? "Password or user name invalid" : ""}</span>
 
                 <div className="btn">
-                <button className="signBtn" type="submit">Sign in</button>
+                <button className="signBtn" type="submit" disabled={isFetching}>{isFetching? <CircularProgress color="inherit" size="15px" /> : "Sign in"}</button>
                 <input type="reset" className='newMedsBtnReset' value="Reset" />
                 </div>    
             </form>

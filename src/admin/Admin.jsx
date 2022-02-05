@@ -26,35 +26,35 @@ export default function Admin() {
                 <Sidebar className='sidebar'/>
                 <Routes>
                     
-                    <Route path="/Admin" element={<Home />}/>
+                    <Route path="/" element={<Home />}/>
 
-                    <Route path="/Admin/users" element={<Adminuser />}/>
+                    <Route path="/users" element={<Adminuser />}/>
 
-                    <Route path="/Admin/new_user" element={<Adduser />}/>
+                    <Route path="/new_user" element={<Adduser />}/>
 
-                    <Route path="/Admin/Edit_user/:user_ID" element={<Edituser />}/>
+                    <Route path="/Edit_user/:user_ID" element={<Edituser />}/>
                 
-                    <Route path="/Admin/patients" element={<Patients />}/>
+                    <Route path="/patients" element={<Patients />}/>
 
-                    <Route path="/Admin/new_patient" element={<AddPatient />}/>
+                    <Route path="/new_patient" element={<AddPatient />}/>
 
-                    <Route path="/Admin/Edit_patient/:patient_ID" element={<EdditPatient />}/>
+                    <Route path="/Edit_patient/:patient_ID" element={<EdditPatient />}/>
 
-                    <Route path="/Admin/medicines" element={<Medicines />}/>
+                    <Route path="/medicines" element={<Medicines />}/>
 
-                    <Route path="/Admin/new_medicines" element={<Addmeds />}/>
+                    <Route path="/new_medicines" element={<Addmeds />}/>
 
-                    <Route path="/Admin/Edit_medicine/:medicine_ID" element={<EditMeds />}/>
+                    <Route path="/Edit_medicine/:medicine_ID" element={<EditMeds />}/>
 
-                    <Route path="/Admin/services" element={<Services/>}/>
+                    <Route path="/services" element={<Services/>}/>
 
-                    <Route path="/Admin/Edit_service/:service_ID" element={<EditService />}/>
+                    <Route path="/Edit_service/:service_ID" element={<EditService />}/>
 
-                    <Route path="/Admin/Patient_history/:patient_id" element={<Patienthistory />} />
+                    <Route path="/Patient_history/:patient_id" element={<Patienthistory />} />
 
-                    <Route path="/Admin/Consultation_history/:user_id" element={<History/>}/>
+                    <Route path="/Consultation_history/:user_id" element={<History/>}/>
 
-                    <Route path="/Admin/Visit_Details/:visit_id" element={<VisitDay/>}/>
+                    <Route path="/Visit_Details/:visit_id" element={<VisitDay/>}/>
                     
 
                 </Routes>            

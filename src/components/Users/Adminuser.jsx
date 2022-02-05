@@ -47,11 +47,11 @@ export default function Adminuser() {
                     
                     return(
                         <>
-                        <Link to={"/Admin/Consultation_history/"+params.row.id}>
+                        <Link to={"/Consultation_history/"+params.row.id}>
                             <Display role={role}/>
                             </Link>
                         <Link 
-                            to={"/Admin/Edit_user/"+params.row.id} 
+                            to={"/Edit_user/"+params.row.id} 
                             state={{item : params.row}}
                         >
                             <button className="userListEdit">Edit</button>

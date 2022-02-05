@@ -9,6 +9,7 @@
     height: 100%; 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 .title{
     padding: 10px;
@@ -16,4 +17,12 @@
     font-weight: bold;
     cursor: pointer;
     justify-content: start;
+}
+.topBarEnd{
+    display: flex;
+    align-items: center; 
+    margin-right: 10px;   
+}
+.name{
+    padding: 10px;
 }

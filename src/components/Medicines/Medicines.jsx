@@ -41,7 +41,7 @@ export default function Medicines() {
                 
                 return(
                     <>
-                        <Link to={"/Admin/Edit_medicine/"+params.row.id} state={{item : params.row}}
+                        <Link to={"/Edit_medicine/"+params.row.id} state={{item : params.row}}
                         >
                         <button className="medListEdit">Edit</button></Link>
 

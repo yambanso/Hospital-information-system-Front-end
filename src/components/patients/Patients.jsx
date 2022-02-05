@@ -61,7 +61,7 @@ export default function Patients() {
           renderCell  : (params)=>{
            return(
                   <>
-                  <Link to={"/Admin/Patient_history/"+params.id} state={{item:params.row}}>
+                  <Link to={"/Patient_history/"+params.id} state={{item:params.row}}>
                     <button className="displayBtn">
                     <AccessTime className='displayIcon'/>
                     History
@@ -69,7 +69,7 @@ export default function Patients() {
                   </Link>
 
                   <Link 
-                            to={"/Admin/Edit_patient/"+params.row.id} 
+                            to={"/Edit_patient/"+params.row.id} 
                             state={{item : params.row}}
                         >
                             <button className="ListEdit">Edit</button>

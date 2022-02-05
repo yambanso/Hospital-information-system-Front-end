@@ -41,7 +41,7 @@ export default function Services() {
                 
                 return(
                     <>
-                        <Link to={"/Admin/Edit_service/"+params.row.id} state={{item : params.row}}>
+                        <Link to={"/Edit_service/"+params.row.id} state={{item : params.row}}>
                             <button className="medListEdit">Edit</button>
                             </Link>
                             

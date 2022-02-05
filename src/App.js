@@ -1,18 +1,14 @@
 import './app.css'
-import Admin from './admin/Admin';
-import TopBar from './components/topBar/TopBar'
-import Layout from './Sign_in/layout';
-import { AuthContextProvider } from './context/AuthContext';
+import { AuthContext } from './context/AuthContext';
+import { useContext } from 'react';
+import Homepage from './homapage/Homepage';
 
 function App() {
+  const user = useContext(AuthContext);
+  console.log(user);
   return (
     <div className="App">
-      <AuthContextProvider>
-          <Layout/>
-          
-      </AuthContextProvider>
-      
-     
+      <Homepage/>
     </div>
   );
 }

@@ -22,14 +22,14 @@ export default function Sidebar() {
                     <h3 className="siderTitle">Quick Menu</h3>
                     <ul className="sidebarLst">
                         
-                    <Link to="/Admin" className={location === "/Admin" ? "sidebarListItem active" : "sidebarListItem"}   >
+                    <Link to="/" className={location === "/Admin" ? "sidebarListItem active" : "sidebarListItem"}   >
                         <li className="sidebarListItem">                            
                                 <Home className="sideBarIcon"/>
                                 Home
                         </li>    
                     </Link>
                            
-                    <Link to="/Admin/users" className={location === "/Admin/users" ? "sidebarListItem active" : "sidebarListItem"}> 
+                    <Link to="/users" className={location === "/Admin/users" ? "sidebarListItem active" : "sidebarListItem"}> 
                         <li className="sidebarListItem">
                                                       
                                 <PermIdentity className="sideBarIcon"/>
@@ -38,7 +38,7 @@ export default function Sidebar() {
                             </li>
                         </Link>
 
-                        <Link to="/Admin/patients">
+                        <Link to="/patients">
                             <li className="sidebarListItem">
                                 <Accessible className="sideBarIcon"/>
                                 Patients
@@ -51,13 +51,13 @@ export default function Sidebar() {
                     <h3 className="siderTitle">Users</h3>
                     <ul className="sidebarLst">
 
-                        <Link to="/Admin/users" className={location === "/Admin/users" ? "sidebarListItem active" : "sidebarListItem"}>
+                        <Link to="/users" className={location === "/Admin/users" ? "sidebarListItem active" : "sidebarListItem"}>
                             <li className="sidebarListItem">
                                 <PermIdentity className="sideBarIcon"/>
                                 Users
                             </li>
                         </Link >
-                        <Link to="/Admin/new_user"  className={location === "/Admin/new_user" ? "sidebarListItem active" : "sidebarListItem"}>    
+                        <Link to="/new_user"  className={location === "/Admin/new_user" ? "sidebarListItem active" : "sidebarListItem"}>    
                             <li className="sidebarListItem">
                                 <Add className="sideBarIcon"/>
                                 Add users
@@ -71,14 +71,14 @@ export default function Sidebar() {
                     <h3 className="siderTitle">Patients</h3>
                     <ul className="sidebarLst">
 
-                    <Link to="/Admin/patients">
+                    <Link to="/patients">
                         <li className="sidebarListItem">
                             <Accessible className="sideBarIcon"/>
                             Patients
                         </li>
                     </Link>    
                     
-                    <Link to="/Admin/new_patient">
+                    <Link to="/new_patient">
                         <li className="sidebarListItem">
                             <Add className="sideBarIcon"/>
                             Add Patients
@@ -92,13 +92,13 @@ export default function Sidebar() {
                     <h3 className="siderTitle">Medication</h3>
                     <ul className="sidebarLst">
 
-                        <Link to="/Admin/medicines">
+                        <Link to="/medicines">
                             <li className="sidebarListItem">
                                 <LocalPharmacy className="sideBarIcon"/>
                                 Medicine
                             </li>
                         </Link>
-                        <Link to="/Admin/new_medicines">
+                        <Link to="/new_medicines">
                         <li className="sidebarListItem">
                             <Add className="sideBarIcon"/>
                             Add New Medicine
@@ -112,17 +112,13 @@ export default function Sidebar() {
                     <h3 className="siderTitle">Extra</h3>
                     <ul className="sidebarLst">
 
-                        <Link to="/Admin/services">
+                        <Link to="/services">
                             <li className="sidebarListItem">
                                 <LocalHospital className="sideBarIcon"/>
                                 Services
                             </li>
                         </Link>
 
-                        <li className="sidebarListItem" >
-                            <Settings className="sideBarIcon"/>
-                            Sign out
-                        </li>
                     
                     </ul>
                 </div>
