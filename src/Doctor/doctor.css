@@ -1,0 +1,6 @@
+.doctor{
+    display: flex;
+}
+.content{
+    flex: 4;
+}
