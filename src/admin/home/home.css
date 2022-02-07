@@ -1,7 +1,7 @@
 .home{
     flex: 4;
     padding: 10px;
-    background-color: #202020;
+    background-color: #EDE7F6;
 }
 .homeTop{
     display: flex;
@@ -10,7 +10,7 @@
 }
 .homeLeft{
     flex: 1;
-    background-color: #2d2d2d;
+    background-color: #64B5F6;
     margin: 0px 20px;
     padding: 30px;
     border-radius: 10px;
@@ -39,7 +39,7 @@
 }
 .userTitle,
 .patientTitle{
-    color: #bbbbbb;
+    color: #2b2b2b;
     font-weight: 600;
     padding: 5px;
 }
@@ -48,7 +48,7 @@
     padding: 5px;
 }
 .homeright{
-    background-color: #2d2d2d;
+    background-color:#64B5F6;
     flex: 1;
     margin: 0px 20px;
     padding: 30px;
@@ -63,7 +63,7 @@
     height: 500px;
 }
 .homeBottomLeft{
-    background-color: #2d2d2d;
+    background-color: #d1c4e9;
     border-radius: 10px;
     flex: 1;
     margin-right: 10px;
@@ -73,7 +73,7 @@
     box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);    
 }
 .homeBottomRight{
-    background-color: #2d2d2d;
+    background-color: #d1c4e9;
     border-radius: 10px;
     flex: 2;
     padding: 10px;

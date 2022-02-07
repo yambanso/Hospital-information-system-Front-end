@@ -1,16 +1,27 @@
 import './medicines.css';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { DataGrid } from '@material-ui/data-grid'
 import { DeleteOutline } from '@material-ui/icons'
 import { medicineRows } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
 import { Link } from 'react-router-dom';
+import { getMedicine } from '../../apiCalls'
 
 
 
 export default function Medicines() {
 
     const [data, setdata] = useState(medicineRows);
+
+    const fetchData = () => {
+        getMedicine.get('/').then(res => {
+            setdata(res.data)
+        })
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     const handleDelete = (id)=>{
         setdata(data.filter((item) => item.id !== id));

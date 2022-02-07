@@ -1,13 +1,27 @@
-import { useState } from 'react'
-import {Link} from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import {Link, useLocation} from 'react-router-dom'
 import { DataGrid } from '@material-ui/data-grid'
-import { DeleteOutline, PermIdentity, Visibility } from '@material-ui/icons'
+import { PermIdentity, Visibility } from '@material-ui/icons'
 import { consultationHistory } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
-import Display from "./Display"
 import './users.css'
+import { getDoctorHistory } from '../../apiCalls'
 
 export default function History() {
+
+    const [ data , setData] = useState(consultationHistory)
+
+    const location = useLocation(); 
+    
+    const fetchData = () => {
+        getDoctorHistory.get('/'+location.state.item.id).then(res => {
+            setData(res.data)
+        })
+    }
+
+    useEffect(() => {
+        fetchData()
+        }, []);
     
 
     
@@ -66,18 +80,18 @@ export default function History() {
              <div className="middle">
                  <div className="Dflex">
                      <PermIdentity className="icon"/>
-                     <span className="name">Lusungu Gondwe</span>
+                     <span className="name">{location.state.item.name}</span>
                  </div>
                  <div className="Dflex">
-                 <span className="name">Role : </span>
-                     <span className="name">Doctor</span>
+                 <span className="name">Email address : </span>
+                     <span className="name">{location.state.item.email}</span>
                  </div>
              </div>
             <div className="userBottom">
             <div className="userTable">
                         <DataGrid
                             className={classes.root}
-                            rows={consultationHistory}
+                            rows={data}
                             columns={userColumn}
                             pageSize={8}
                             rowsPerPageOptions={[8]}

@@ -1,20 +1,20 @@
 .sidebar{
     flex: 1;
     height: calc(100vh - 50px);
-    background-color: #2d2d2d;
+    background-color: #C5CAE9;
     position: sticky;
     top: 50px;
 }
 .sidebarWrapper{
     padding: 20px;
-    color: #bbbbbb;
+    color: #2b2b2b;
 }
 .sidebarMenu{
     margin-bottom: 20px;
 }
 .siderTitle{
     font-size: 13px;
-    color: #bbbbbb;
+    color: #2b2b2b;
 }
 .sidebarLst{
     list-style: none;

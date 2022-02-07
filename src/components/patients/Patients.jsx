@@ -1,14 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { AccessTime } from '@material-ui/icons'
 import { DataGrid } from '@material-ui/data-grid';
 import { patientsRows } from '../../data/tableData';
+import { getPatients } from '../../apiCalls'
 import './patients.css'
 import { useStyles } from '../../data-gridStyle';
 
 export default function Patients() {
     const classes = useStyles();
     const [Data, setdata] =  useState(patientsRows);
+
+    const fetchData = async () => {      
+      getPatients.get('/').then(res =>{
+        setdata(res.data)
+    })
+    }
+
+    useEffect(() => {
+      fetchData()
+    }, [])
 
     const handleChange = (name) =>{
         setdata(Data.filter((item) => item.name.toLowerCase().includes(name)));

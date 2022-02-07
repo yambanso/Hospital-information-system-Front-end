@@ -3,13 +3,25 @@ import { DataGrid } from '@material-ui/data-grid'
 import {  PermIdentity, Visibility } from '@material-ui/icons'
 import { consultationHistory } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
+import { getPatientHistory } from '../../apiCalls'
 import './patients.css'
+import { useState , useEffect} from 'react'
 
 export default function Patienthistory(props) {
 
+    const [data , setConsult] = useState(consultationHistory)
+
     const location = useLocation();
     
-        
+    const fetchData = async() => {
+        getPatientHistory.get('/'+location.state.item.id).then(res => {
+            setConsult(res.data)
+                })
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
      const userColumn = [
             { field: 'id', headerName: 'ID', width: 100 },
             {
@@ -80,7 +92,7 @@ export default function Patienthistory(props) {
             <div className="userTable">
                         <DataGrid
                             className={classes.root}
-                            rows={consultationHistory}
+                            rows={data}
                             columns={userColumn}
                             pageSize={8}
                             rowsPerPageOptions={[8]}

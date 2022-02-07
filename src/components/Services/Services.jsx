@@ -1,16 +1,27 @@
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 import { DataGrid } from '@material-ui/data-grid'
 import { DeleteOutline } from '@material-ui/icons'
 import { servicesRows } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
 import './services.css'
 import { Link } from 'react-router-dom'
+import { getServices } from '../../apiCalls'
 
 
 
 export default function Services() {
 
     const [data, setdata] = useState(servicesRows);
+
+    const fetchData = async () => {
+        getServices.get('/').then(res => {
+            setdata(res.data)
+        })
+    }
+
+    useEffect(() => {
+            fetchData()
+    }, [])
 
     const handleDelete = (id)=>{
         setdata(data.filter((item) => item.id !== id));
@@ -44,11 +55,6 @@ export default function Services() {
                         <Link to={"/Edit_service/"+params.row.id} state={{item : params.row}}>
                             <button className="medListEdit">Edit</button>
                             </Link>
-                            
-
-                               
-                        <DeleteOutline className='medListDelete' onClick={()=>handleDelete(params.row.id)}/>
-
                         
                     </>
                     )

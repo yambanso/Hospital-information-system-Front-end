@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { DataGrid } from '@material-ui/data-grid'
 import { DeleteOutline, Visibility } from '@material-ui/icons'
@@ -6,9 +6,20 @@ import { userRows } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
 import Display from "./Display"
 import './users.css'
+import { getUsers } from '../../apiCalls'
 
 export default function Adminuser() {
     const [data, setdata] = useState(userRows);
+
+   const fetchData = async() =>{
+    getUsers.get('/').then(res => {
+        setdata(res.data)
+    })
+   } 
+   
+   useEffect(() =>{
+        fetchData()
+   },[])
 
     const handleDelete = (id)=>{
         setdata(data.filter((item) => item.id !== id));
@@ -47,7 +58,8 @@ export default function Adminuser() {
                     
                     return(
                         <>
-                        <Link to={"/Consultation_history/"+params.row.id}>
+                        <Link to={"/Consultation_history/"+params.row.id}
+                        state ={{item : params.row}}>
                             <Display role={role}/>
                             </Link>
                         <Link 

@@ -4,9 +4,6 @@ import {createStyles, makeStyles} from "@material-ui/core/styles"
 export const useStyles = makeStyles((theme) => createStyles({
     root: {
         "& .MuiDataGrid-renderingZone" : {
-            "& .MuiDataGrid-columnHeaderWrapper" : {
-                color : "white"
-            },
             "& .MuiDataGrid-row" : {
                 color : "black",
                 "&:nth-child(2n)" : {

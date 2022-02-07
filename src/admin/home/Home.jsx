@@ -3,10 +3,43 @@ import { Accessible, AccountCircle } from "@material-ui/icons"
 import { userColumns, userRows, patientsRows, patientsColumns } from "../../data/tableData"
 import { useStyles } from "../../data-gridStyle"
 import "./home.css"
+import { getUserCount,getPatientCount, getPatients, getUsers } from '../../apiCalls'
+import { useState, useEffect } from 'react'
 
 
 export default function Home() {
+    const count = 0 ;
+    const pcount = 0;
+    const [usercount, setCount] = useState(count);
+    const [patientcount, setPcount] = useState(pcount)
+    const [prows, setProws] = useState(patientsRows)
+    const [urows, setUrows] = useState(userRows)
 
+     const fetchData = async () => {
+
+        getUserCount.get('/').then(res => {
+            setCount(res.data)
+        })
+    
+        getPatientCount.get('/').then(res => {
+            setPcount(res.data)
+        })
+    
+        getPatients.get('/').then(res =>{
+            setProws(res.data)
+        })
+    
+        getUsers.get('/').then(res => {
+            setUrows(res.data)
+        })
+
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+    
+    
     const classes = useStyles();
     return (
         <div className='home'>
@@ -21,7 +54,7 @@ export default function Home() {
                             <span className="userTitle">                            
                                 Users
                             </span>
-                            <span className="userCount">35</span>
+                            <span className="userCount">{usercount}</span>
                         </div>    
                     </div>
 
@@ -35,7 +68,7 @@ export default function Home() {
                             <span className="patientTitle">                            
                                 Patients
                             </span>
-                            <span className="patientCount">400</span>
+                            <span className="patientCount">{patientcount}</span>
                         </div>    
                     </div>
                     
@@ -51,7 +84,7 @@ export default function Home() {
                     <div className="usersTable">
                         <DataGrid
                             className={classes.root}
-                            rows={userRows}
+                            rows={urows}
                             columns={userColumns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
@@ -69,7 +102,7 @@ export default function Home() {
                     <div className="patientsTable">
                         <DataGrid
                             className={classes.root}
-                            rows={patientsRows}
+                            rows={prows}
                             columns={patientsColumns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
