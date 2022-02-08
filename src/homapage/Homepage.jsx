@@ -10,7 +10,6 @@ const [Role, setRole] = useState(null);
 
 const updateRole = (role) => {
         setRole(role)
-        console.log(role);
 }
 
   

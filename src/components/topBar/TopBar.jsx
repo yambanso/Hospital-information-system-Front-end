@@ -7,7 +7,6 @@ import Tooltip from '@material-ui/core/Tooltip'
 
 export default function TopBar(props) {
     const user = useContext(AuthContext);
-    console.log(user);
 
     const signout = () => {
         user.user = null;

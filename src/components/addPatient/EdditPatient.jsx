@@ -1,15 +1,34 @@
-
+import * as React from 'react'
 import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import  './addpatient.css';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { api_URL } from '../../apiCalls';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { CircularProgress } from '@material-ui/core';
+import {Snackbar } from "@mui/material"
+import MuiAlert from '@mui/material/Alert'
+
 
 const schema = yup.object().shape({
   })
 
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
+});
+
+
 
 export default function EdditPatient(props) {
+    const [isWritting, setWritting] = React.useState(false);
+    const [isOpen, setOpen] = React.useState(false) 
+    const [doOpen ,setOpenn] = React.useState(false)
+
+    const user = useContext(AuthContext);
+    const token = user.user.Token;
 
     const location = useLocation();
 
@@ -17,9 +36,37 @@ export default function EdditPatient(props) {
     resolver : yupResolver(schema),
 });
 
-const onSubmit = (data) => console.log(data);
+const onSubmit = async(data) =>{
+    setWritting(true)
+    let res = await axios.put(api_URL+"/patients/"+location.state.item.id,data,{
+        headers : {
+            'Authorization' : "Bearer"+" "+token
+        }
+    }).catch(err => {
+        setWritting(false)
+        setOpenn(true)
+        return;
+    })
+    setWritting(false)
+    setOpen(true)
+
+}
 
 
+const handleClose = (event,reason) => {
+    if(reason === 'clickaway'){
+        return;
+    }
+    setOpen(false)
+    
+    
+}
+const doClose = (event,reason) => {
+    if(reason ==='clickaway'){
+        return;
+    }
+    setOpenn(false)
+}
 
 
   return (
@@ -87,11 +134,34 @@ const onSubmit = (data) => console.log(data);
                 <span className='errors'>{errors.address?.message}</span>
 
                 <div className="btn">
-                <button className="newPatientBtn" type="submit">Update</button>
+                <button className="newPatientBtn" type="submit" disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Update"}</button>
                 <input type="reset" className='newuserBtnReset' value="Reset" />
                 </div>
                                
               </form>
+
+              <>
+                <Snackbar anchorOrigin={{
+                    vertical : 'bottom',
+                    horizontal : "left"
+                }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{width:'100%'}}>
+                        Patient record updated succesifuly
+                    </Alert>
+                </Snackbar>
+                </>
+
+                <>
+                <Snackbar anchorOrigin={{
+                    vertical : 'bottom',
+                    horizontal : "left"
+                }} open={doOpen} autoHideDuration={6000} onClose = {doClose}>
+                    <Alert onClose={handleClose} severity="error" sx={{width:'100%'}}>
+                        failed to update Patient Record
+                    </Alert>
+                </Snackbar>
+                </>
+
             </div>
 
         </div>

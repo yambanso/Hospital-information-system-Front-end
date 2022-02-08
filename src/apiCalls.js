@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 export const api_URL = "http://127.0.0.1:8000/api"
 export const loginCall = async(userCredentials,dispatch)=> {
@@ -20,12 +22,17 @@ export const getPatientCount = axios.create({
     baseURL : api_URL+"/patient_count"
 })
 
+
 export const getPatients = axios.create({
     baseURL :  api_URL+"/patients"
 })
 
 export const getUsers = axios.create({
     baseURL : api_URL+"/users"
+})
+
+export const addUser = axios.create({
+    baseURL : api_URL+"/user_Registration"
 })
 
 export const getMedicine = axios.create({
