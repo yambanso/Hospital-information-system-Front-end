@@ -18,11 +18,12 @@ export default function SideBar() {
             </Link>
                    
           
-            
+                <Link to="/prescriptions">
                     <li className="sidebarListItem">
                         <Accessible className="sideBarIcon"/>
-                        Patients
+                        Create Prescription
                     </li>
+                </Link>    
             
             </ul>
         </div>

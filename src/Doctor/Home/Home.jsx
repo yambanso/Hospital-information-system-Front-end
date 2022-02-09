@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './home.css'
 import { useState } from 'react'
 import {Link} from 'react-router-dom'
 import { AccessTime } from '@material-ui/icons'
 import { DataGrid } from '@material-ui/data-grid';
 import { patientsRows } from '../../data/tableData';
+import { getPatients } from '../../apiCalls'
 import { useStyles } from '../../data-gridStyle';
 
 export default function Home() {
@@ -15,6 +16,15 @@ export default function Home() {
     const handleChange = (name) =>{
         setdata(Data.filter((item) => item.name.toLowerCase().includes(name)));
     }
+    const fetchData = () =>{
+      getPatients.get('/').then(res =>{
+        setdata(res.data)
+    })
+    }
+
+    useEffect(() =>{
+      fetchData();
+    },[])
    
 
     const patientColumns = [
@@ -70,10 +80,10 @@ export default function Home() {
                  </button>
                   </Link>
 
-
+                        <Link to = {"/Consults/"+params.id} state={{item : params.row}}>
                             <button className="ListEdit">Consult
                               </button>
-                          
+                              </Link>  
 
                   </>
                   )

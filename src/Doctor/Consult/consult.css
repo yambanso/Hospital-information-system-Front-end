@@ -1,0 +1,111 @@
+.consult{
+    padding: 10px;
+    width: 100%;
+    height: auto;
+    background-color: #EDE7F6;
+}
+.consultTitle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.backBtn,
+.submit{
+    width: 80px;
+    border: none;
+    padding: 5px;
+    background-color: darkcyan;
+    border-radius: 5px;
+    cursor: pointer;
+    color: wheat;
+    font-size: 16px;
+}
+.Container{
+    display: flex;
+    margin-top: 10px;
+}
+.consultPatient{
+    flex: 2;
+    padding: 5px;
+}
+.patientShow{
+    flex: 1;
+    padding: 5px;
+    margin-left: 10px;
+    border-left: 1px solid gray;
+    
+}
+.pShowTop,
+.pshowInfo{
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+}
+.pIcon{
+    padding: 10px;
+    margin-right: 5px;
+    font-size: 25px !important;
+}
+.frm{
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid gray;
+}
+.frm>label{
+
+    padding: 10px;
+    font-weight: 300;
+}
+.area{
+    padding: 10px;
+    width: 400px;
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+.area :active{
+    outline: none;
+}
+.submit{
+    margin-left: 5px;
+    padding: 5px;
+    height: fit-content;
+    border: none;
+    background-color: coral;
+    color: bisque;
+}
+.errors{
+    padding: 10px;
+    margin-top: 10px;
+    color: red;
+}
+.labResults{
+    margin-top: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-bottom: 2px solid gray;
+}
+
+.results{
+    margin-left: 5px;
+    padding: 10px;
+    width: 500px;
+}
+.top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tt{
+    font-weight: 600;
+    color: darkgrey;
+}
+.medicineTable{
+    margin-top: 10px;
+    padding: 10px;
+
+}

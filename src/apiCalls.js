@@ -50,3 +50,6 @@ export const getPatientHistory = axios.create({
 export const getDoctorHistory = axios.create({
     baseURL : api_URL+ "/Visitation/Administer"
 })
+export const getWithoutPrescriptions = axios.create({
+    baseURL : api_URL + "/Visitation_without_Prescription"
+})

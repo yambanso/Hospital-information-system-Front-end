@@ -1,7 +1,7 @@
 .home{
     flex: 4;
     padding: 10px;
-    background-color: #EDE7F6;
+    background-color: #EDE7F6 !important;
 }
 .homeTop{
     display: flex;

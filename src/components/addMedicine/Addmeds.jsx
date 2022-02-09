@@ -31,11 +31,9 @@ export default function Addmeds() {
 
     const handleClose = (event,reason) => {
         if(reason === 'clickaway'){
-            return;
+            setOpen(false)
         }
-        setOpen(false)
-        
-        
+        setOpen(false)       
     }
     const doClose = (event,reason) => {
         if(reason ==='clickaway'){
