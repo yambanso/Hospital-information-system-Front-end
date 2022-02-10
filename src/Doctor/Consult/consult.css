@@ -111,3 +111,27 @@
     padding: 10px;
 
 }
+.prescribeBtnpad{
+    padding : 10px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-bottom: 5px;
+    border-bottom: 2px solid gray;
+    border-top: 2px solid gray;
+}
+.prscrbtn{
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: orangered;
+    color: wheat;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.table{
+    height: 450px;
+    margin-bottom: 5px;
+}

@@ -11,19 +11,15 @@ import { Link } from 'react-router-dom';
 import './consult.css'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { api_URL, getPatients } from '../../apiCalls';
+import { getMedicine } from '../../apiCalls'
 import { useContext } from 'react';
 import { useStyles } from '../../data-gridStyle'
 import { AuthContext } from '../../context/AuthContext';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
-import { getMedicine } from '../../apiCalls'
+import Pdetails from './Pdetails';
 
 
-const schema = yup.object().shape({
-    Description : yup.string().required(), 
-    patient_id : yup.string().required(),
-})
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
@@ -35,13 +31,11 @@ export default function Prescribe() {
     const [isOpen, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState("Visit Description saved...");
     const [type, setType] = React.useState("success")
-    
-    const {register, handleSubmit, formState:{errors}} = useForm({
-        resolver : yupResolver(schema),
-    });
+
 
     const [data, setdata] = useState([]);
-    const [patient, setPatient] =  useState()
+    const [select, setSelection] = useState([]);
+    
 
     const location = useLocation();
     const pID = location.state.item.id;
@@ -56,25 +50,17 @@ export default function Prescribe() {
         }
         setOpen(false)
     }
-    const fetchP = ( ) => {
-        getPatients.get('/'+location.state.item.patient_id).then(res => {
-            setPatient(res.data);
-            console.log(res.data)
-            console.log(location.state.item.patient_id)
-        })
-    }
     const fetchData = () => {
         getMedicine.get('/').then(res => {
             setdata(res.data)
-        })
-
-        
+        })        
     }
 
-    
+    const handleSubmit = () => {
+            // prescription submit
+    }
 
     useEffect(() => {
-        fetchP()
         fetchData()
     }, [])
 
@@ -128,61 +114,37 @@ export default function Prescribe() {
                                 </div>
                                 
                                 <div className="medicineTable">
-                                    
-                        <DataGrid
-                            className={classes.root}
-                            rows={data}
-                            columns={userColumn}
-                            pageSize={8}
-                            hideFooterPagination= {data.length > 7}
-                            rowsPerPageOptions={[8]}
-                            checkboxSelection
-                            disableSelectAllCheckBox
-                            onSelectionModelChange={itm => console.log(itm)}
-                            disableSelectionOnClick
-                        />
+                                <div className="table">
+                                        <DataGrid
+                                            className={classes.root}
+                                            rows={data}
+                                            columns={userColumn}
+                                            pageSize={8}
+                                            hideFooterPagination
+                                            rowsPerPageOptions={[8]}
+                                            checkboxSelection
+                                            disableSelectAllCheckBox
+                                            onSelectionModelChange={(ids) => {
+                                                const selectionId = new Set(ids);
+                                                const selectionRows = data.filter((row) => selectionId.has(row.id));
+                                                setSelection(selectionRows);
+                                            }
+                                            }
+                                            disableSelectionOnClick
+                                        />
+                                        </div>
+                        <div className="prescribeBtnpad">
+                            <button className="prscrbtn" onClick={()=>{
+                                console.log(select)
+                            }}>Prescribe</button>
+                        </div>
                         </div>
 
                             </div>
                         </div>
                     </div>
                     <div className="patientShow">
-
-                        <div className="pShowTop"> 
-                            <PermIdentity className='pIcon'/>
-                            <div className="showPname">{patient.firstname} {patient.surname}</div>
-                        </div>
-                        
-
-                        <div className="pSHowBtm">
-                            <div className="pshowInfo">
-                                <CalendarToday  className = "pIcon"/>
-                                <span className="info">{patient.Dob}</span>
-                            </div>
-
-                            
-                            <div className="pshowInfo">
-                                <Bloodtype  className = "pIcon"/>
-                                <span className="info">{patient.blood_group}</span>
-                            </div>
-
-                            
-                            <div className="pshowInfo">
-                                <LibraryBooks  className = "pIcon"/>
-                                <span className="info">{patient.Medical_scheme}</span>
-                            </div>
-
-                            <div className="pshowInfo">
-                                <PhoneAndroid  className = "pIcon"/>
-                                <span className="info">{patient.Phonenumber}</span>
-                            </div>
-
-                            <div className="pshowInfo">
-                                <LocationSearching  className = "pIcon"/>
-                                <span className="info">{patient.address}</span>
-                            </div>
-
-                        </div>
+                        <Pdetails patient_id ={location.state.item.patient_id} />                        
                     </div>
           </div>
           <>
