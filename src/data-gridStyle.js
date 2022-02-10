@@ -3,7 +3,11 @@ import {createStyles, makeStyles} from "@material-ui/core/styles"
 
 export const useStyles = makeStyles((theme) => createStyles({
     root: {
+        "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer" : {
+                display : "none"
+        },        
         "& .MuiDataGrid-renderingZone" : {
+
             "& .MuiDataGrid-row" : {
                 color : "black",
                 "&:nth-child(2n)" : {

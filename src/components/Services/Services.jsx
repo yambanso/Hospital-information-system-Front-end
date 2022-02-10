@@ -69,7 +69,7 @@ export default function Services() {
       <div className="medicineTop">
                 <div className="searchInput">
                     
-                      <input  type="text" placeholder='enter user name....' onChange={ event =>handleChange(event.target.value)} />
+                      <span className="heading">Services</span>
                 </div>
                 </div>
             <div className="medicineBottom">

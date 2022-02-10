@@ -98,8 +98,8 @@ export default function Patients() {
         <div className="patientTop">
                 <div className="patientInput">
                     
-                      <input  type="text" placeholder='enter patient name....' onChange={ event =>handleChange(event.target.value)} />
-                </div>
+                        <span className="heading">Clients</span>
+                                     </div>
                 </div>
 
         <div className="patientBtm">

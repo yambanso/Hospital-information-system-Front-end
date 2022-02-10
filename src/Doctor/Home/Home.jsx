@@ -51,16 +51,7 @@ export default function Home() {
             headerName: 'Medical Scheme',
             width: 150
         },
-        {
-          field: 'Phonenumber',
-          headerName: 'Contact',
-          width: 150,
-        },
-        {
-            field: 'next_of_kin_contact',
-            headerName: 'Next of Kin Contact',
-            width: 150
-        },
+        
 
         {
           field: 'address',
@@ -97,7 +88,7 @@ export default function Home() {
         <div className="HomeTop">
                 <div className="homeInput">
                     
-                      <input  type="text" placeholder='enter patient name....' onChange={ event =>handleChange(event.target.value)} />
+                      <span className="heading">Consultation</span>
                 </div>
                 </div>
 

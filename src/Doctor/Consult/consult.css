@@ -7,7 +7,9 @@
 .consultTitle{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+}
+.cTitle{
+    margin-left: 25%;
 }
 .backBtn,
 .submit{

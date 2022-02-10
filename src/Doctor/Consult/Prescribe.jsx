@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { DataGrid } from '@material-ui/data-grid'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import {Bloodtype,LibraryBooks} from '@mui/icons-material';
 import { CircularProgress } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './consult.css'
@@ -55,20 +56,25 @@ export default function Prescribe() {
         }
         setOpen(false)
     }
+    const fetchP = ( ) => {
+        getPatients.get('/'+location.state.item.patient_id).then(res => {
+            setPatient(res.data);
+            console.log(res.data)
+            console.log(location.state.item.patient_id)
+        })
+    }
     const fetchData = () => {
         getMedicine.get('/').then(res => {
             setdata(res.data)
         })
 
-        getPatients.get('/'+location.state.item.patient_id).then(res => {
-            setPatient(res.data);
-            console.log(location.state.item.patient_id)
-        })
+        
     }
 
     
 
     useEffect(() => {
+        fetchP()
         fetchData()
     }, [])
 
@@ -93,12 +99,12 @@ export default function Prescribe() {
   return (
       <div className="consult">
           <div className="consultTitle">
-              <h2 className='cTitle'>Prescribe</h2>
               <Link to='/prescriptions'>
                   <button className="backBtn">
                       Back
                       </button>
               </Link>
+              <h2 className='cTitle'>Prescribe</h2>
           </div>
 
           <div className="Container">
@@ -122,13 +128,16 @@ export default function Prescribe() {
                                 </div>
                                 
                                 <div className="medicineTable">
+                                    
                         <DataGrid
                             className={classes.root}
                             rows={data}
                             columns={userColumn}
                             pageSize={8}
+                            hideFooterPagination= {data.length > 7}
                             rowsPerPageOptions={[8]}
                             checkboxSelection
+                            disableSelectAllCheckBox
                             onSelectionModelChange={itm => console.log(itm)}
                             disableSelectionOnClick
                         />
@@ -141,24 +150,36 @@ export default function Prescribe() {
 
                         <div className="pShowTop"> 
                             <PermIdentity className='pIcon'/>
-                            <div className="showPname">patient.firstname patient.surname</div>
+                            <div className="showPname">{patient.firstname} {patient.surname}</div>
                         </div>
                         
 
                         <div className="pSHowBtm">
                             <div className="pshowInfo">
                                 <CalendarToday  className = "pIcon"/>
-                                <span className="info">patient.Dob</span>
+                                <span className="info">{patient.Dob}</span>
+                            </div>
+
+                            
+                            <div className="pshowInfo">
+                                <Bloodtype  className = "pIcon"/>
+                                <span className="info">{patient.blood_group}</span>
+                            </div>
+
+                            
+                            <div className="pshowInfo">
+                                <LibraryBooks  className = "pIcon"/>
+                                <span className="info">{patient.Medical_scheme}</span>
                             </div>
 
                             <div className="pshowInfo">
                                 <PhoneAndroid  className = "pIcon"/>
-                                <span className="info">patient.Phonenumber</span>
+                                <span className="info">{patient.Phonenumber}</span>
                             </div>
 
                             <div className="pshowInfo">
                                 <LocationSearching  className = "pIcon"/>
-                                <span className="info">patient.address</span>
+                                <span className="info">{patient.address}</span>
                             </div>
 
                         </div>

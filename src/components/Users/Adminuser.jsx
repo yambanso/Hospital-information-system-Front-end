@@ -88,7 +88,7 @@ export default function Adminuser() {
             <div className="usersTop">
                 <div className="searchInput">
                     
-                      <input  type="text" placeholder='enter user name....' onChange={ event =>handleChange(event.target.value)} />
+                     <span className="heading">System Users</span>
                 </div>
                 </div>
             <div className="userBottom">

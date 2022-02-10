@@ -9,6 +9,7 @@ import { CircularProgress } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './consult.css'
 import axios from 'axios';
+import {Bloodtype,LibraryBooks} from '@mui/icons-material';
 import { useLocation } from 'react-router-dom';
 import { api_URL } from '../../apiCalls';
 import { useContext } from 'react';
@@ -78,12 +79,13 @@ export default function Consult() {
   return (
       <div className="consult">
           <div className="consultTitle">
-              <h2 className='cTitle'>Counsult Patient</h2>
+              
               <Link to='/'>
                   <button className="backBtn">
                       Back
                       </button>
               </Link>
+              <h2 className='cTitle'>Counsult Patient</h2>
           </div>
 
           <div className="Container">
@@ -113,6 +115,18 @@ export default function Consult() {
                                 <CalendarToday  className = "pIcon"/>
                                 <span className="info">{location.state.item.Dob}</span>
                             </div>
+
+                            <div className="pshowInfo">
+                                <Bloodtype  className = "pIcon"/>
+                                <span className="info">{location.state.item.blood_group}</span>
+                            </div>
+
+                            
+                            <div className="pshowInfo">
+                                <LibraryBooks  className = "pIcon"/>
+                                <span className="info">{location.state.item.Medical_scheme}</span>
+                            </div>
+
 
                             <div className="pshowInfo">
                                 <PhoneAndroid  className = "pIcon"/>
