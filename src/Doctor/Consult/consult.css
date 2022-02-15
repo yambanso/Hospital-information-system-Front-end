@@ -22,6 +22,9 @@
     color: wheat;
     font-size: 16px;
 }
+.submit{
+    background-color: orangered !important;
+}
 .Container{
     display: flex;
     margin-top: 10px;

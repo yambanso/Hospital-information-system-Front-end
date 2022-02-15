@@ -35,7 +35,6 @@ export default function Prescribe() {
 
     const [data, setdata] = useState([]);
     const [select, setSelection] = useState([]);
-    const [presc, setPresc] = useState([]);
     
 
     const location = useLocation();

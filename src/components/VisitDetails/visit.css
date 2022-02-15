@@ -1,66 +1,80 @@
 .visit{
-    flex: 4;
     padding: 10px;
-    background-color: #202020;
-}
-.content{
-    display: flex;
+    width: 100%;
+    height: 720px;
+    background-color: #EDE7F6;
 }
 .visitTitle{
-    background-color: #2b2b2b;
-    margin-top: 10px;
-    padding: 10px;
-    height: 50px;
+    font-weight: 300;
     display: flex;
-    justify-content: center;
-    -webkit-box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
-    box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
-}
-.heading{
-    font-weight: 600;
-    margin-top: 20px;
-    color: black;
     align-items: center;
-    justify-content:center;
 }
-.contentLeft{
-    flex: 2;
-    margin: 10px;
+.title{
+    margin-left: 25%;
 }
-.contentRight{
-    
-    flex: 1;
-    position: sticky;
-    margin: 10px;
-}
-.item{
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    background-color: #2b2b2b;
-
-}
-.patientImg{
-    width: 100px;
-    height: 100px;
-    margin: 10px;
+.backBtn,
+.submit{
+    width: 80px;
+    border: none;
+    padding: 5px;
+    background-color: darkcyan;
+    border-radius: 5px;
     cursor: pointer;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px; 
+    color: wheat;
+    font-size: 16px;
 }
-.details{
-    padding: 10px;
-    color: whitesmoke;
+.Container{
     display: flex;
+    margin-top: 10px;
 }
-.detal{
-    margin-right: 10px;
+.visitDetails{
+    flex: 2;
+    padding: 5px;
+}
+.patientShow{
+    flex: 1;
+    padding: 5px;
+    margin-left: 10px;
+    border-left: 1px solid gray;
+    
+}
+.vDetails{
+    display: flex;
+    padding: 20px;
+    align-content: center;
+    justify-content: center;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+.det{
+    display: flex;
+    padding: 20px;
+    align-content: center;
+    justify-content: center;
+    }
+.head{
+    font-weight: 300;
+    padding: 5px;
+    margin-right: 5px;
+}
+.info{
+    padding: 5px;
+}
+.heder{
     font-weight: 600;
 }
-.detail{
-    margin-right: 5px;
+.pdetails{
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.pDeets{
+    display: flex;
+    padding: 20px;
+    margin-left: 80px;
+    margin-right: 80px;
+    align-content: center;
+    justify-content: center;
+    border: none;
+    border-bottom: 1px solid gray;
 }

@@ -71,21 +71,21 @@ export default function Patienthistory(props) {
     return (      
         <div className="users">
             <div className="usersTop">                    
-                      <span className="historyHeading">Consultation History</span>
+                      <span className="historyheading">Consultation History</span>
              </div>
-             <div className="middle">
-                 <div className="Dflex">
-                     <PermIdentity className="icon"/>
-                     <span className="name">{location.state.item.firstname}  {location.state.item.surname}</span>
+             <div className="midle">
+                 <div className="dflex">
+                     <PermIdentity className="icons"/>
+                     <span className="Name">{location.state.item.firstname}  {location.state.item.surname}</span>
                  </div>
-                 <div className="Dflex">
-                 <span className="name">Date of Birth : </span>
-                     <span className="name">{location.state.item.Dob}</span>
+                 <div className="dflex">
+                 <span className="Name">Date of Birth : </span>
+                     <span className="Name">{location.state.item.Dob}</span>
                  </div>
 
-                 <div className="Dflex">
-                 <span className="name"> Medical Scheme : </span>
-                     <span className="name">{location.state.item.Medical_scheme}</span>
+                 <div className="dflex">
+                 <span className="Name"> Medical Scheme : </span>
+                     <span className="Name">{location.state.item.Medical_scheme}</span>
                  </div>
              </div>
             <div className="userBottom">

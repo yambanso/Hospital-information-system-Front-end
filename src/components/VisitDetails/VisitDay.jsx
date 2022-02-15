@@ -1,58 +1,82 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import imge  from '../../data/patient.jpg'
 import './visit.css'
+import Pdetails from '../../Doctor/Consult/Pdetails';
+import { getPrescription } from '../../apiCalls';
 
 export default function VisitDay(props) {
 
+  const history = useNavigate();
   const location = useLocation();
-  console.log(location.state.item);
+  let total = 0;
+  const [Prescr, setPrescription] = useState([]);
+
+  const fetchData = () => {
+    getPrescription.get('/'+location.state.item.id).then(res =>{
+      setPrescription(res.data)  
+      
+    })
+  }
+
+  useEffect(() => {
+    fetchData()
+    console.log(Prescr)
+  },[])
+
   return (
       <div className='visit'>
 
             <div className="visitTitle">
-                <span className="heading"> Visit Details </span>
+            
+                <button className="backBtn" onClick={() =>{
+                  history(-1)
+                } }>Back</button>
+              
+                <span className="title"> Visit Details </span>
             </div>
-        <div className="content">
+        <div className="Container">
 
-        <div className="contentLeft">      
+        <div className="visitDetails">      
 
-        <div className="item">
-                    <span className="heading"> Visit Details </span>
+        <div className="deets">
 
-                    <div className="details">
-                        <span className="detal">Consultation Day :  {location.state.item.visit_day}</span>
+                    <div className="vDetails">
+                        <span className="head">Consultation Day  : </span>
+                        <span className="info">{location.state.item.visit_day}</span>
                         </div>
 
 
-                    <div className="details">
-                        <span className="detal"> Description   </span>                        
+                    <div className="vDetails">
+                        <span className="head"> Description   :</span>                        
+                        <span className="info">{location.state.item.Description}</span>
                         </div>
 
+                  {location.state.item.lab_results != null ?
+                    <div className="vDetails">
+                        <span className="head"> Lab Results   </span>                    
+                        <span className="info"> {location.state.item.lab_results}</span>
+                        </div> : <></>}
+
+                      <div className="pdetails">
+                        <div className="det">
+                        <span className="heder"> Prescription   </span>                        
+                        </div>
+                        {Prescr.map((item) => {
+                          total = total + parseFloat(item.Price);
+                          return(
+                          <div className="pDeets">
+                          <span className="head"> {item.name}   :</span>                        
+                          <span className="info">{item.Price}</span>
+                          </div>
+
+                        )})}
+                        <div className="vDetails">
+                        <span className="head"> Total   :</span>                        
+                        <span className="info">{total}</span>
+                        </div>
+                        </div>
                         
-                    <div className="details">
-                        <span className="detail">{location.state.item.Description}</span>
-                        </div>
-
-
-                    <div className="details">
-                        <span className="detal"> Lab Results   </span>
-                                            </div>
-                        <div className="details">
-                    
-                        <span className="detail"> {location.state.item.lab_results}</span>
-                        </div>
-
-
-                        <div className="details">
-                        <span className="detal"> Prescription   </span>
-                        
-                        </div>
-
-                        <div className="details">
-                        
-                        <span className="detail"> Lofnac <br/> Aspirin <br/> Dacold </span>
-                        </div>
 
 
         </div>   
@@ -61,37 +85,11 @@ export default function VisitDay(props) {
 
         
 
-          <div className="contentRight">
+          <div className="patientShow">
               <div className="item">
               <span className="heading"> Patient Details </span>
-              
-              <img src={imge} alt="" className="patientImg"/>
 
-              <div className="details">
-              <span className="detal"> Name   :</span>
-              <span className="detail"> Jimmy Maloya  </span>
-              </div>
-
-              <div className="details">
-              <span className="detal"> Date of Birth   :</span>
-              <span className="detail"> 07-04-1998  </span>
-              </div>
-
-              <div className="details">
-              <span className="detal"> Contact   :</span>
-              <span className="detail"> +265 888 62 60 62  </span>
-              </div>
-
-              <div className="details">
-              <span className="detal"> Medical Scheme   :</span>
-              <span className="detail"> Masm  </span>
-              </div>
-
-              <div className="details">
-              <span className="detal"> Address   :</span>
-              <span className="detail"> Kameza | Blantyre  </span>
-              </div>
-
+             <Pdetails patient_id ={location.state.item.patient_id} />
             </div>
           
           </div>

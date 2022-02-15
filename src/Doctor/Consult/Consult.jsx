@@ -32,9 +32,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function Consult() {
     const [isWritting , setWritting] = React.useState(false);
+    const [send, isSending] = React.useState(false)
     const [isOpen, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState("Visit Description saved...");
     const [type, setType] = React.useState("success")
+    const [visit_id, setVisitID] = React.useState()
+    const [select, setSelection] = useState([]);
 
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver : yupResolver(schema),
@@ -46,6 +49,7 @@ export default function Consult() {
     const user = useContext(AuthContext);
     const token = user.user.Token;
     const classes = useStyles();
+    const [data, setdata] = useState([]);
 
     const handleClose = (event , reason) => {
         if(reason = 'clickaway'){
@@ -57,11 +61,12 @@ export default function Consult() {
     const onSubmit = async(data) =>{
         setWritting(true)
         try {
-            let res = await axios.post(api_URL+"/Visitation",data,{
+            await axios.post(api_URL+"/Visitation",data,{
                 headers : {
                     'Authorization' : "Bearer"+" "+token
                 }
-            }).then(() =>{
+            }).then((res) =>{
+                setVisitID(res.data.id)
                 setWritting(false)
                 setOpen(true)
             })                
@@ -73,7 +78,32 @@ export default function Consult() {
         
     } 
 
+    const userColumn = [
+        { field: 'id', headerName: 'ID', width: 90 },
+        {
+          field: 'name',
+          headerName: 'Name',
+          width: 150,
+        },
+        {
+          field: 'Price',
+          headerName: 'Price (Kwacha)',
+          width: 150,
+        },
+        
+    ]
     
+
+    const fetchData = () => {
+        getMedicine.get('/').then(res => {
+            setdata(res.data)
+        })        
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
 
 
   return (
@@ -98,11 +128,68 @@ export default function Consult() {
                                 <TextareaAutosize className='area' name='Description' placeholder='Please enter Patient Description' {...register("Description",{required: "Required"})} minRows={5}/>
                                 <span className='errors'>{errors.Description?.message}</span>
                                 </div>
-                                <button type='submit' className='submit' disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
+                                <button type='submit' className='submit' disabled={isWritting || visit_id != null}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
                             </form>
  
                         </div>
-                    </div>
+                    
+                        <div className="medicine">
+                                <div className="top">
+                                    <span className="tt">Prescribe Medicine</span>
+                                </div>
+                                
+                                <div className="medicineTable">
+                                <div className="table">
+                                        <DataGrid
+                                            className={classes.root}
+                                            rows={data}
+                                            columns={userColumn}
+                                            pageSize={8}
+                                            hideFooterPagination
+                                            rowsPerPageOptions={[8]}
+                                            checkboxSelection
+                                            disableSelectAllCheckBox
+                                            onSelectionModelChange={(ids) => {
+                                                const selectionId = new Set(ids);
+                                                const selectionRows = data.filter((row) => selectionId.has(row.id));
+                                                setSelection(selectionRows);
+                                            }
+                                            }
+                                            disableSelectionOnClick
+                                        />
+                                        </div>
+                        <div className="prescribeBtnpad">
+                            <button className="prscrbtn" onClick={()=>{
+                                isSending(true)
+                                const arr = [];
+                                {select.map((item,index) =>(
+                                    arr.push({visitation_id : visit_id + "",
+                                    medications_id : item.id+""})
+                                ))}
+                                    axios.post(api_URL+"/Visitation_prescriptions",{items : arr},{
+                                        headers : {
+                                            'Authorization' : "Bearer"+" "+token,
+                                            'Content-Type' : 'application/json'
+                                        }
+                                    }).then(()=>{
+                                        isSending(false);
+                                        setOpen(true);
+                                    }).catch((err)=>{
+                                    isSending(false)
+                                    setMessage("Failled to create visit prescription")
+                                    setType("error")
+                                    setOpen(true)})
+
+                                
+
+                            }} disabled={send || visit_id == null || select.length == 0}>{send ? <CircularProgress color="inherit" size="15px"/> : "Prescribe"}</button>
+                        </div>
+                        </div>
+
+                            </div>
+
+                    
+                    </div>                   
                     <div className="patientShow">
 
                         <div className="pShowTop"> 
@@ -140,7 +227,8 @@ export default function Consult() {
 
                         </div>
                     </div>
-          </div>
+
+                              </div>
           <>
                 <Snackbar anchorOrigin={{
                     vertical : 'bottom',

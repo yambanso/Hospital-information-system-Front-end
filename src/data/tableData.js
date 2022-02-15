@@ -7,11 +7,6 @@ export const userColumns = [
     width: 150,
   },
   {
-    field: 'email',
-    headerName: 'Email',
-    width: 150,
-  },
-  {
     field: 'Role',
     headerName: 'Role',
     width: 110,
@@ -30,11 +25,6 @@ export const patientsColumns = [
     width: 150,
     valueGetter: (params)=>  params.row.firstname + " " + params.row.surname,
     
-  },
-    {
-    field: 'Dob',
-    headerName: 'Date of Birth',
-    width: 110,
   },
   {
     field: 'Phonenumber',

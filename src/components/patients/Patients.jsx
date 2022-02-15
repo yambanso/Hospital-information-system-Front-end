@@ -56,12 +56,6 @@ export default function Patients() {
           width: 150,
         },
         {
-            field: 'next_of_kin_contact',
-            headerName: 'Next of Kin Contact',
-            width: 150
-        },
-
-        {
           field: 'address',
           headerName: 'Address',
           width: 130,

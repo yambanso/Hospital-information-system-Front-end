@@ -16,7 +16,7 @@ export default function TopBar(props) {
         <div className='topBar'>
             <div className="topBarWrapper">
                 <div className="topBarStart">
-                    <span className="title">Hospital Management System</span>
+                    <span className="Title">Hospital Management System</span>
                 </div>
                 <div className="topBarEnd">
                     <div className="name">{user.user.user.name}</div>

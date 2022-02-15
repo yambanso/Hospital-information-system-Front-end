@@ -7,6 +7,7 @@ import Patienthistory from '../components/patients/Patienthistory';
 import Consult from './Consult/Consult';
 import ActiveVisits from './Prescribe/ActiveVisits';
 import Prescribe from './Consult/Prescribe';
+import VisitDay from '../components/VisitDetails/VisitDay'
 
 export default function Doctor() {
   return (
@@ -25,6 +26,8 @@ export default function Doctor() {
           <Route path="/prescriptions" element={<ActiveVisits />}/>
 
           <Route path= "/create_Prescription/:id" element={<Prescribe />} />
+
+          <Route path="/Visit_Details/:visit_id" element={<VisitDay/>}/>
 
           </Routes>
           </div>
