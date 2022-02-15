@@ -144,7 +144,7 @@ export default function Prescribe() {
                                     arr.push({visitation_id : ID + "",
                                     medications_id : item.id+""})
                                 ))}
-                                    axios.post(api_URL+"/Visitation_prescription",JSON.stringify(arr),{
+                                    axios.post(api_URL+"/Visitation_prescriptions",{items : arr},{
                                         headers : {
                                             'Authorization' : "Bearer"+" "+token,
                                             'Content-Type' : 'application/json'
