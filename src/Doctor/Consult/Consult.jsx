@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { DataGrid } from '@material-ui/data-grid'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, TextareaAutosize } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './consult.css'
 import axios from 'axios';
@@ -95,7 +95,7 @@ export default function Consult() {
                                 <input type="text" name='patient_id'value={pID} style={{display : "none"}} {...register("patient_id",{required: "Required"})} />
                                 <label>Patient Complaint</label>
                                 <div className="txt">
-                                <input type="textarea" className='area' name='Description' placeholder='Please enter Patient Description' {...register("Description",{required: "Required"})}/>
+                                <TextareaAutosize className='area' name='Description' placeholder='Please enter Patient Description' {...register("Description",{required: "Required"})} minRows={5}/>
                                 <span className='errors'>{errors.Description?.message}</span>
                                 </div>
                                 <button type='submit' className='submit' disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>

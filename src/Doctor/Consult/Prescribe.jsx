@@ -6,12 +6,12 @@ import { DataGrid } from '@material-ui/data-grid'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {Bloodtype,LibraryBooks} from '@mui/icons-material';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, TextareaAutosize } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './consult.css'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { getMedicine } from '../../apiCalls'
+import { getMedicine , api_URL } from '../../apiCalls'
 import { useContext } from 'react';
 import { useStyles } from '../../data-gridStyle'
 import { AuthContext } from '../../context/AuthContext';
@@ -29,16 +29,17 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function Prescribe() {
     const [isWritting , setWritting] = React.useState(false);
     const [isOpen, setOpen] = React.useState(false);
-    const [message, setMessage] = React.useState("Visit Description saved...");
+    const [message, setMessage] = React.useState("Visit Prescription created...");
     const [type, setType] = React.useState("success")
 
 
     const [data, setdata] = useState([]);
     const [select, setSelection] = useState([]);
+    const [presc, setPresc] = useState([]);
     
 
     const location = useLocation();
-    const pID = location.state.item.id;
+    const ID = location.state.item.id;
     const user = useContext(AuthContext);
     const token = user.user.Token;
     const classes = useStyles();
@@ -57,8 +58,9 @@ export default function Prescribe() {
     }
 
     const handleSubmit = () => {
-            // prescription submit
+        
     }
+    
 
     useEffect(() => {
         fetchData()
@@ -98,7 +100,8 @@ export default function Prescribe() {
                         <div className="frmItem">
                             <div className="frm">
                                 <label>Patient Complaint</label>
-                                <input type="textarea" className='area' name='Description' value={location.state.item.Description} onChange={handleChange} placeholder='Please enter Patient Description' />
+                                <TextareaAutosize className='area' name='Description' value={location.state.item.Description} onChange={handleChange} placeholder='Please enter Patient Description' minRows={5}/>
+    
                                 
                             </div>
                             {location.state.item.lab_results != null ?
@@ -135,8 +138,29 @@ export default function Prescribe() {
                                         </div>
                         <div className="prescribeBtnpad">
                             <button className="prscrbtn" onClick={()=>{
-                                console.log(select)
-                            }}>Prescribe</button>
+                                setWritting(true)
+                                const arr = [];
+                                {select.map((item,index) =>(
+                                    arr.push({visitation_id : ID + "",
+                                    medications_id : item.id+""})
+                                ))}
+                                    axios.post(api_URL+"/Visitation_prescription",JSON.stringify(arr),{
+                                        headers : {
+                                            'Authorization' : "Bearer"+" "+token,
+                                            'Content-Type' : 'application/json'
+                                        }
+                                    }).then(()=>{
+                                        setWritting(false);
+                                        setOpen(true);
+                                    }).catch((err)=>{
+                                    setWritting(false)
+                                    setMessage("Failled to create visit prescription")
+                                    setType("error")
+                                    setOpen(true)})
+
+                                
+
+                            }} disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Prescribe"}</button>
                         </div>
                         </div>
 
