@@ -6,7 +6,7 @@ import {
 import { useState , useEffect} from 'react'
 import { getWithoutPrescriptions } from '../../apiCalls'
 import { useStyles } from '../../data-gridStyle'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import { Link } from 'react-router-dom';
 
 
@@ -77,6 +77,9 @@ const classes = useStyles();
             <DataGrid
                             className={classes.root}
                             rows={data}
+                            components = {{
+                              Toolbar : GridToolbar
+                            }}
                             columns={userColumn}
                             pageSize={8}
                             rowsPerPageOptions={[8]}

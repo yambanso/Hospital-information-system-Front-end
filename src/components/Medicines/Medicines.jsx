@@ -1,6 +1,6 @@
 import './medicines.css';
 import { useState, useEffect } from 'react'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridFilterForm, GridToolbar, GridToolbarFilterButton } from '@material-ui/data-grid'
 import { DeleteOutline } from '@material-ui/icons'
 import { medicineRows } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
@@ -81,6 +81,9 @@ export default function Medicines() {
                         <DataGrid
                             className={classes.root}
                             rows={data}
+                            components ={{
+                                Toolbar : GridToolbar
+                            }}
                             columns={userColumn}
                             pageSize={8}
                             rowsPerPageOptions={[8]}

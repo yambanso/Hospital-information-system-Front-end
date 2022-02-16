@@ -1,6 +1,6 @@
 import { useState , useEffect } from 'react'
 import {Link} from 'react-router-dom'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import { DeleteOutline, Visibility } from '@material-ui/icons'
 import { userRows } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
@@ -96,6 +96,9 @@ export default function Adminuser() {
                         <DataGrid
                             className={classes.root}
                             rows={data}
+                            components = {{
+                                Toolbar : GridToolbar
+                            }}
                             columns={userColumn}
                             pageSize={8}
                             rowsPerPageOptions={[8]}

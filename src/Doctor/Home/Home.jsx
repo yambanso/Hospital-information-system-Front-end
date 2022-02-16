@@ -3,7 +3,7 @@ import './home.css'
 import { useState } from 'react'
 import {Link} from 'react-router-dom'
 import { AccessTime } from '@material-ui/icons'
-import { DataGrid } from '@material-ui/data-grid';
+import { DataGrid, GridToolbar } from '@material-ui/data-grid';
 import { patientsRows } from '../../data/tableData';
 import { getPatients } from '../../apiCalls'
 import { useStyles } from '../../data-gridStyle';
@@ -97,6 +97,9 @@ export default function Home() {
             <DataGrid
                             className={classes.root}
                             rows={Data}
+                            components = {{
+                              Toolbar : GridToolbar
+                            }}
                             columns={patientColumns}
                             pageSize={8}
                             rowsPerPageOptions={[8]}

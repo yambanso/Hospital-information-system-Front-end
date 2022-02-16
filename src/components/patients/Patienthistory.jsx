@@ -1,5 +1,5 @@
 import {Link, useLocation} from 'react-router-dom'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import {  PermIdentity, Visibility } from '@material-ui/icons'
 import { consultationHistory } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
@@ -93,6 +93,9 @@ export default function Patienthistory(props) {
                         <DataGrid
                             className={classes.root}
                             rows={data}
+                            components={{
+                                Toolbar : GridToolbar
+                            }}
                             columns={userColumn}
                             pageSize={8}
                             rowsPerPageOptions={[8]}

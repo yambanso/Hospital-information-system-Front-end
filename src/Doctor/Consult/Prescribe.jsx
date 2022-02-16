@@ -2,7 +2,7 @@ import { PermIdentity,CalendarToday,PhoneAndroid,LocationSearching } from '@mate
 import * as React from 'react';
 import {useForm} from 'react-hook-form'
 import { useState, useEffect } from 'react'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {Bloodtype,LibraryBooks} from '@mui/icons-material';
@@ -103,7 +103,7 @@ export default function Prescribe() {
     
                                 
                             </div>
-                            {location.state.item.lab_results != null ?
+                            {location.state.item.lab_results === null ?
                             <div className="labResults">
                                 <span className="head">Lab Results  : </span>
                                 <span className="results">I didn't like the idea of creating a custom component, because if you have a different wrapping element you would have to createanother custom component etc. Also, it is just overkill. So I just did it with css and activeClassName:</span>
@@ -120,6 +120,9 @@ export default function Prescribe() {
                                         <DataGrid
                                             className={classes.root}
                                             rows={data}
+                                            components = {{
+                                                Toolbar : GridToolbar
+                                            }}
                                             columns={userColumn}
                                             pageSize={8}
                                             hideFooterPagination

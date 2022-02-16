@@ -1,5 +1,5 @@
 import { useState , useEffect} from 'react'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import { DeleteOutline } from '@material-ui/icons'
 import { servicesRows } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
@@ -77,6 +77,11 @@ export default function Services() {
                         <DataGrid
                             className={classes.root}
                             rows={data}
+                            components = {
+                                {
+                                    Toolbar : GridToolbar
+                                }
+                            }
                             columns={userColumn}
                             pageSize={8}
                             rowsPerPageOptions={[8]}

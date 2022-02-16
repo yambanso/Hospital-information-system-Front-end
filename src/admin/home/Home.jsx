@@ -1,4 +1,4 @@
-import { DataGrid } from "@material-ui/data-grid"
+import { DataGrid, GridToolbar } from "@material-ui/data-grid"
 import { Accessible, AccountCircle } from "@material-ui/icons"
 import { userColumns, userRows, patientsRows, patientsColumns } from "../../data/tableData"
 import { useStyles } from "../../data-gridStyle"
@@ -38,7 +38,7 @@ export default function Home() {
     useEffect(() => {
         fetchData()
     }, [])
-    
+
     
     const classes = useStyles();
     return (
@@ -85,6 +85,10 @@ export default function Home() {
                         <DataGrid
                             className={classes.root}
                             rows={urows}
+                            components={{
+                                Toolbar : GridToolbar,
+                            }}
+                            filterModel ={{items : [{columnField : 'name', operatorValue : 'contains'}]}}
                             columns={userColumns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
@@ -103,6 +107,9 @@ export default function Home() {
                         <DataGrid
                             className={classes.root}
                             rows={prows}
+                            components={{
+                                Toolbar : GridToolbar,
+                            }}
                             columns={patientsColumns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}

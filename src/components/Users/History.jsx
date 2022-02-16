@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import {Link, useLocation} from 'react-router-dom'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import { PermIdentity, Visibility } from '@material-ui/icons'
 import { consultationHistory } from '../../data/tableData'
 import { useStyles } from '../../data-gridStyle'
@@ -75,16 +75,16 @@ export default function History() {
     return (      
         <div className="users">
             <div className="usersTop">                    
-                      <span className="historyHeading">Consultation History</span>
+                      <span className="historyHding">Consultation History</span>
              </div>
              <div className="middle">
-                 <div className="Dflex">
-                     <PermIdentity className="icon"/>
-                     <span className="name">{location.state.item.name}</span>
+                 <div className="dflex">
+                     <PermIdentity className="icons"/>
+                     <span className="Name">{location.state.item.name}</span>
                  </div>
-                 <div className="Dflex">
-                 <span className="name">Email address : </span>
-                     <span className="name">{location.state.item.email}</span>
+                 <div className="dflex">
+                 <span className="Name">Email address : </span>
+                     <span className="Name">{location.state.item.email}</span>
                  </div>
              </div>
             <div className="userBottom">
@@ -92,6 +92,9 @@ export default function History() {
                         <DataGrid
                             className={classes.root}
                             rows={data}
+                            components = {{
+                                Toolbar : GridToolbar
+                            }}
                             columns={userColumn}
                             pageSize={8}
                             rowsPerPageOptions={[8]}
