@@ -6,10 +6,14 @@ import { patientsRows } from '../../data/tableData';
 import { getPatients } from '../../apiCalls'
 import './patients.css'
 import { useStyles } from '../../data-gridStyle';
+import PatientHistoryBtn from './PatienHistoryBtn';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Patients() {
     const classes = useStyles();
     const [Data, setdata] =  useState(patientsRows);
+    const user = useContext(AuthContext);  
 
     const fetchData = async () => {      
       getPatients.get('/').then(res =>{
@@ -67,11 +71,8 @@ export default function Patients() {
            return(
                   <>
                   <Link to={"/Patient_history/"+params.id} state={{item:params.row}}>
-                    <button className="displayBtn">
-                    <AccessTime className='displayIcon'/>
-                    History
-                 </button>
-                  </Link>
+                    <PatientHistoryBtn role={user.user.user.Role} />
+                    </Link>                  
 
                   <Link 
                             to={"/Edit_patient/"+params.row.id} 
