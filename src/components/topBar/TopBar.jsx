@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext'
 import { Settings } from '@material-ui/icons';
 import Tooltip from '@material-ui/core/Tooltip'
+import { Logout } from '@mui/icons-material';
 
 
 export default function TopBar(props) {
@@ -21,7 +22,7 @@ export default function TopBar(props) {
                 <div className="topBarEnd">
                     <div className="name">{user.user.user.name}</div>
                     <Tooltip title="Log Out" arrow >
-                    <Settings  className="topBarIcon" onClick={()=>signout()}/></Tooltip>
+                    <Logout  className="topBarIcon" onClick={()=>signout()}/></Tooltip>
                 </div>
             </div>
         </div>
