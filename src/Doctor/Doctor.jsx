@@ -29,6 +29,8 @@ export default function Doctor() {
 
           <Route path="/Visit_Details/:visit_id" element={<VisitDay/>}/>
 
+          <Route path='*' element={<Home />}/>
+
           </Routes>
           </div>
       </div>

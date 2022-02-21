@@ -28,6 +28,8 @@ export default function Admin() {
                     
                     <Route path="/" element={<Home />}/>
 
+                    <Route path='*' element={<Home />}/>
+
                     <Route path="/users" element={<Adminuser />}/>
 
                     <Route path="/new_user" element={<Adduser />}/>
