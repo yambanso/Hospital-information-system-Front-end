@@ -40,9 +40,14 @@ export default function Medicines() {
           width: 150,
         },
         {
+            field: 'Type',
+            headerName: 'Type',
+            width: 250,
+          },
+        {
           field: 'Price',
           headerName: 'Price (Kwacha)',
-          width: 150,
+          width: 250,
         },
         {
             field: 'actions',

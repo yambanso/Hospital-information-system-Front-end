@@ -73,6 +73,20 @@ export default function EditMeds(props) {
                 </div>
                 <span className='errors'>{errors.name?.message}</span>
 
+                <div className="newMedsItem">
+                <label >Medicine Type</label>
+                <select className='newMedSelect' name='Type' placeholder='Select Medicine Type' {...register("Type",{required :"Required"})}>
+                <option value="Pain killers">Pain killers</option>
+                <option value="Cold Cure">Cold cure</option>
+                <option value="Anti Biotics">Anti Biotics</option>
+                <option value="Anti Virals">Anti Virals</option>
+                <option value="Vitamins">Vitamins</option>
+                <option value="Minerals">Minerals</option>
+                </select>
+                </div>
+                <span className='errors'>{errors.Type?.message}</span>
+                
+
                 
                 <div className="newMedsItem">
                     <label >Medicine Price</label>

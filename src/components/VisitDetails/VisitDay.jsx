@@ -37,7 +37,7 @@ export default function VisitDay(props) {
                   history(-1)
                 } }>Back</button>
               
-                <span className="title"> Visit Details </span>
+                <span className="ttle"> Visit Details </span>
             </div>
         <div className="Container">
 

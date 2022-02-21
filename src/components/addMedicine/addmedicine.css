@@ -77,3 +77,8 @@
     color: rgb(172, 50, 50);
     font-size: 16px;
 }
+
+.newMedSelect{
+    height: 40px;
+    border-radius: 5px;
+}

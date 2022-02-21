@@ -74,6 +74,11 @@ export default function Prescribe() {
           width: 150,
         },
         {
+            field: 'Type',
+            headerName: 'Type',
+            width: 250,
+          },
+        {
           field: 'Price',
           headerName: 'Price (Kwacha)',
           width: 150,
@@ -103,7 +108,7 @@ export default function Prescribe() {
     
                                 
                             </div>
-                            {location.state.item.lab_results === null ?
+                            {location.state.item.lab_results != null ?
                             <div className="labResults">
                                 <span className="head">Lab Results  : </span>
                                 <span className="results">I didn't like the idea of creating a custom component, because if you have a different wrapping element you would have to createanother custom component etc. Also, it is just overkill. So I just did it with css and activeClassName:</span>

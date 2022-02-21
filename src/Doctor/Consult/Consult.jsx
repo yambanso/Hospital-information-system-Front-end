@@ -2,7 +2,7 @@ import { PermIdentity,CalendarToday,PhoneAndroid,LocationSearching } from '@mate
 import * as React from 'react';
 import {useForm} from 'react-hook-form'
 import { useState, useEffect } from 'react'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { CircularProgress, TextareaAutosize } from '@material-ui/core';
@@ -60,21 +60,22 @@ export default function Consult() {
     }
     const onSubmit = async(data) =>{
         setWritting(true)
-        try {
+        
             await axios.post(api_URL+"/Visitation",data,{
                 headers : {
                     'Authorization' : "Bearer"+" "+token
                 }
+            }).catch ((error) => {
+                setWritting(false)
+                setMessage("Failled to add Clients visit")
+                setType("error")
+                setOpen(true)
             }).then((res) =>{
                 setVisitID(res.data.id)
                 setWritting(false)
                 setOpen(true)
             })                
-        } catch (error) {
-            setWritting(false)
-            setMessage("Operation Failled")
-            setType("error")
-        }
+
         
     } 
 
@@ -84,7 +85,11 @@ export default function Consult() {
           field: 'name',
           headerName: 'Name',
           width: 150,
-        },
+        },{
+            field: 'Type',
+            headerName: 'Type',
+            width: 250,
+          },
         {
           field: 'Price',
           headerName: 'Price (Kwacha)',
@@ -128,7 +133,7 @@ export default function Consult() {
                                 <TextareaAutosize className='area' name='Description' placeholder='Please enter Patient Description' {...register("Description",{required: "Required"})} minRows={5}/>
                                 <span className='errors'>{errors.Description?.message}</span>
                                 </div>
-                                <button type='submit' className='submit' disabled={isWritting || visit_id != null}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
+                                <button type='submit' className='submit' disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
                             </form>
  
                         </div>
@@ -143,6 +148,9 @@ export default function Consult() {
                                         <DataGrid
                                             className={classes.root}
                                             rows={data}
+                                            components={{
+                                                Toolbar : GridToolbar
+                                            }}
                                             columns={userColumn}
                                             pageSize={8}
                                             hideFooterPagination
@@ -171,18 +179,18 @@ export default function Consult() {
                                             'Authorization' : "Bearer"+" "+token,
                                             'Content-Type' : 'application/json'
                                         }
-                                    }).then(()=>{
+                                    }).catch((err)=>{
+                                        isSending(false)
+                                        setMessage("Failled to create visit prescription")
+                                        setType("error")
+                                        setOpen(true)})
+                                    .then(()=>{
                                         isSending(false);
                                         setOpen(true);
-                                    }).catch((err)=>{
-                                    isSending(false)
-                                    setMessage("Failled to create visit prescription")
-                                    setType("error")
-                                    setOpen(true)})
-
+                                    })
                                 
 
-                            }} disabled={send || visit_id == null || select.length == 0}>{send ? <CircularProgress color="inherit" size="15px"/> : "Prescribe"}</button>
+                            }} disabled={send || visit_id == null || select.length === 0}>{send ? <CircularProgress color="inherit" size="15px"/> : "Prescribe"}</button>
                         </div>
                         </div>
 
