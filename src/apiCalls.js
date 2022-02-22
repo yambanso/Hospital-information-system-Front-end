@@ -56,3 +56,7 @@ export const getWithoutPrescriptions = axios.create({
 export const getPrescription = axios.create({
     baseURL : api_URL + "/Visitation_Prescription"
 })
+
+export const getLab = axios.create({
+    baseURL : api_URL + "/Visitation_without_Results"
+})

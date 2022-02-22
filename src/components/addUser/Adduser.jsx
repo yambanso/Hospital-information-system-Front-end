@@ -95,7 +95,7 @@ export default function Adduser() {
                     <select className='newUserSelect' name='role' placeholder='Select user role' {...register("role",{required :"Required"})}>
                         <option value="Admin">Admin</option>
                         <option value="Doctor">Doctor</option>
-                        <option value="Lab Technician">Lab Technician</option>
+                        <option value="Lab_Technician">Lab Technician</option>
                         <option value="Pharmacist">Pharmacists</option>
                         <option value="Receptionist">Receptionist</option>                        
                     </select>

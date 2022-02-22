@@ -1,0 +1,26 @@
+.lab_home{
+    padding: 10px;
+    background-color: #EDE7F6 !important;
+}
+.header{
+    padding: 10px;
+    background-color: #90CAF9;
+    display: flex;
+    height: 35px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0 , 0 , 0, 0.75);
+}
+.textTitle{
+    align-items: center;
+    justify-content: center;
+    color: rgb(49, 48, 48);
+    font-weight: 600;
+}
+.table{
+    padding: 10px;
+    margin-top: 10px;
+    height: 525px;
+}

@@ -18,6 +18,15 @@ import { AuthContext } from '../../context/AuthContext';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
 import { getMedicine } from '../../apiCalls'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import StepNav from './stepNav';
+
 
 
 const schema = yup.object().shape({
@@ -34,10 +43,13 @@ export default function Consult() {
     const [isWritting , setWritting] = React.useState(false);
     const [send, isSending] = React.useState(false)
     const [isOpen, setOpen] = React.useState(false);
+    const [open, setPopOpen] = React.useState(false)
     const [message, setMessage] = React.useState("Visit Description saved...");
     const [type, setType] = React.useState("success")
     const [visit_id, setVisitID] = React.useState()
-    const [select, setSelection] = useState([]);
+    const [select, setSelection] = React.useState([]);
+    const [stage, setStage] = React.useState(0)
+    const labelArray =['Stage 1', 'Stage 2', 'Stage 3']
 
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver : yupResolver(schema),
@@ -74,6 +86,7 @@ export default function Consult() {
                 setVisitID(res.data.id)
                 setWritting(false)
                 setOpen(true)
+                setPopOpen(true)
             })                
 
         
@@ -98,6 +111,94 @@ export default function Consult() {
         
     ]
     
+    const stepOne = () =>{
+        return (
+            <div className="frmItem">
+                            <form onSubmit={handleSubmit(onSubmit)} className="frm">
+                                <input type="text" name='patient_id'value={pID} style={{display : "none"}} {...register("patient_id",{required: "Required"})} />
+                                <label>Patient Complaint</label>
+                                <div className="txt">
+                                <TextareaAutosize className='area' name='Description' placeholder='Please enter Patient Description' {...register("Description",{required: "Required"})} minRows={5}/>
+                                <span className='errors'>{errors.Description?.message}</span>
+                                </div>
+                                <button type='submit' className='submit' disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
+                            </form>
+ 
+                        </div>            
+        )
+    }
+
+    const stepTwo = () => {
+        return(
+        <div className="medicine">
+        <div className="top">
+            <span className="tt">Prescribe Medicine</span>
+        </div>
+        
+        <div className="medicineTable">
+        <div className="table">
+                <DataGrid
+                    className={classes.root}
+                    rows={data}
+                    components={{
+                        Toolbar : GridToolbar
+                    }}
+                    columns={userColumn}
+                    pageSize={8}
+                    hideFooterPagination
+                    rowsPerPageOptions={[8]}
+                    checkboxSelection
+                    disableSelectAllCheckBox
+                    onSelectionModelChange={(ids) => {
+                        const selectionId = new Set(ids);
+                        const selectionRows = data.filter((row) => selectionId.has(row.id));
+                        setSelection(selectionRows);
+                    }
+                    }
+                    disableSelectionOnClick
+                />
+                </div>
+<div className="prescribeBtnpad">
+    <button className="prscrbtn" onClick={()=>{
+        isSending(true)
+        const arr = [];
+        {select.map((item,index) =>(
+            arr.push({visitation_id : visit_id + "",
+            medications_id : item.id+""})
+        ))}
+            axios.post(api_URL+"/Visitation_prescriptions",{items : arr},{
+                headers : {
+                    'Authorization' : "Bearer"+" "+token,
+                    'Content-Type' : 'application/json'
+                }
+            }).catch((err)=>{
+                isSending(false)
+                setMessage("Failled to create visit prescription")
+                setType("error")
+                setOpen(true)})
+            .then(()=>{
+                isSending(false);
+                setOpen(true);
+            })
+        
+
+    }} disabled={send || visit_id == null || select.length === 0}>{send ? <CircularProgress color="inherit" size="15px"/> : "Prescribe"}</button>
+</div>
+</div>
+
+    </div>
+        )
+    }
+
+    const handlePopupClose = () => {
+        setPopOpen(false);
+      };
+
+    const proceed = () => {
+        setStage(1);
+        setPopOpen(false)
+    }  
+
 
     const fetchData = () => {
         getMedicine.get('/').then(res => {
@@ -123,81 +224,18 @@ export default function Consult() {
               <h2 className='cTitle'>Counsult Patient</h2>
           </div>
 
+          <div className="progress">
+                 
+                 <StepNav labelArray = {labelArray} stage = {stage}></StepNav>
+              </div>
+
           <div className="Container">
+
                     <div className="consultPatient">
-                        <div className="frmItem">
-                            <form onSubmit={handleSubmit(onSubmit)} className="frm">
-                                <input type="text" name='patient_id'value={pID} style={{display : "none"}} {...register("patient_id",{required: "Required"})} />
-                                <label>Patient Complaint</label>
-                                <div className="txt">
-                                <TextareaAutosize className='area' name='Description' placeholder='Please enter Patient Description' {...register("Description",{required: "Required"})} minRows={5}/>
-                                <span className='errors'>{errors.Description?.message}</span>
-                                </div>
-                                <button type='submit' className='submit' disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
-                            </form>
- 
-                        </div>
-                    
-                        <div className="medicine">
-                                <div className="top">
-                                    <span className="tt">Prescribe Medicine</span>
-                                </div>
-                                
-                                <div className="medicineTable">
-                                <div className="table">
-                                        <DataGrid
-                                            className={classes.root}
-                                            rows={data}
-                                            components={{
-                                                Toolbar : GridToolbar
-                                            }}
-                                            columns={userColumn}
-                                            pageSize={8}
-                                            hideFooterPagination
-                                            rowsPerPageOptions={[8]}
-                                            checkboxSelection
-                                            disableSelectAllCheckBox
-                                            onSelectionModelChange={(ids) => {
-                                                const selectionId = new Set(ids);
-                                                const selectionRows = data.filter((row) => selectionId.has(row.id));
-                                                setSelection(selectionRows);
-                                            }
-                                            }
-                                            disableSelectionOnClick
-                                        />
-                                        </div>
-                        <div className="prescribeBtnpad">
-                            <button className="prscrbtn" onClick={()=>{
-                                isSending(true)
-                                const arr = [];
-                                {select.map((item,index) =>(
-                                    arr.push({visitation_id : visit_id + "",
-                                    medications_id : item.id+""})
-                                ))}
-                                    axios.post(api_URL+"/Visitation_prescriptions",{items : arr},{
-                                        headers : {
-                                            'Authorization' : "Bearer"+" "+token,
-                                            'Content-Type' : 'application/json'
-                                        }
-                                    }).catch((err)=>{
-                                        isSending(false)
-                                        setMessage("Failled to create visit prescription")
-                                        setType("error")
-                                        setOpen(true)})
-                                    .then(()=>{
-                                        isSending(false);
-                                        setOpen(true);
-                                    })
-                                
+                                               
+                    {stage === 0 ? stepOne() : stepTwo()}
 
-                            }} disabled={send || visit_id == null || select.length === 0}>{send ? <CircularProgress color="inherit" size="15px"/> : "Prescribe"}</button>
-                        </div>
-                        </div>
-
-                            </div>
-
-                    
-                    </div>                   
+                    </div>
                     <div className="patientShow">
 
                         <div className="pShowTop"> 
@@ -236,7 +274,7 @@ export default function Consult() {
                         </div>
                     </div>
 
-                              </div>
+            </div>
           <>
                 <Snackbar anchorOrigin={{
                     vertical : 'bottom',
@@ -247,6 +285,38 @@ export default function Consult() {
                     </Alert>
                 </Snackbar>
                 </>
+                <>
+        <Dialog open={open} onClose={handlePopupClose}>
+        
+        <DialogTitle>Order Test</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To Proceed to the next stage where you will create the prescription please click cancel.
+            To order Lab Test please order with the form then submit
+          </DialogContentText>
+          
+          <TextareaAutosize
+            autoFocus
+            margin="dense"
+            className='area length' 
+            name='Order' 
+            placeholder='Please enter the lab tests you want to order'
+            id="order"
+            label="Test for"
+            type="text"
+            fullWidth
+            minRows={5}
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={proceed}>Cancel</Button>
+          <Button onClick={() => {
+              console.log("Order Test")
+          }}>Order Test</Button>
+        </DialogActions>
+      </Dialog>
+      </>    
 
       </div>
   )

@@ -1,7 +1,6 @@
 import './topbar.css'
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext'
-import { Settings } from '@material-ui/icons';
 import Tooltip from '@material-ui/core/Tooltip'
 import { Logout } from '@mui/icons-material';
 
