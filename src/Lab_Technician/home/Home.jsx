@@ -25,15 +25,15 @@ export default function Home () {
     const Column = [
         { field: 'id', headerName: 'ID', width: 100 },
         {
-          field: 'patient_id',
-          headerName: 'Patient ID',
-          width: 150,
-        },
-        {
           field: 'Description',
           headerName: 'Description',
           width: 220,
         },
+        {
+            field: 'Test_Order',
+            headerName: 'Test for',
+            width: 150,
+          },
         {
             field: 'visit_day',
             headerName: 'Visit Day',

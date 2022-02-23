@@ -1,6 +1,8 @@
 .visit{
+    flex: 4;
     padding: 10px;
-    height: fit-content;
+    height: 610;
+    overflow: scroll;
     background-color: #EDE7F6;
 }
 .visitTitle{

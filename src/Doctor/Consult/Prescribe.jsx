@@ -18,6 +18,7 @@ import { AuthContext } from '../../context/AuthContext';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
 import Pdetails from './Pdetails';
+import StepNav from './stepNav';
 
 
 
@@ -31,6 +32,7 @@ export default function Prescribe() {
     const [isOpen, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState("Visit Prescription created...");
     const [type, setType] = React.useState("success")
+    const labelArray =['Description', 'Order Tests', 'Prescribe']
 
 
     const [data, setdata] = useState([]);
@@ -78,12 +80,7 @@ export default function Prescribe() {
             headerName: 'Type',
             width: 250,
           },
-        {
-          field: 'Price',
-          headerName: 'Price (Kwacha)',
-          width: 150,
-        },
-        
+               
     ]
 
     const handleChange = () => {}
@@ -99,19 +96,22 @@ export default function Prescribe() {
               <h2 className='cTitle'>Prescribe</h2>
           </div>
 
+          <div className="progress">
+              <StepNav labelArray={labelArray} stage = {2}></StepNav>
+          </div>
+
           <div className="Container">
                     <div className="consultPatient">
                         <div className="frmItem">
-                            <div className="frm">
-                                <label>Patient Complaint</label>
-                                <TextareaAutosize className='area' name='Description' value={location.state.item.Description} onChange={handleChange} placeholder='Please enter Patient Description' minRows={5}/>
-    
-                                
-                            </div>
+                        <div className="labResults">
+                                <span className="head">Description  : </span>
+                                <span className="results">{location.state.item.lab_results}</span>
+                              </div>
+
                             {location.state.item.lab_results != null ?
                             <div className="labResults">
                                 <span className="head">Lab Results  : </span>
-                                <span className="results">I didn't like the idea of creating a custom component, because if you have a different wrapping element you would have to createanother custom component etc. Also, it is just overkill. So I just did it with css and activeClassName:</span>
+                                <span className="results">{location.state.item.lab_results}</span>
                               </div>
                             :<></>}
 

@@ -6,7 +6,7 @@ import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { CircularProgress, TextareaAutosize } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './consult.css'
 import axios from 'axios';
 import {Bloodtype,LibraryBooks} from '@mui/icons-material';
@@ -26,6 +26,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import StepNav from './stepNav';
+import { ValidationError } from 'yup';
 
 
 
@@ -47,9 +48,11 @@ export default function Consult() {
     const [message, setMessage] = React.useState("Visit Description saved...");
     const [type, setType] = React.useState("success")
     const [visit_id, setVisitID] = React.useState()
+    const [ordering, setOrder] = React.useState(false)
     const [select, setSelection] = React.useState([]);
     const [stage, setStage] = React.useState(0)
-    const labelArray =['Stage 1', 'Stage 2', 'Stage 3']
+    const labelArray =['Description', 'Order Tests', 'Prescribe']
+    const valueRef = React.useRef('')
 
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver : yupResolver(schema),
@@ -62,6 +65,7 @@ export default function Consult() {
     const token = user.user.Token;
     const classes = useStyles();
     const [data, setdata] = useState([]);
+    const history  = useNavigate()
 
     const handleClose = (event , reason) => {
         if(reason = 'clickaway'){
@@ -84,6 +88,7 @@ export default function Consult() {
                 setOpen(true)
             }).then((res) =>{
                 setVisitID(res.data.id)
+                setStage(stage+1)
                 setWritting(false)
                 setOpen(true)
                 setPopOpen(true)
@@ -103,11 +108,6 @@ export default function Consult() {
             headerName: 'Type',
             width: 250,
           },
-        {
-          field: 'Price',
-          headerName: 'Price (Kwacha)',
-          width: 150,
-        },
         
     ]
     
@@ -191,11 +191,12 @@ export default function Consult() {
     }
 
     const handlePopupClose = () => {
+        setStage(stage+1);
         setPopOpen(false);
       };
 
     const proceed = () => {
-        setStage(1);
+        setStage(stage+1);
         setPopOpen(false)
     }  
 
@@ -210,6 +211,31 @@ export default function Consult() {
         fetchData()
     }, [])
 
+    const validationError = () => {
+        setMessage("Please make sure that you have enter your lab test order")
+                setType("error")
+                setOpen(true)
+    }
+
+    const sendOrder = async(order) =>{
+        setOrder(true)
+        await axios.put(api_URL+"/Visitation/"+visit_id,{Test_Order : order},{
+            headers : {
+                'Authorization' : "Bearer"+" "+token
+            }
+        }).catch ((error) => {
+            setWritting(false)
+            setMessage("Failled to send Lab test Order")
+            setType("error")
+            setOpen(true)
+        }).then((res) =>{
+            setStage(stage+1)
+            setWritting(false)
+            setOpen(true)
+            setPopOpen(false);
+            history(-1)
+        })
+    }
 
 
   return (
@@ -295,7 +321,7 @@ export default function Consult() {
             To order Lab Test please order with the form then submit
           </DialogContentText>
           
-          <TextareaAutosize
+          <TextField
             autoFocus
             margin="dense"
             className='area length' 
@@ -307,13 +333,16 @@ export default function Consult() {
             fullWidth
             minRows={5}
             variant="standard"
+            inputRef ={valueRef}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={proceed}>Cancel</Button>
-          <Button onClick={() => {
-              console.log("Order Test")
-          }}>Order Test</Button>
+          <Button disabled={ordering} onClick={() => {
+              let val = valueRef.current.value
+              {val === null ? validationError(): sendOrder(val)}
+              
+          }}>{ordering ? <CircularProgress color="inherit" size="15px"/> :"Order Test"}</Button>
         </DialogActions>
       </Dialog>
       </>    

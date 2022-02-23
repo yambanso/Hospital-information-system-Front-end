@@ -3,10 +3,10 @@ import Step from './Step'
 
 export default function StepNav(props) {
     return (
-        <div>
+        <div className='stepWrapper'>
             {props.labelArray.map((item,index)=>{
                 return(
-                <Step key={index} index ={index} label= {item}></Step>
+                <Step key={index} index ={index} Selected={props.stage === index} label= {item}></Step>
             )})}
             
         </div>

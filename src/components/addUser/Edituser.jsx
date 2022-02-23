@@ -1,23 +1,62 @@
-import {useState} from 'react'
+
+import * as React from 'react'
 import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './Adduser.css'
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { addUser, api_URL } from '../../apiCalls';
+import { CircularProgress } from '@material-ui/core';
+import {Snackbar } from "@mui/material"
+import MuiAlert from '@mui/material/Alert'
+import { AuthContext } from '../../context/AuthContext';
+
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
+});
+
 
 const schema = yup.object().shape({
     email: yup.string().email(),
     })
 
 export default function Edituser(props) {
+    const [isWritting, setWritting] = React.useState(false);
+    const [isOpen, setOpen] = React.useState(false) 
+    
 
     const location = useLocation();
+    const user = React.useContext(AuthContext);
+    const token = user.user.Token;
+
 
     const {register, handleSubmit, formState:{errors} }  = useForm({
         resolver : yupResolver(schema),
     });
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = async(data) =>{
+        setWritting(true)
+
+        let res = await addUser.put("/"+location.state.item.id,data,{
+            headers : {
+                'Authorization' : "Bearer"+" "+token
+            }}).catch(err => {
+                setWritting(false)        
+            })
+            setWritting(false)
+            setOpen(true)
+
+    }
+
+    const handleClose = (event,reason) => {
+        if(reason === 'clickaway'){
+            setOpen(false)
+        }
+        setOpen(false)       
+    }   
+
     
 
     return (
@@ -47,7 +86,7 @@ export default function Edituser(props) {
 
                 <div className="newUserItem">
                     <label >User Role</label>
-                    <select className='newUserSelect' name='role' defaultValue={location.state.item.Role} {...register("role")}>
+                    <select className='newUserSelect' name='Role' defaultValue={location.state.item.Role} {...register("Role")}>
                         <option value="Admin">Admin</option>
                         <option value="Doctor">Doctor</option>
                         <option value="Lab Technician">Lab Technician</option>
@@ -57,12 +96,23 @@ export default function Edituser(props) {
                 </div>
                 
                 <div className="btn">
-                <button className="newUserBtn" type="submit">Update</button>
+                <button className="newUserBtn" type="submit" disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Update"}</button>
                 <input type="reset" className='newuserBtnReset' value="Reset" />
                 </div>
                     
                 </form>
             </div>
+            <>
+                <Snackbar anchorOrigin={{
+                    vertical : 'bottom',
+                    horizontal : "left"
+                }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{width:'100%'}}>
+                    User details Updated succesifuly
+                    </Alert>
+                </Snackbar>
+                </>
+
         </div>
     )
 }

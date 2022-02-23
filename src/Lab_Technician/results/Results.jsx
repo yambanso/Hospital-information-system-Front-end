@@ -37,7 +37,7 @@ export default function Results () {
     const token = user.user.Token;
     
     
-
+    console.log(location.state.item)
     
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver : yupResolver(schema),
@@ -83,7 +83,8 @@ export default function Results () {
                 <div className="lab_results">
                     <div className="case">
                         <span className="Hed">Test for : </span>
-                        <span className="text">Mararia </span>
+                        <TextareaAutosize className='infarea' name='Description' defaultValue={location.state.item.Test_Order} {...register("Description",{required: "Required"})} minRows={5}/>
+                                
 
                     </div>
                     <div className="case">

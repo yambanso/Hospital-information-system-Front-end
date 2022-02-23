@@ -61,3 +61,8 @@
     margin-left: 5px;
     padding: 10px;
 }
+.infarea{
+    border: none;
+    background-color: inherit;
+    width: 600px;
+}
