@@ -1,0 +1,14 @@
+.hgt{
+    height: 800px;
+}
+.doneBtn{
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #447a7c;
+    color: whitesmoke;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+
+}

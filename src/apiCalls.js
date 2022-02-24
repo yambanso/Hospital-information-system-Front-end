@@ -60,3 +60,6 @@ export const getPrescription = axios.create({
 export const getLab = axios.create({
     baseURL : api_URL + "/lab_test_orders"
 })
+export const getVisits = axios.create({
+    baseURL : api_URL + "/active_visits"
+})

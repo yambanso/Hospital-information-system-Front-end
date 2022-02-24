@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {Bloodtype,LibraryBooks} from '@mui/icons-material';
 import { CircularProgress, TextareaAutosize } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './consult.css'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
@@ -33,6 +33,7 @@ export default function Prescribe() {
     const [message, setMessage] = React.useState("Visit Prescription created...");
     const [type, setType] = React.useState("success")
     const labelArray =['Description', 'Order Tests', 'Prescribe']
+    const history = useNavigate();
 
 
     const [data, setdata] = useState([]);
@@ -157,8 +158,19 @@ export default function Prescribe() {
                                             'Content-Type' : 'application/json'
                                         }
                                     }).then(()=>{
-                                        setWritting(false);
-                                        setOpen(true);
+                                        axios.put(api_URL+"/Visitation/"+ID,{ Status : "Prescribed"},{
+                                            headers : {
+                                                'Authorization' : "Bearer"+" "+token
+                                            }
+                                        }).catch((err)=>{
+                                            setWritting(false)
+                                            setMessage("Failled to create visit prescription")
+                                            setType("error")
+                                            setOpen(true)}).then(()=>{
+                                                setWritting(false);
+                                                setOpen(true);
+                                                history(-1)
+                                            })                                     
                                     }).catch((err)=>{
                                     setWritting(false)
                                     setMessage("Failled to create visit prescription")

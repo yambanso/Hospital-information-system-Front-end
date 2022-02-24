@@ -177,8 +177,18 @@ export default function Consult() {
                 setType("error")
                 setOpen(true)})
             .then(()=>{
+                axios.put(api_URL+"/Visitation/"+visit_id,{ Status : "Prescribed"},{
+                    headers : {
+                        'Authorization' : "Bearer"+" "+token
+                    }
+                }).catch((err)=>{
+                    setWritting(false)
+                    setMessage("Failled to create visit prescription")
+                    setType("error")
+                    setOpen(true)}).then(()=>{                            
                 isSending(false);
                 setOpen(true);
+                    })
             })
         
 
