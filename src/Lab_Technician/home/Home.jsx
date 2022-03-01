@@ -65,7 +65,7 @@ export default function Home () {
             </div>
 
             <div className="table">
-                <DataGrid
+                  <DataGrid
                     className={classes.root}
                     rows={data}
                     components = {{
@@ -76,7 +76,7 @@ export default function Home () {
                     rowsPerPageOptions={[8]}
                     disableSelectionOnClick
                 />
-            </div>
+                           </div>
         </div>
     )
 }

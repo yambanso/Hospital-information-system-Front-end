@@ -134,6 +134,10 @@
     border-bottom: 2px solid gray;
     border-top: 2px solid gray;
 }
+.consultBtn{
+    margin-top: 10px;
+    display: flex;
+}
 .prscrbtn{
     border: none;
     cursor: pointer;
@@ -145,7 +149,7 @@
     border-radius: 10px;
 }
 .table{
-    height: 450px;
+    height: 400px;
     margin-bottom: 5px;
 }
 .progress{

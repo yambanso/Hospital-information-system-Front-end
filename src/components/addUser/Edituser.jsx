@@ -89,7 +89,7 @@ export default function Edituser(props) {
                     <select className='newUserSelect' name='Role' defaultValue={location.state.item.Role} {...register("Role")}>
                         <option value="Admin">Admin</option>
                         <option value="Doctor">Doctor</option>
-                        <option value="Lab Technician">Lab Technician</option>
+                        <option value="Lab_Technician">Lab Technician</option>
                         <option value="Pharmacist">Pharmacists</option>
                         <option value="Receptionist">Receptionist</option>                        
                     </select>

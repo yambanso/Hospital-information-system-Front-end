@@ -53,6 +53,8 @@ export default function Consult() {
     const [stage, setStage] = React.useState(0)
     const labelArray =['Description', 'Order Tests', 'Prescribe']
     const valueRef = React.useRef('')
+    const [desc , setDescription] = React.useState()
+    const [done, isDone] = React.useState(false) 
 
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver : yupResolver(schema),
@@ -76,6 +78,7 @@ export default function Consult() {
     }
     const onSubmit = async(data) =>{
         setWritting(true)
+        setDescription(data.Description)
         
             await axios.post(api_URL+"/Visitation",data,{
                 headers : {
@@ -114,14 +117,23 @@ export default function Consult() {
     const stepOne = () =>{
         return (
             <div className="frmItem">
-                            <form onSubmit={handleSubmit(onSubmit)} className="frm">
+                            <form onSubmit={handleSubmit(onSubmit)} className="form">
                                 <input type="text" name='patient_id'value={pID} style={{display : "none"}} {...register("patient_id",{required: "Required"})} />
-                                <label>Patient Complaint</label>
+                                <label style={{marginLeft : "40%", padding : "20px"}}>Patient Complaint</label>
                                 <div className="txt">
-                                <TextareaAutosize className='area' name='Description' placeholder='Please enter Patient Description' {...register("Description",{required: "Required"})} minRows={5}/>
+                                <TextareaAutosize style={{width : "500px",marginLeft : "10%"}} className='area' name='Description' placeholder='Please enter Patient Description' {...register("Description",{required: "Required"})} minRows={5}/>
                                 <span className='errors'>{errors.Description?.message}</span>
                                 </div>
-                                <button type='submit' className='submit' disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
+                                <div className="consultBtn">
+                                <button type='submit' className='submit' style={{marginRight : "50px",marginLeft : "35%"}} disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
+                                
+                                <Link to='/'>
+                                 <button className="backBtn">
+                                     Back
+                                </button>
+                                 </Link>
+
+                                </div>
                             </form>
  
                         </div>            
@@ -164,7 +176,9 @@ export default function Consult() {
         const arr = [];
         {select.map((item,index) =>(
             arr.push({visitation_id : visit_id + "",
-            medications_id : item.id+""})
+            medications_id : item.id+"",
+            Qauntity : 1,
+            Status : 0,})
         ))}
             axios.post(api_URL+"/Visitation_prescriptions",{items : arr},{
                 headers : {
@@ -185,9 +199,11 @@ export default function Consult() {
                     setWritting(false)
                     setMessage("Failled to create visit prescription")
                     setType("error")
-                    setOpen(true)}).then(()=>{                            
+                    setOpen(true)})
+                    .then(()=>{                            
                 isSending(false);
                 setOpen(true);
+                isDone(true)
                     })
             })
         
@@ -321,7 +337,7 @@ export default function Consult() {
                     </Alert>
                 </Snackbar>
                 </>
-                <>
+                <>                
         <Dialog open={open} onClose={handlePopupClose}>
         
         <DialogTitle>Order Test</DialogTitle>
@@ -347,13 +363,38 @@ export default function Consult() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={proceed}>Cancel</Button>
+          <Button onClick={proceed}>Next</Button>
           <Button disabled={ordering} onClick={() => {
               let val = valueRef.current.value
               {val === null ? validationError(): sendOrder(val)}
               
           }}>{ordering ? <CircularProgress color="inherit" size="15px"/> :"Order Test"}</Button>
         </DialogActions>
+      </Dialog>
+      </>
+
+             <>                
+        <Dialog open={done} onClose={()=>{
+            isDone(false)
+            history(-1)
+        }}>
+        
+        <DialogTitle> Visit Summary</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {desc}
+          </DialogContentText>
+            Prescribed : {select.length} drugs
+          <DialogContentText>
+            
+          </DialogContentText>         
+          
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => {
+              history(-1)
+          }}>Done</Button>
+          </DialogActions>
       </Dialog>
       </>    
 

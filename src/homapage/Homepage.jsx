@@ -23,7 +23,7 @@ const updateRole = (role) => {
                           {
                             'Admin' : <Admin />,
                             'Doctor': < Doctor />,
-                            'Lab Technician' : <Lab_tech />,
+                            'Lab_Technician' : <Lab_tech />,
                             'Pharmacist' : <Pharma />,
                           }[Role]}
                       </> : <Sign_in upRole={updateRole}/>}

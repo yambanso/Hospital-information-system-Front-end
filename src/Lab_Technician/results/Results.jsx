@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import Pdetails from "../../Doctor/Consult/Pdetails";
 import './results.css'
 import { CircularProgress, TextareaAutosize } from '@material-ui/core';
+import { Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form'
 import { useState, useEffect } from 'react'
 import { DataGrid, GridToolbar } from '@material-ui/data-grid'
@@ -87,15 +88,24 @@ export default function Results () {
                                 
 
                     </div>
-                    <div className="case">
-                        <span className="Hed">Test Results</span>
-                        <form onSubmit={handleSubmit(onSubmit)} className="frm">
+                    <div className="case" style={{flexDirection : "column"}}>
+                        <span className="Hed" style={{marginLeft : "40%"}}>Test Results</span>
+                        <form onSubmit={handleSubmit(onSubmit)} className="frm" style={{flexDirection : "column"}} >
                          <div className="txt">   
-                        <TextareaAutosize className='area' name='lab_results' placeholder='Please enter test results' {...register("lab_results",{required: "Required"})} minRows={5}/>
+                        <TextareaAutosize style={{width : "500px", marginLeft : "25%"}} className='area' name='lab_results' placeholder='Please enter test results' {...register("lab_results",{required: "Required"})} minRows={5}/>
                         <span className='errors'>{errors.Description?.message}</span>
                         </div>
-                        <button type='submit' className='submit' disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
+                        <div className="consultBtn" style={{marginLeft : "25%"}}>
+                        <Link to='/'>
+                                 <button className="backBtn" style={{marginRight : "20px"}}>
+                                     Cancel
+                                </button>
+                                 </Link>
+
+                        <button type='submit' className='submit'  disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
+                        </div>
                         </form>
+
                     </div>
                 </div>
                 

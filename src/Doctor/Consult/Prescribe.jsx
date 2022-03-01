@@ -150,7 +150,9 @@ export default function Prescribe() {
                                 const arr = [];
                                 {select.map((item,index) =>(
                                     arr.push({visitation_id : ID + "",
-                                    medications_id : item.id+""})
+                                    medications_id : item.id+"",
+                                    Qauntity : 1,
+                                    Status : 0,})
                                 ))}
                                     axios.post(api_URL+"/Visitation_prescriptions",{items : arr},{
                                         headers : {
@@ -166,7 +168,8 @@ export default function Prescribe() {
                                             setWritting(false)
                                             setMessage("Failled to create visit prescription")
                                             setType("error")
-                                            setOpen(true)}).then(()=>{
+                                            setOpen(true)})
+                                            .then(()=>{
                                                 setWritting(false);
                                                 setOpen(true);
                                                 history(-1)
@@ -175,9 +178,7 @@ export default function Prescribe() {
                                     setWritting(false)
                                     setMessage("Failled to create visit prescription")
                                     setType("error")
-                                    setOpen(true)})
-
-                                
+                                    setOpen(true)})                                
 
                             }} disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Prescribe"}</button>
                         </div>

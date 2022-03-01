@@ -5,6 +5,8 @@ import { api_URL, getPrescription } from '../../apiCalls';
 import Pdetails from '../../Doctor/Consult/Pdetails';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
+import { TextField } from '@mui/material';
+import { CheckBox } from '@mui/icons-material';
 
 export default function Prescription () {
     const history = useNavigate();
@@ -72,7 +74,10 @@ export default function Prescription () {
                         {Prescr.map((item) => {
                           return(
                           <div className="pDeets">
-                          <span className="head"> {item.name}   </span>                        
+                          <span className="head"> {item.name}   </span>
+                          
+                          {/*<CheckBox/>
+                          <TextField />*/}                        
                           </div>
 
                         )})}
