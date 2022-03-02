@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import imge  from '../../data/patient.jpg'
 import './visit.css'
 import Pdetails from '../../Doctor/Consult/Pdetails';
-import { getPrescription } from '../../apiCalls';
+import { getPivot, getPrescription } from '../../apiCalls';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function VisitDay(props) {
@@ -23,9 +23,15 @@ export default function VisitDay(props) {
     })
   }
 
+  const fetchInfo = async() => {
+    await getPivot.get("/"+location.state.item.id).then(res => {
+      console.log(res.data)
+    });
+  }
+
   useEffect(() => {
     fetchData()
-    console.log(Role)
+    fetchInfo()
   },[])
 
   return (

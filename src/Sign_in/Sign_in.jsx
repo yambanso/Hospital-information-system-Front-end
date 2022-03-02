@@ -29,7 +29,7 @@ export default function Sign_in(props) {
         loginCall({email : data.email, password : data.password}, dispatch);
     }
     
-     {user != null ? <>{console.log(user.user.Role)}{props.upRole(user.user.Role)}</> : props.upRole(null)}
+     {user != null ? <>{props.upRole(user.user.Role)}</> : props.upRole(null)}
     
   return(
     <div className='signin'>

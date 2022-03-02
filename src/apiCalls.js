@@ -63,3 +63,7 @@ export const getLab = axios.create({
 export const getVisits = axios.create({
     baseURL : api_URL + "/active_visits"
 })
+
+export const getPivot = axios.create({
+    baseURL : api_URL + "/Visitation_pivot"
+})
