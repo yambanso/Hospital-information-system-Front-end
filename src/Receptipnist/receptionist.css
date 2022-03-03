@@ -1,0 +1,6 @@
+.receptionist{
+    display: flex;
+}
+.content{
+    flex: 4;
+}

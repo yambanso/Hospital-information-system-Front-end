@@ -3,8 +3,7 @@ import { Home ,
     Accessible, 
     Add, 
     LocalPharmacy,
-    LocalHospital,
-    Settings
+    LocalHospital
 } from '@material-ui/icons'
 import './sidebar.css'
 import {Link, useLocation} from 'react-router-dom'
@@ -41,7 +40,7 @@ export default function Sidebar() {
                         <Link to="/patients">
                             <li className="sidebarListItem">
                                 <Accessible className="sideBarIcon"/>
-                                Patients
+                                Clients
                             </li>
                         </Link>
                     </ul>

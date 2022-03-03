@@ -3,7 +3,7 @@
     flex-direction: column;
     background-color: #202020;
     align-items: center;
-    height: 750px;
+    height: 670px;
     width: 100%;
 }
 
@@ -24,20 +24,20 @@
     padding: 20px;    
     flex-wrap: wrap;    
 }
-.formItem{
+.formitem{
     width: 500px;
     display: flex;
     flex-direction: column;
     margin-top: 10px;
     margin-right: 20px;
 }
-.formItem>label{
+.formitem>label{
     margin-bottom: 10px;
     font-size: 14px;
     font-weight: 600;
     color: gray;
 }
-.formItem>input{
+.formitem>input{
     height: 20px;
     padding: 10px;
     border: 1px solid gray;

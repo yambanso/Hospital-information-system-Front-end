@@ -40,19 +40,19 @@ export default function Sign_in(props) {
                 <span>Sign In</span>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="form">
-            <div className="formItem">
+            <div className="formitem">
                     <label >Email <address></address></label>
                     <input type="text" name="email" placeholder='enter youre email address'  {...register("email",{required: "Required"})}/>
                 </div>
                 <span className='errors'>{errors.email?.message}</span>
-                <div className="formItem">
+                <div className="formitem">
                     <label >Password</label>
                     <input type="password" name="password" placeholder='enter password'  {...register("password",{required: "Required"})}/>
                 </div>
                 <span className='errors'>{errors.password?.message}</span>
                 <span className='errors'>{error ? "Password or user name invalid" : ""}</span>
 
-                <div className="btn">
+                <div className="Sbtn" >
                 <button className="signBtn" type="submit" disabled={isFetching}>{isFetching? <CircularProgress color="inherit" size="15px" /> : "Sign in"}</button>
                 <input type="reset" className='newMedsBtnReset' value="Reset" />
                 </div>    
