@@ -84,7 +84,7 @@ export default function Results () {
                 <div className="lab_results">
                     <div className="case">
                         <span className="Hed">Test for : </span>
-                        <TextareaAutosize className='infarea' name='Description' defaultValue={location.state.item.Test_Order} {...register("Description",{required: "Required"})} minRows={5}/>
+                        <span className='infarea' style={{paddingTop : "10px"}}>{location.state.item.Test_Order}</span>
                                 
 
                     </div>
@@ -95,15 +95,18 @@ export default function Results () {
                         <TextareaAutosize style={{width : "500px", marginLeft : "25%"}} className='area' name='lab_results' placeholder='Please enter test results' {...register("lab_results",{required: "Required"})} minRows={5}/>
                         <span className='errors'>{errors.Description?.message}</span>
                         </div>
-                        <div className="consultBtn" style={{marginLeft : "25%"}}>
+                        <div className="consultBtn" style={{marginLeft : "40%"}}>
+                       
+            
+                        <button type='submit' className='submit'  disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
+                       
                         <Link to='/'>
-                                 <button className="backBtn" style={{marginRight : "20px"}}>
+                                 <button className="backBtn" style={{marginLeft : "50px"}}>
                                      Cancel
                                 </button>
                                  </Link>
+                                 </div>
 
-                        <button type='submit' className='submit'  disabled={isWritting}>{isWritting ? <CircularProgress color="inherit" size="15px"/> : "Save"}</button>
-                        </div>
                         </form>
 
                     </div>
