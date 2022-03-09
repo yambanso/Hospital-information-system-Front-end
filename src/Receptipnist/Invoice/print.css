@@ -1,0 +1,54 @@
+.bar{
+    margin: 10px;
+    display: flex;
+    background-color: blueviolet;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+}
+.hdr{
+    padding: 10px;
+    font-weight: 600;
+    color: whitesmoke;
+    font-size: 32px !important;
+}
+.vl{
+    padding: 10px;
+}
+.servs{
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-bottom: 2px solid gray;
+}
+.client{
+    margin-right: 100px;
+    border: none;
+}
+.Hdetails{
+    margin-top: -45px;
+}
+.hder{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+}
+.tble{
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+}
+@media print{
+    @page {
+        size: landscape;
+    }
+}

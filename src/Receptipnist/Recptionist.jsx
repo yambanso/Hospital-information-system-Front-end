@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar/Sidebar"
 import "./receptionist.css"
 import Home from "./Home/Home"
 import Invoice from "./Invoice/invoice"
+import Print from "./Invoice/Print"
 export default function Receptionist () {
     return(
         <BrowserRouter>
@@ -19,7 +20,9 @@ export default function Receptionist () {
 
                         <Route path="/new_Client" element={<AddPatient />} />
 
-                        <Route path="/invoce" element={<Invoice />} />
+                        <Route path="/invoice" element={<Invoice />} />
+
+                        <Route path="/print/:id" element={<Print />} />
 
                         <Route path="*" element={<Home />}/>
                     </Routes>

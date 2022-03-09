@@ -17,7 +17,6 @@ const schema = yup.object().shape({
 
 
 export default function Sign_in(props) {
-    const[isNull, setIsNull] = useState(true) 
     const {register, handleSubmit, formState:{errors} }  = useForm({
         resolver : yupResolver(schema),
     });
@@ -28,6 +27,8 @@ export default function Sign_in(props) {
     const onSubmit = (data) => {
         loginCall({email : data.email, password : data.password}, dispatch);
     }
+
+    
     
      {user != null ? <>{props.upRole(user.user.Role)}</> : props.upRole(null)}
     

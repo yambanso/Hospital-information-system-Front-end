@@ -3,8 +3,8 @@ import { DataGrid, GridToolbar } from "@material-ui/data-grid"
 import { LocalPrintshop } from "@material-ui/icons";
 import * as React from "react"
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getVisits } from "../../apiCalls";
-import { AuthContext } from "../../context/AuthContext";
 import { useStyles } from "../../data-gridStyle";
 import '../Home/home.css'
 
@@ -30,11 +30,14 @@ export default function Invoice (){
         renderCell  : (params)=> {                                   
             return(
                 <>
-                
+                <Link to={
+                    "/print/"+params.row.id
+                } state={{item : params.row}}>
                    <button className="displayBtn">
                             <LocalPrintshop className='displayIcon'/>
                             Print
                         </button>
+                </Link>        
                         
                 </>
                 )
@@ -43,8 +46,7 @@ export default function Invoice (){
 ];
 
     const classes = useStyles()
-    const [Data, setdata] =  React.useState([]);
-    const user = React.useContext(AuthContext);  
+    const [Data, setdata] =  React.useState([]); 
 
     const fetchData = async() => {
         getVisits.get('/Invoice').then(res =>{
@@ -64,7 +66,7 @@ export default function Invoice (){
         <div className="HomeTop">
                 <div className="homeInput">
                     
-                      <span className="heading">Consultation</span>
+                      <span className="heading">Invoice</span>
                 </div>
                 </div>
 

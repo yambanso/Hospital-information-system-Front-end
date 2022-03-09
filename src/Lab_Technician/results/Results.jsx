@@ -5,14 +5,12 @@ import './results.css'
 import { CircularProgress, TextareaAutosize } from '@material-ui/core';
 import { Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form'
-import { useState, useEffect } from 'react'
-import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
 import { api_URL } from '../../apiCalls';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -37,8 +35,6 @@ export default function Results () {
     const user = useContext(AuthContext);
     const token = user.user.Token;
     
-    
-    console.log(location.state.item)
     
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver : yupResolver(schema),

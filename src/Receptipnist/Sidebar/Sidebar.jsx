@@ -6,11 +6,6 @@ import {
 import './sidebar.css'
 import {Link, useLocation} from 'react-router-dom'
 
-const location = useLocation;
-
-
-
-
 export default function Sidebar() {
     return (
         <div className='sidebar'>
@@ -25,7 +20,7 @@ export default function Sidebar() {
                             </li>
                             </Link>
                             
-                            <Link to="/invoce">
+                            <Link to="/invoice">
                             <li className="sidebarListItem">
                                 <Receipt className="sideBarIcon"/>
                                 Invoices
