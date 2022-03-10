@@ -52,3 +52,16 @@
         size: landscape;
     }
 }
+.printBtn{
+    margin-left: 30%;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    font-weight: 600;
+    position: relative;
+    color: darkslategrey;
+    background-color: wheat;
+}

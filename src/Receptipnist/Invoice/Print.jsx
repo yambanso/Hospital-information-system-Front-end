@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { LibraryBooks, LocationCity, PermIdentity } from "@material-ui/icons";
 import { useLocation, useNavigate } from "react-router-dom"
 import {TableContainer,Table, TableBody,TableRow,Paper,TableHead,TableCell} from '@material-ui/core'
 import { getPatients, getPivot, getPrescription, getServices } from "../../apiCalls";
 import './print.css'
 import { Email, LocationOn, PhoneAndroid, Telegram } from '@mui/icons-material';
-import { padding } from '@mui/system';
+import ReactToPrint from 'react-to-print';
+
 
 export default function Print(){
     const location = useLocation();
@@ -15,6 +16,8 @@ export default function Print(){
     const [prescription, setPrescription] = useState([]);
     const [pivot, setPivots] = useState([]);
     let total = 0;
+
+    const componentRef = useRef(); 
     
 
     const fetchData = async() => {
@@ -36,12 +39,14 @@ export default function Print(){
         setPrescription(res.data);
         }); 
     
-      console.log(pivot) 
     }
+
     
     useEffect(()=>{
         fetchData()        
     }, [])
+
+    const compRef = useRef();
 
     const inv = () => {
         return(
@@ -218,16 +223,20 @@ export default function Print(){
             } }>Back</button>
           
             <span className="ttle"> Print Details </span>
+
+            <ReactToPrint
+            trigger={() => <button className = "printBtn">Print</button>}
+            content={() => compRef.current}
+            onAfterPrint={() => console.log("Invoice : Hms"+location.state.item.id+" Printed succesifully")}
+            />
+            
         </div>
         <div className="ngini">
             
-            <div className="bill">
+            <div className="bill" ref={compRef}>
                 {inv()}
                 </div>
             </div>
-
-
-
             </div>
     )
 }
