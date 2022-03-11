@@ -63,48 +63,12 @@ QuickSearchToolbar.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-const VISIBLE_FIELDS = ['name', 'blood_group', 'Dob', 'Medical_scheme', 'address'];
 
 export default function Datatable(props) {
-  
+  let dat = props.Data;
   const [searchText, setSearchText] = React.useState('');
-  const [rows, setRows] = React.useState(props.Data);
-  
-  const patientColumns = [
-    { field: 'id', headerName: 'ID', width: 90 },
-    {
-      field: 'name',
-      headerName: 'Name',
-      width: 150,
-      valueGetter: (params)=>  params.row.firstname + " " + params.row.surname,
-      
-    },
-    {
-        field: 'blood_group',
-        headerName: 'Blood Group',
-        width: 150,
-
-    },
-      {
-      field: 'Dob',
-      headerName: 'Date of Birth',
-      width: 110,
-    },{
-        field: 'Medical_scheme',
-        headerName: 'Medical Scheme',
-        width: 150
-    },
-    {
-      field: 'Phonenumber',
-      headerName: 'Contact',
-      width: 150,
-    },
-    {
-      field: 'address',
-      headerName: 'Address',
-      width: 130,
-    }
-];
+  const [rows, setRows] = React.useState(dat);
+  const columns = props.columns  
 
 
   const requestSearch = (searchValue) => {
@@ -119,20 +83,21 @@ export default function Datatable(props) {
   };
 
   React.useEffect(() => {
-    setRows(rows);
-  }, [rows]);
+    setRows(dat);
+  }, []);
 
   return (
     
       <DataGrid
         components={{ Toolbar: QuickSearchToolbar }}
         rows={rows}
-        columns={patientColumns}
+        columns={columns}
         componentsProps={{
           toolbar: {
             value: searchText,
             onChange: (event) => requestSearch(event.target.value),
-            clearSearch: () => requestSearch(''),
+            clearSearch: () => {requestSearch('')
+                                  setRows(dat)},
           },
         }}
         rowsPerPageOptions={[8]}

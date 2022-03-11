@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { LibraryBooks, LocationCity, PermIdentity } from "@material-ui/icons";
 import { useLocation, useNavigate } from "react-router-dom"
 import {TableContainer,Table, TableBody,TableRow,Paper,TableHead,TableCell} from '@material-ui/core'
-import { getPatients, getPivot, getPrescription, getServices } from "../../apiCalls";
+import { api_URL, getPatients, getPivot, getPrescription, getServices } from "../../apiCalls";
 import './print.css'
 import { Email, LocationOn, PhoneAndroid, Telegram } from '@mui/icons-material';
 import ReactToPrint from 'react-to-print';
+import { AuthContext } from '../../context/AuthContext';
+import axios from 'axios';
 
 
 export default function Print(){
@@ -16,9 +18,11 @@ export default function Print(){
     const [prescription, setPrescription] = useState([]);
     const [pivot, setPivots] = useState([]);
     let total = 0;
-
+    
     const componentRef = useRef(); 
     
+    const user = useContext(AuthContext)
+    const token = user.user.Token;
 
     const fetchData = async() => {
         await getPivot.get("/"+location.state.item.id).then(res => {
@@ -227,7 +231,14 @@ export default function Print(){
             <ReactToPrint
             trigger={() => <button className = "printBtn">Print</button>}
             content={() => compRef.current}
-            onAfterPrint={() => console.log("Invoice : Hms"+location.state.item.id+" Printed succesifully")}
+            onAfterPrint={() => {
+                axios.put(api_URL+"/Visitation/"+location.state.item.id,{ Status : "Complete"},{
+                    headers : {
+                        'Authorization' : "Bearer"+" "+token
+                    }
+            }).then(()=>{
+                history(-1)
+            })}}
             />
             
         </div>
