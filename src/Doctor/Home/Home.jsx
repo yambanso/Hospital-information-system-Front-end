@@ -3,19 +3,14 @@ import './home.css'
 import { useState } from 'react'
 import {Link} from 'react-router-dom'
 import { AccessTime } from '@material-ui/icons'
-import { DataGrid, GridToolbar } from '@material-ui/data-grid';
 import { patientsRows } from '../../data/tableData';
 import { getPatients } from '../../apiCalls'
-import { useStyles } from '../../data-gridStyle';
+import Datatable from '../../Receptipnist/Home/Data-table';
 
 export default function Home() {
 
-  const classes = useStyles();
     const [Data, setdata] =  useState(patientsRows);
 
-    const handleChange = (name) =>{
-        setdata(Data.filter((item) => item.name.toLowerCase().includes(name)));
-    }
     const fetchData = () =>{
       getPatients.get('/').then(res =>{
         setdata(res.data)
@@ -94,17 +89,7 @@ export default function Home() {
 
         <div className="homeBtm">
             <div className="homeTable">
-            <DataGrid
-                            className={classes.root}
-                            rows={Data}
-                            components = {{
-                              Toolbar : GridToolbar
-                            }}
-                            columns={patientColumns}
-                            pageSize={8}
-                            rowsPerPageOptions={[8]}
-                            disableSelectionOnClick
-                        />
+            <Datatable Data={Data} columns={patientColumns}/>
             </div>
             </div>        
             

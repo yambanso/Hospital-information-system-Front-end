@@ -1,11 +1,10 @@
 import './medicines.css';
 import { useState, useEffect } from 'react'
-import { DataGrid, GridFilterForm, GridToolbar, GridToolbarFilterButton } from '@material-ui/data-grid'
 import { DeleteOutline } from '@material-ui/icons'
 import { medicineRows } from '../../data/tableData'
-import { useStyles } from '../../data-gridStyle'
 import { Link } from 'react-router-dom';
 import { getMedicine } from '../../apiCalls'
+import Datatable from '../../Receptipnist/Home/Data-table';
 
 
 
@@ -26,11 +25,6 @@ export default function Medicines() {
     const handleDelete = (id)=>{
         setdata(data.filter((item) => item.id !== id));
     }
-
-    const handleChange = (name) =>{
-        setdata(data.filter((item) => item.name.toLowerCase().includes(name)));
-    }
-   
 
     const userColumn = [
         { field: 'id', headerName: 'ID', width: 90 },
@@ -71,7 +65,6 @@ export default function Medicines() {
         }
     ]
 
-    const classes = useStyles();
 
   return(
   <div className='medicine'>
@@ -83,17 +76,7 @@ export default function Medicines() {
                 </div>
             <div className="medicineBottom">
             <div className="medicineTable">
-                        <DataGrid
-                            className={classes.root}
-                            rows={data}
-                            components ={{
-                                Toolbar : GridToolbar
-                            }}
-                            columns={userColumn}
-                            pageSize={8}
-                            rowsPerPageOptions={[8]}
-                            disableSelectionOnClick
-                        />
+                <Datatable Data={data} columns={userColumn} />
                         </div>
                    
             </div>

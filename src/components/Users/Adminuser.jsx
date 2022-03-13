@@ -1,12 +1,12 @@
-import { useState , useEffect } from 'react'
+import { useState , useEffect, useContext } from 'react'
 import {Link} from 'react-router-dom'
-import { DataGrid, GridToolbar } from '@material-ui/data-grid'
-import { DeleteOutline, Visibility } from '@material-ui/icons'
+import { DeleteOutline } from '@material-ui/icons'
 import { userRows } from '../../data/tableData'
-import { useStyles } from '../../data-gridStyle'
 import Display from "./Display"
 import './users.css'
 import { getUsers } from '../../apiCalls'
+import Datatable from '../../Receptipnist/Home/Data-table'
+import { AuthContext } from '../../context/AuthContext'
 
 export default function Adminuser() {
     const [data, setdata] = useState(userRows);
@@ -15,7 +15,9 @@ export default function Adminuser() {
     getUsers.get('/').then(res => {
         setdata(res.data)
     })
-   } 
+   }
+   const user = useContext(AuthContext)
+   const uID = user.user.user.id
    
    useEffect(() =>{
         fetchData()
@@ -25,12 +27,7 @@ export default function Adminuser() {
         setdata(data.filter((item) => item.id !== id));
     }
 
-    const handleChange = (name) =>{
-        setdata(data.filter((item) => item.name.toLowerCase().includes(name)));
-    }
-
-
-
+    
      const userColumn = [
             { field: 'id', headerName: 'ID', width: 90 },
             {
@@ -69,9 +66,9 @@ export default function Adminuser() {
                             <button className="userListEdit">Edit</button>
                             </Link>
 
-                                
+                        {uID === params.row.id ? <></> :                    
                             <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>
-
+                        }    
                             
                         </>
                         )
@@ -79,8 +76,6 @@ export default function Adminuser() {
             }
      ];
 
-
-     const classes = useStyles();
          
               
     return (      
@@ -93,17 +88,8 @@ export default function Adminuser() {
                 </div>
             <div className="userBottom">
             <div className="userTable">
-                        <DataGrid
-                            className={classes.root}
-                            rows={data}
-                            components = {{
-                                Toolbar : GridToolbar
-                            }}
-                            columns={userColumn}
-                            pageSize={8}
-                            rowsPerPageOptions={[8]}
-                            disableSelectionOnClick
-                        />
+                        <Datatable Data={data} columns={userColumn} />                      
+                        
                         </div>
                    
             </div>

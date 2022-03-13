@@ -1,10 +1,9 @@
-import { DataGrid, GridToolbar } from "@material-ui/data-grid"
 import { Accessible, AccountCircle } from "@material-ui/icons"
 import { userColumns, userRows, patientsRows, patientsColumns } from "../../data/tableData"
-import { useStyles } from "../../data-gridStyle"
 import "./home.css"
 import { getUserCount,getPatientCount, getPatients, getUsers } from '../../apiCalls'
 import { useState, useEffect } from 'react'
+import Datatable from '../../Receptipnist/Home/Data-table';
 
 
 export default function Home() {
@@ -40,7 +39,7 @@ export default function Home() {
     }, [])
 
     
-    const classes = useStyles();
+    
     return (
         <div className='home'>
 
@@ -82,18 +81,8 @@ export default function Home() {
                     </span>
                     <div className="userTable">
                     <div className="usersTable">
-                        <DataGrid
-                            className={classes.root}
-                            rows={urows}
-                            components={{
-                                Toolbar : GridToolbar,
-                            }}
-                            filterModel ={{items : [{columnField : 'name', operatorValue : 'contains'}]}}
-                            columns={userColumns}
-                            pageSize={5}
-                            rowsPerPageOptions={[5]}
-                            disableSelectionOnClick
-                        />
+                        <Datatable Data={urows} columns={userColumns}/>
+                        
                         </div>
                     </div>
                     
@@ -104,17 +93,8 @@ export default function Home() {
                     </span>
                     <div className="patientsTable">
                     <div className="patientsTable">
-                        <DataGrid
-                            className={classes.root}
-                            rows={prows}
-                            components={{
-                                Toolbar : GridToolbar,
-                            }}
-                            columns={patientsColumns}
-                            pageSize={5}
-                            rowsPerPageOptions={[5]}
-                            disableSelectionOnClick
-                        />
+                    <Datatable Data={prows} columns={patientsColumns}/>
+                        
                         </div>
 
                     </div>

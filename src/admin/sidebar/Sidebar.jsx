@@ -73,7 +73,7 @@ export default function Sidebar() {
                     <Link to="/patients">
                         <li className="sidebarListItem">
                             <Accessible className="sideBarIcon"/>
-                            Patients
+                            Clients
                         </li>
                     </Link>    
                     

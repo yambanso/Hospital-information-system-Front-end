@@ -1,19 +1,13 @@
-
-import { DataGrid, GridToolbar } from "@material-ui/data-grid"
 import * as React from "react"
 import { useEffect } from "react";
 import { getPatients } from "../../apiCalls";
-import { AuthContext } from "../../context/AuthContext";
-import { useStyles } from "../../data-gridStyle";
 import Datatable from "./Data-table";
 import './home.css'
 
 export default function Home (){
 
     
-    const classes = useStyles()
-    const [Data, setdata] =  React.useState([]);
-    const user = React.useContext(AuthContext); 
+    const [Data, setdata] =  React.useState([]); 
     
     const patientColumns = [
         { field: 'id', headerName: 'ID', width: 90 },

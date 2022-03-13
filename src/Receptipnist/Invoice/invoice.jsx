@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getVisits } from "../../apiCalls";
 import { useStyles } from "../../data-gridStyle";
+import Datatable from "../Home/Data-table";
 import '../Home/home.css'
 
 export default function Invoice (){
@@ -14,8 +15,8 @@ export default function Invoice (){
   const Column = [
     { field: 'id', headerName: 'ID', width: 100 },
     {
-      field: 'Description',
-      headerName: 'Description',
+      field: 'patient_id',
+      headerName: 'Patient ID',
       width: 220,
     },
     {
@@ -49,7 +50,7 @@ export default function Invoice (){
     const [Data, setdata] =  React.useState([]); 
 
     const fetchData = async() => {
-        getVisits.get('/Invoice').then(res =>{
+        await getVisits.get('/Invoice').then(res =>{
             setdata(res.data)
         })
     }
@@ -72,6 +73,7 @@ export default function Invoice (){
 
                 <div className="homeBtm">
                     <div className="homeTable">
+                    
                         <DataGrid
                                                     className={classes.root}
                                                     rows={Data}

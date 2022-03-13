@@ -70,11 +70,12 @@ export default function Datatable(props) {
   const [rows, setRows] = React.useState(dat);
   const columns = props.columns  
 
+  
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
-    const filteredRows = rows.filter((row) => {
+    const filteredRows = dat.filter((row) => {
       return Object.keys(row).some((field) => {
         return searchRegex.test(row[field].toString());
       });
@@ -82,9 +83,10 @@ export default function Datatable(props) {
     setRows(filteredRows);
   };
 
+  
   React.useEffect(() => {
-    setRows(dat);
-  }, []);
+    setRows(dat);    
+  }, [dat]);
 
   return (
     
@@ -100,6 +102,7 @@ export default function Datatable(props) {
                                   setRows(dat)},
           },
         }}
+        pageSize={8}
         rowsPerPageOptions={[8]}
       />
       );

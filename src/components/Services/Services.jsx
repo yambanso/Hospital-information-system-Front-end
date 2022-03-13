@@ -1,11 +1,9 @@
 import { useState , useEffect} from 'react'
-import { DataGrid, GridToolbar } from '@material-ui/data-grid'
-import { DeleteOutline } from '@material-ui/icons'
 import { servicesRows } from '../../data/tableData'
-import { useStyles } from '../../data-gridStyle'
 import './services.css'
 import { Link } from 'react-router-dom'
 import { getServices } from '../../apiCalls'
+import Datatable from '../../Receptipnist/Home/Data-table'
 
 
 
@@ -22,15 +20,6 @@ export default function Services() {
     useEffect(() => {
             fetchData()
     }, [])
-
-    const handleDelete = (id)=>{
-        setdata(data.filter((item) => item.id !== id));
-    }
-
-    const handleChange = (name) =>{
-        setdata(data.filter((item) => item.name.toLowerCase().includes(name)));
-    }
-   
 
     const userColumn = [
         { field: 'id', headerName: 'ID', width: 90 },
@@ -62,7 +51,6 @@ export default function Services() {
         }
     ]
 
-    const classes = useStyles();
 
   return(
   <div className='medicine'>
@@ -74,19 +62,7 @@ export default function Services() {
                 </div>
             <div className="medicineBottom">
             <div className="medicineTable">
-                        <DataGrid
-                            className={classes.root}
-                            rows={data}
-                            components = {
-                                {
-                                    Toolbar : GridToolbar
-                                }
-                            }
-                            columns={userColumn}
-                            pageSize={8}
-                            rowsPerPageOptions={[8]}
-                            disableSelectionOnClick
-                        />
+                        <Datatable Data={data} columns={userColumn} />
                         </div>
                    
             </div>
