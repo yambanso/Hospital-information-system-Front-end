@@ -8,6 +8,7 @@ import Edituser from '../components/addUser/Edituser'
 import Medicines from '../components/Medicines/Medicines'
 import Patienthistory from '../components/patients/Patienthistory'
 import Patients from '../components/patients/Patients'
+import Report from '../components/Report.jsx/Report'
 import EditService from '../components/Services/EditService'
 import Services from '../components/Services/Services'
 import Adminuser from '../components/Users/Adminuser'
@@ -49,6 +50,8 @@ export default function Admin() {
                     <Route path="/Edit_medicine/:medicine_ID" element={<EditMeds />}/>
 
                     <Route path="/services" element={<Services/>}/>
+
+                    <Route path="/Report" element={<Report />}/>
 
                     <Route path="/Edit_service/:service_ID" element={<EditService />}/>
 

@@ -10,6 +10,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.37",
     "@material-ui/icons": "^4.11.2",
     "@mui/icons-material": "^5.4.1",
+    "@mui/lab": "^5.0.0-alpha.73",
     "@mui/material": "^5.4.0",
     "@mui/x-data-grid": "^5.6.1",
     "@testing-library/jest-dom": "^5.16.1",

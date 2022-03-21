@@ -47,6 +47,7 @@ export const getPatientHistory = axios.create({
     baseURL : api_URL+'/Visitation'
 })
 
+
 export const getDoctorHistory = axios.create({
     baseURL : api_URL+ "/Visitation/Administer"
 })
@@ -66,4 +67,16 @@ export const getVisits = axios.create({
 
 export const getPivot = axios.create({
     baseURL : api_URL + "/Visitation_pivot"
+})
+
+export const getMonthly = axios.create({
+    baseURL : api_URL + "/reportMonthly"
+})
+
+export const getMonthlyPrescribed = axios.create({
+    baseURL : api_URL + "/reportMonthlyMeds"
+})
+
+export const getMonthlyUnprescribed = axios.create({
+    baseURL : api_URL + "/reportMonthlyMedsUnPrescribed"
 })

@@ -5,7 +5,7 @@ import { api_URL, getPivot, getPrescription } from '../../apiCalls';
 import Pdetails from '../../Doctor/Consult/Pdetails';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
-import { Checkbox, InputLabel, Select, TextField } from '@mui/material';
+import { Checkbox, InputLabel, Select} from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import {Snackbar } from "@mui/material"
@@ -50,7 +50,7 @@ export default function Prescription () {
         setWritting(true)
         axios.put(api_URL+"/Visitation_prescriptions",{items : pivots},{
           headers : {
-              'Authorization' : "Bearer"+" "+token,
+              'Authorization' : "Bearer"+ " " +token,
               'Content-Type' : 'application/json'
           }
       }).catch(() => {
@@ -61,7 +61,7 @@ export default function Prescription () {
       }).then(
           axios.put(api_URL+"/Visitation/"+location.state.item.id,{ Status : "Invoice"},{
             headers : {
-                'Authorization' : "Bearer"+" "+token
+                'Authorization' : "Bearer"+ " " +token
             }
         }).catch(()=>{
           setWritting(false)            

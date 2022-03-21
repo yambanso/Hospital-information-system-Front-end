@@ -5,6 +5,7 @@ import { Home ,
     LocalPharmacy,
     LocalHospital
 } from '@material-ui/icons'
+import { Assessment } from '@mui/icons-material' 
 import './sidebar.css'
 import {Link, useLocation} from 'react-router-dom'
 
@@ -37,12 +38,12 @@ export default function Sidebar() {
                             </li>
                         </Link>
 
-                        <Link to="/patients">
-                            <li className="sidebarListItem">
-                                <Accessible className="sideBarIcon"/>
-                                Clients
-                            </li>
-                        </Link>
+                        <Link to="/Report">
+                        <li className="sidebarListItem">
+                                    <Assessment className="sideBarIcon"/>
+                                    Report
+                                </li>
+                                </Link>
                     </ul>
                 </div>
 
@@ -110,6 +111,14 @@ export default function Sidebar() {
                 <div className="sidebarMenu">
                     <h3 className="siderTitle">Extra</h3>
                     <ul className="sidebarLst">
+
+                    <Link to="/Report">
+                    <li className="sidebarListItem">
+                                <Assessment className="sideBarIcon"/>
+                                Report
+                            </li>
+                            </Link>        
+
 
                         <Link to="/services">
                             <li className="sidebarListItem">
