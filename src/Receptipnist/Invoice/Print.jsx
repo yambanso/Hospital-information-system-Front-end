@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { LibraryBooks, LocationCity, PermIdentity } from "@material-ui/icons";
+import { LibraryBooks, LocationCity, PermIdentity, LocalPrintshop } from "@material-ui/icons";
 import { useLocation, useNavigate } from "react-router-dom"
 import {TableContainer,Table, TableBody,TableRow,Paper,TableHead,TableCell} from '@material-ui/core'
 import { api_URL, getPatients, getPivot, getPrescription, getServices } from "../../apiCalls";
@@ -229,7 +229,10 @@ export default function Print(){
             <span className="ttle"> Print Details </span>
 
             <ReactToPrint
-            trigger={() => <button className = "printBtn">Print</button>}
+
+    trigger={() => <button className='displayBtn printBtn' >
+            <LocalPrintshop className='displayIcon'/>
+            Print</button>}
             content={() => compRef.current}
             onAfterPrint={() => {
                 axios.put(api_URL+"/Visitation/"+location.state.item.id,{ Status : "Complete"},{

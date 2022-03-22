@@ -70,7 +70,8 @@ export default function Prescription () {
          setOpen(true)
         }).then(()=>{
           setWritting(false)
-            setOpen(true)            
+            setOpen(true)
+            history(-1)            
         }))
       }
       
@@ -84,12 +85,10 @@ export default function Prescription () {
       const handleClose = (event , reason) => {
         if(reason = 'clickaway'){
             setOpen(false)
-            history(-1)
             return
         }
         setOpen(false)
-        history(-1)
-    }
+            }
 
     
     return (
@@ -110,13 +109,13 @@ export default function Prescription () {
     <div className="deets">
 
     <div className="vDetails">
-                        <span className="head"> Description   :</span>                        
+                        <span className="head"> Description   </span>                        
                         <span className="info">{location.state.item.Description}</span>
                         </div>
                   {Results != null ?
                     <div className="vDetails">
                         <span className="head"> Lab Results   </span>                    
-                        <span className="info"> {location.state.item.lab_results}</span>
+                        <span className="info" style={{ marginTop : "10px"}}> {location.state.item.lab_results}</span>
                         </div> : <></>}
 
                     <div className="pdetails">

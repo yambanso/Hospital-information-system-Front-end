@@ -26,4 +26,11 @@
     font-weight: 500;
     font-size: medium;
 }
+.printButton{
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
 

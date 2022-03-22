@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import './Adduser.css'
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { addUser, api_URL } from '../../apiCalls';
+import { addUser } from '../../apiCalls';
 import { CircularProgress } from '@material-ui/core';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
@@ -31,6 +31,10 @@ export default function Edituser(props) {
     const user = React.useContext(AuthContext);
     const token = user.user.Token;
 
+    const [type, setType] = React.useState("success")
+    const [message, setMessage] = React.useState('Service details Updated succesifuly')
+
+
 
     const {register, handleSubmit, formState:{errors} }  = useForm({
         resolver : yupResolver(schema),
@@ -43,10 +47,14 @@ export default function Edituser(props) {
             headers : {
                 'Authorization' : "Bearer"+" "+token
             }}).catch(err => {
-                setWritting(false)        
-            })
+                setType('error')
+                setMessage('Failled to update user record')
+                setWritting(false) 
+                setOpen(true)       
+            }).then(()=>{
             setWritting(false)
             setOpen(true)
+        })
 
     }
 
@@ -107,8 +115,8 @@ export default function Edituser(props) {
                     vertical : 'bottom',
                     horizontal : "left"
                 }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{width:'100%'}}>
-                    User details Updated succesifuly
+                    <Alert onClose={handleClose} severity={type} sx={{width:'100%'}}>
+                    {message}
                     </Alert>
                 </Snackbar>
                 </>

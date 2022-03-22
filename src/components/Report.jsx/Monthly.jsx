@@ -19,8 +19,8 @@ export default function Monthly() {
             let vis = res.data;
             setVisits(res.data)
             vis.map((item) => {                
-                {item.lab_results != null ? <>{T = T + 1 }
-                {console.log(T)}</>:
+                {item.lab_results != null ? <>{T = T + 1}
+                {console.log(T)}</> :
                     T = 0}            
             })
             setTest(T)            
@@ -37,10 +37,9 @@ export default function Monthly() {
         await getServices.get("/").then(res =>{
             let s = res.data;
                 let totalCons = visits.length * parseFloat(s[0].Price);
-                console.log(totalCons)
                 let labTotal = test * parseFloat(s[1].Price)
                 let tot = totalCons + labTotal;
-                console.log(tot)
+                console.log(labTotal)
                 setTotal(tot)
         })
         
@@ -188,7 +187,7 @@ export default function Monthly() {
                                  margin : "20px"
                                              }}>
                                   <span className="head">Total Revenue Generated this Month </span>                        
-                                <span className="info" style={{fontWeight : "600",fontSize : "16px", marginRight : "10px"}}>{total}  Kwacha   </span>
+                                <span className="info" style={{fontWeight : "600",fontSize : "16px", marginRight : "10px"}}>{total + prescTotal}  Kwacha   </span>
                                                           
                          </div>   
 

@@ -1,12 +1,7 @@
-import { PermIdentity,CalendarToday,PhoneAndroid,LocationSearching } from '@material-ui/icons';
 import * as React from 'react';
-import {useForm} from 'react-hook-form'
 import { useState, useEffect } from 'react'
 import { DataGrid, GridToolbar } from '@material-ui/data-grid'
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import {Bloodtype,LibraryBooks} from '@mui/icons-material';
-import { CircularProgress, TextareaAutosize } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { Link, useNavigate } from 'react-router-dom';
 import './consult.css'
 import axios from 'axios';
@@ -18,6 +13,12 @@ import { AuthContext } from '../../context/AuthContext';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
 import Pdetails from './Pdetails';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 import StepNav from './stepNav';
 
 
@@ -34,6 +35,8 @@ export default function Prescribe() {
     const [type, setType] = React.useState("success")
     const labelArray =['Description', 'Order Tests', 'Prescribe']
     const history = useNavigate();
+    const [done, isDone] = React.useState(false) 
+
 
 
     const [data, setdata] = useState([]);
@@ -58,10 +61,6 @@ export default function Prescribe() {
             setdata(res.data)
         })        
     }
-
-    const handleSubmit = () => {
-        
-    }
     
 
     useEffect(() => {
@@ -84,10 +83,9 @@ export default function Prescribe() {
                
     ]
 
-    const handleChange = () => {}
 
   return (
-      <div className="consult">
+      <div className="consult" style={{height : "1050px"}}>
           <div className="consultTitle">
               <Link to='/prescriptions'>
                   <button className="backBtn">
@@ -105,13 +103,13 @@ export default function Prescribe() {
                     <div className="consultPatient">
                         <div className="frmItem">
                         <div className="labResults">
-                                <span className="head">Description  : </span>
-                                <span className="results">{location.state.item.lab_results}</span>
+                                <span className="head">Description</span>
+                                <span className="results">{location.state.item.Description}</span>
                               </div>
 
                             {location.state.item.lab_results != null ?
                             <div className="labResults">
-                                <span className="head">Lab Results  : </span>
+                                <span className="head">Lab Results</span>
                                 <span className="results">{location.state.item.lab_results}</span>
                               </div>
                             :<></>}
@@ -172,7 +170,7 @@ export default function Prescribe() {
                                             .then(()=>{
                                                 setWritting(false);
                                                 setOpen(true);
-                                                history(-1)
+                                                isDone(true)
                                             })                                     
                                     }).catch((err)=>{
                                     setWritting(false)
@@ -201,6 +199,31 @@ export default function Prescribe() {
                     </Alert>
                 </Snackbar>
                 </>
+
+                <>                
+        <Dialog open={done} onClose={()=>{
+            isDone(false)
+            history(-1)
+        }}>
+        
+        <DialogTitle> Visit Summary</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+          {location.state.item.Description}
+          </DialogContentText>
+            Prescribed : {select.length} drugs
+          <DialogContentText>
+            
+          </DialogContentText>         
+          
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => {
+              history(-1)
+          }}>Done</Button>
+          </DialogActions>
+      </Dialog>
+      </>
 
       </div>
   )
