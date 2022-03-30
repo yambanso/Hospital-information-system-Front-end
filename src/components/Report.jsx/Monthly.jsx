@@ -11,6 +11,8 @@ export default function Monthly() {
     const [unPresc, setUnPrescr] = useState([])
     let prescTotal = 0;
     let lost = 0 ;
+    let pTotal = 0;
+    let uTotal = 0
     const [total, setTotal] = useState(0) 
 
     const fetchData = async() => {
@@ -19,11 +21,10 @@ export default function Monthly() {
             let vis = res.data;
             setVisits(res.data)
             vis.map((item) => {                
-                {item.lab_results != null ? <>{T = T + 1}
-                {console.log(T)}</> :
-                    T = 0}            
+                if(item.lab_results != null)T = T + 1                           
             })
-            setTest(T)            
+            setTest(T)
+             
         })
 
         await getMonthlyPrescribed.get("/").then(res =>{
@@ -39,15 +40,13 @@ export default function Monthly() {
                 let totalCons = visits.length * parseFloat(s[0].Price);
                 let labTotal = test * parseFloat(s[1].Price)
                 let tot = totalCons + labTotal;
-                console.log(labTotal)
-                setTotal(tot)
+               setTotal(tot)
         })
         
     }
 
     useEffect(()=>{
-        fetchData()
-        
+        fetchData()        
     },[])
     
   return (
@@ -55,7 +54,7 @@ export default function Monthly() {
         <div >
         <div className="bar">
             <div className="Ttle">
-                <span className="hdr">Monthly Report</span>
+                <span className="hdr">Monthly Financial Report</span>
                 </div>
                 
             </div>
@@ -68,13 +67,10 @@ export default function Monthly() {
                 <div className="mdetails">
                     <div className="mTotal">
                         <span className="head">The lab tests conducted last month are  </span>
-                        <span className="head">{test}  </span>
+                        <span className="info">{test}  </span>
                     </div>
-
-
-                </div>
-
-            </div>
+                     </div>
+                  </div>
 
             <div className="TaBle">
                 <div className="TableTitle">
@@ -86,14 +82,25 @@ export default function Monthly() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Name</TableCell>
-                                    <TableCell align='right'>Quantity</TableCell>
+                                    <TableCell align='right'>Prescribed Quantity</TableCell>
+                                    <TableCell align='right'>UnPrescribed Quantinty</TableCell>
                                     <TableCell align='right'>Unit Price (Kwacha)</TableCell>
-                                    <TableCell align='right'>Total Amount</TableCell>
+                                    <TableCell align='right'>Total Amount (Generated)</TableCell>
+                                    <TableCell align='right'>Total amount Lost(Due to unprescribed drugs)</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {prescribed.map((row) => {
                                         prescTotal = prescTotal + parseFloat(row.Revenue)
+                                        pTotal = pTotal + parseInt(row.Total)
+                                       let unpre = unPresc.filter((prescri) =>{
+                                           return prescri.name === row.name})
+                                     
+                                       {unpre[0] != null ? uTotal = uTotal + parseInt(unpre[0].Total) : <></> }
+                                        let rev = 0
+                                        {unpre[0] != null ? rev = parseFloat(unpre[0].Revenue_lost) : rev = 0}
+                                        lost = lost + rev
+    
                                         return(
                                             <TableRow key={row.name}>
                                                 <TableCell component='th' scope='row'>
@@ -101,99 +108,57 @@ export default function Monthly() {
                                                 </TableCell>
                                                 <TableCell align ='right'>
                                                     {row.Total}
+                                                </TableCell>
+                                                <TableCell align ='right'>
+                                                    {unpre[0] != null ? unpre[0].Total : "-"}
                                                 </TableCell>                                               
                                                 <TableCell align ='right'>
                                                     {row.Price}
                                                 </TableCell>                                                
                                                 <TableCell align ='right'>
                                                     {row.Revenue}
-                                                </TableCell>
-                                            </TableRow>
-                                        )
-                                })
-                                }
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </div>
-                <div style={{display : "flex",alignItems : "center", 
-                                 justifyContent : "center",
-                                 margin : "20px"
-                                                                  }}>
-                                  <span className="head"> Revenue Generated  </span>                        
-                                <span className="info" style={{fontWeight : "600",fontSize : "16px", marginRight : "10px"}}>{prescTotal}  Kwacha   </span>
-                                                          
-                         </div>   
-
-
-
-            </div>
-
-            <div className="TaBle">
-                <div className="TableTitle">
-                    <span className="TableTitleText"> Drugs Not Prescribed</span>
-                </div>
-                <div className="tble">
-                    <TableContainer component = {Paper}>
-                        <Table style={{width : "100%"}} size = "medium">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Name</TableCell>
-                                    <TableCell align='right'>Quantity</TableCell>
-                                    <TableCell align='right'>Unit Price (Kwacha)</TableCell>
-                                    <TableCell align='right'>Total Amount</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {unPresc.map((item) => {
-                                        lost = lost + parseFloat(item.Revenue)
-                                        return(
-                                            <TableRow key={item.name}>
-                                                <TableCell component='th' scope='row'>
-                                                    {item.name}
-                                                </TableCell>
-                                                <TableCell align ='right'>
-                                                    {item.Total}
-                                                </TableCell>                                               
-                                                <TableCell align ='right'>
-                                                    {item.Price}
                                                 </TableCell>                                                
                                                 <TableCell align ='right'>
-                                                    {item.Revenue}
+                                                    {unpre[0] === null ? "-" : rev }
                                                 </TableCell>
                                             </TableRow>
                                         )
                                 })
                                 }
+                                <TableRow >
+                                                <TableCell component='th' scope='row'>
+                                                    Total
+                                                </TableCell>
+                                                <TableCell align ='right'>
+                                                    {pTotal}
+                                                </TableCell>
+                                                <TableCell align ='right'>
+                                                    {uTotal}
+                                                </TableCell>                                               
+                                                <TableCell align ='right'>
+                                                    -
+                                                </TableCell>                                                
+                                                <TableCell align ='right'>
+                                                    {prescTotal}
+                                                </TableCell>                                                
+                                                <TableCell align ='right'>
+                                                    - {lost}
+                                                </TableCell>
+                                            </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
-                </div>
-                <div style={{display : "flex",alignItems : "center", 
-                                 justifyContent : "center",
-                                 margin : "20px"
-                                                                  }}>
-                                  <span className="head"> Revenue lost due to un prescribed drugs is  </span>                        
-                                <span className="info" style={{fontWeight : "600",fontSize : "16px", marginRight : "10px"}}>{lost}  Kwacha   </span>
-                                                          
-                         </div>   
-
+                                    
 
 
             </div>
-                
-            <div style={{display : "flex",alignItems : "center", 
-                                 justifyContent : "center",
-                                 margin : "20px"
-                                             }}>
-                                  <span className="head">Total Revenue Generated this Month </span>                        
-                                <span className="info" style={{fontWeight : "600",fontSize : "16px", marginRight : "10px"}}>{total + prescTotal}  Kwacha   </span>
-                                                          
-                         </div>   
 
+
+                
 
         
-            </div>       
+            </div> 
+        </div>          
     
   )
 }

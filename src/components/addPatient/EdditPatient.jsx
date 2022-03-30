@@ -89,6 +89,14 @@ const doClose = (event,reason) => {
                 <span className='errors'>{errors.surname?.message}</span>
 
                 <div className="newPatientItem">
+                    <label >Patient Gender </label>
+                    <select className='newPatientSelect' name='Gender' defaultValue={location.state.item.Gender} placeholder='Select patients Gender' {...register("Gender")}>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        </select>
+                </div>
+
+                <div className="newPatientItem">
                     <label >Contact</label>
                     <input type="text" name="Phonenumber" defaultValue={location.state.item.Phonenumber}  {...register("Phonenumber")}/>
                 </div>

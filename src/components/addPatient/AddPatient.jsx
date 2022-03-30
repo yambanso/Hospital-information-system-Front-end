@@ -15,6 +15,7 @@ import MuiAlert from '@mui/material/Alert'
 const schema = yup.object().shape({
   firstname : yup.string().required(),
   surname: yup.string().required(),
+  Gender: yup.string.required(),
   Phonenumber : yup.string().required("Patients Contact is required").min(10),
   next_of_kin_contact : yup.string().required("Patients Next of Kin's contact is required").min(10),
   blood_group : yup.string().required(),
@@ -88,6 +89,16 @@ const doClose = (event,reason) => {
                     <input type="text" name="surname" placeholder='enter patients surname'  {...register("surname",{required: "Required"})}/>
                 </div>
                 <span className='errors'>{errors.surname?.message}</span>
+
+                
+                <div className="newPatientItem">
+                    <label >Patient Gender </label>
+                    <select className='newPatientSelect' name='Gender' placeholder='Select patients Gender' {...register("Gender",{required :"Required"})}>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        </select>
+                </div>
+                <span className='errors'>{errors.Gender?.message}</span>
 
                 <div className="newPatientItem">
                     <label >Contact</label>
