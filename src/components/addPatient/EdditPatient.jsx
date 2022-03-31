@@ -90,7 +90,7 @@ const doClose = (event,reason) => {
 
                 <div className="newPatientItem">
                     <label >Patient Gender </label>
-                    <select className='newPatientSelect' name='Gender' defaultValue={location.state.item.Gender} placeholder='Select patients Gender' {...register("Gender")}>
+                    <select className='newPatientSelect' name='Gender' placeholder='Select patients Gender' {...register("Gender")}>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         </select>

@@ -80,3 +80,7 @@ export const getMonthlyPrescribed = axios.create({
 export const getMonthlyUnprescribed = axios.create({
     baseURL : api_URL + "/reportMonthlyMedsUnPrescribed"
 })
+
+export const getDiagnosis = axios.create({
+    baseURL : api_URL + "/monthlyDiagnosis"
+})

@@ -15,7 +15,7 @@ import MuiAlert from '@mui/material/Alert'
 const schema = yup.object().shape({
   firstname : yup.string().required(),
   surname: yup.string().required(),
-  Gender: yup.string.required(),
+  Gender: yup.string().required(),
   Phonenumber : yup.string().required("Patients Contact is required").min(10),
   next_of_kin_contact : yup.string().required("Patients Next of Kin's contact is required").min(10),
   blood_group : yup.string().required(),
