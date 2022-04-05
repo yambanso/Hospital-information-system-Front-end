@@ -195,8 +195,8 @@ export default function Prescription () {
         </div>
         <>
     <Snackbar anchorOrigin={{
-        vertical : 'bottom',
-        horizontal : "left"
+        vertical : 'top',
+        horizontal : "center"
     }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
         <Alert onClose={handleClose} severity={type} sx={{width:'100%'}}>
              {message}

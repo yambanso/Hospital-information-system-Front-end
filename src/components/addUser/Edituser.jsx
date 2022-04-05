@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './Adduser.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { addUser } from '../../apiCalls';
 import { CircularProgress } from '@material-ui/core';
@@ -33,6 +33,7 @@ export default function Edituser(props) {
 
     const [type, setType] = React.useState("success")
     const [message, setMessage] = React.useState('Service details Updated succesifuly')
+    const nav = useNavigate()
 
 
 
@@ -54,6 +55,7 @@ export default function Edituser(props) {
             }).then(()=>{
             setWritting(false)
             setOpen(true)
+            nav(-1)
         })
 
     }
@@ -112,8 +114,8 @@ export default function Edituser(props) {
             </div>
             <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : 'center'
                 }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
                     <Alert onClose={handleClose} severity={type} sx={{width:'100%'}}>
                     {message}

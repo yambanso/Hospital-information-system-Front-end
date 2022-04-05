@@ -47,6 +47,7 @@ export default function Adduser() {
                 } )
             setOpen(true)
             setWritting(false)
+            history(-1)
 
     };
 
@@ -123,8 +124,8 @@ export default function Adduser() {
                 </form>
                 <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{width:'100%'}}>
                         User added succesifuly
@@ -134,8 +135,8 @@ export default function Adduser() {
 
                 <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={doOpen} autoHideDuration={6000} onClose = {doClose}>
                     <Alert onClose={handleClose} severity="error" sx={{width:'100%'}}>
                         failled to add user

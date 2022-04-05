@@ -10,6 +10,7 @@ import { api_URL } from '../../apiCalls';
 import { CircularProgress } from '@material-ui/core';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -29,6 +30,7 @@ export default function Addmeds() {
     const [isWritting, setWritting] = React.useState(false);
     const [isOpen, setOpen] = React.useState(false) 
     const [doOpen ,setOpenn] = React.useState(false)
+    const nav = useNavigate()
 
     const handleClose = (event,reason) => {
         if(reason === 'clickaway'){
@@ -61,6 +63,7 @@ export default function Addmeds() {
             })
             setWritting(false)
             setOpen(true)
+            nav('/')
 
     }
     
@@ -108,8 +111,8 @@ export default function Addmeds() {
                 </form>
                 <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{width:'100%'}}>
                         Medicine added succesifuly
@@ -119,8 +122,8 @@ export default function Addmeds() {
 
                 <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={doOpen} autoHideDuration={6000} onClose = {doClose}>
                     <Alert onClose={handleClose} severity="error" sx={{width:'100%'}}>
                         failed to add Medicine

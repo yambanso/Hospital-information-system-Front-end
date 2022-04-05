@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import  './addpatient.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { api_URL } from '../../apiCalls';
 import { useContext } from 'react';
@@ -26,6 +26,7 @@ export default function EdditPatient(props) {
     const [isWritting, setWritting] = React.useState(false);
     const [isOpen, setOpen] = React.useState(false) 
     const [doOpen ,setOpenn] = React.useState(false)
+    const nav = useNavigate()
 
     const user = useContext(AuthContext);
     const token = user.user.Token;
@@ -49,6 +50,7 @@ const onSubmit = async(data) =>{
     })
     setWritting(false)
     setOpen(true)
+    nav('/')
 
 }
 
@@ -150,8 +152,8 @@ const doClose = (event,reason) => {
 
               <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{width:'100%'}}>
                         Patient record updated succesifuly
@@ -161,8 +163,8 @@ const doClose = (event,reason) => {
 
                 <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={doOpen} autoHideDuration={6000} onClose = {doClose}>
                     <Alert onClose={handleClose} severity="error" sx={{width:'100%'}}>
                         failed to update Patient Record

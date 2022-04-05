@@ -5,7 +5,7 @@ import {TableContainer,Table, TableBody,TableRow,Paper,TableHead,TableCell} from
 
 
 
-export default function Disease() {
+export default function ThisYrDis() {
   const [diag, setDiag] = useState([]) 
   const [Lab, setLab] = useState([])
   const [mild, setMild] = useState([])
@@ -14,7 +14,7 @@ export default function Disease() {
   const [infection , setInfection] = useState([])
 
   const fetchData = async() => {
-    await getDiagnosis.get("/thisMonth").then(res =>{
+    await getDiagnosis.get("/thisYear").then(res =>{
           let v = res.data
 
           let l = v.filter((prescri) =>{
@@ -42,21 +42,24 @@ export default function Disease() {
         }))
         setInfection(Lab.filter((mal)=>{
           return mal.lab_results.toLocaleLowerCase().includes("blood cell".toLocaleLowerCase())
-        }))      
+        }))
+
+        console.log(infection)
+      
       },[Lab])
 
   return (
     <div>
       <div className="bar">
     <div className="Ttle">
-        <span className="hdr">Monthly Diagnosis Report</span>
+        <span className="hdr" >This Years Diagnosis Report</span>
         </div>        
     </div>
 
     <div className="overView">
                 <span className="Ttext">Overview</span>
                 <div className="mTotal">
-                    <span className="head"> Monthly visits  </span>
+                    <span className="head">This Year's visits  </span>
                     <span className="info">{diag === null ? "0" : diag.length}  </span>
                 </div>
                 <div className="mdetails">
@@ -79,7 +82,7 @@ export default function Disease() {
 
                 <div className="TaBle">
                 <div className="TableTitle">
-                    <span className="TableTitleText">Monthly Cases</span>
+                    <span className="TableTitleText">Yearly Cases</span>
                 </div>
                 <div className="tble">
                     <TableContainer component = {Paper}>

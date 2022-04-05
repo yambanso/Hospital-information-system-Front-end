@@ -10,7 +10,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { CircularProgress } from '@material-ui/core';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
-
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object().shape({
   firstname : yup.string().required(),
@@ -32,6 +32,7 @@ export default function AddPatient() {
     const [isWritting, setWritting] = React.useState(false);
     const [isOpen, setOpen] = React.useState(false) 
     const [doOpen ,setOpenn] = React.useState(false)
+    const nav = useNavigate()
 
     const user = useContext(AuthContext);
     const token = user.user.Token;
@@ -52,6 +53,7 @@ const onSubmit = async(data) => {
     })
     setWritting(false)
     setOpen(true)
+    nav('/')
 
 }
 
@@ -155,8 +157,8 @@ const doClose = (event,reason) => {
 
             <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{width:'100%'}}>
                         Patient added succesifuly
@@ -166,8 +168,8 @@ const doClose = (event,reason) => {
 
                 <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={doOpen} autoHideDuration={6000} onClose = {doClose}>
                     <Alert onClose={handleClose} severity="error" sx={{width:'100%'}}>
                         failed to add Patient

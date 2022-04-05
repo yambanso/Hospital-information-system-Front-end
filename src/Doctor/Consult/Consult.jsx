@@ -329,8 +329,8 @@ export default function Consult() {
             </div>
           <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
                     <Alert onClose={handleClose} severity={type} sx={{width:'100%'}}>
                          {message}
@@ -363,7 +363,7 @@ export default function Consult() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={proceed}>Next</Button>
+          <Button onClick={proceed} color='error'>Next</Button>
           <Button disabled={ordering} onClick={() => {
               let val = valueRef.current.value
               {val === null ? validationError(): sendOrder(val)}

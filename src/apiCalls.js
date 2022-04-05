@@ -69,8 +69,8 @@ export const getPivot = axios.create({
     baseURL : api_URL + "/Visitation_pivot"
 })
 
-export const getMonthly = axios.create({
-    baseURL : api_URL + "/reportMonthly"
+export const getReport = axios.create({
+    baseURL : api_URL + "/report"
 })
 
 export const getMonthlyPrescribed = axios.create({
@@ -82,5 +82,9 @@ export const getMonthlyUnprescribed = axios.create({
 })
 
 export const getDiagnosis = axios.create({
-    baseURL : api_URL + "/monthlyDiagnosis"
+    baseURL : api_URL + "/Diagnosis"
+})
+
+export const getLastMonthDiagnosis = axios.create({
+
 })

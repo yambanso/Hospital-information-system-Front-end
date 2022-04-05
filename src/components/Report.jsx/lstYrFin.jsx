@@ -4,7 +4,7 @@ import {TableContainer,Table, TableBody,TableRow,Paper,TableHead,TableCell} from
 import './report.css'
 
 
-export default function Monthly() {
+export default function LstYrFin() {
     const [visits, setVisits] = useState([])
     const [test, setTest] = useState(0)
     const [prescribed, setPrescr] = useState([])
@@ -17,7 +17,7 @@ export default function Monthly() {
 
     const fetchData = async() => {
         let T = 0
-        await getReport.get("/thisMonth").then(res => {
+        await getReport.get("/lastYear").then(res => {
             let vis = res.data;
             setVisits(res.data)
             vis.map((item) => {                
@@ -27,11 +27,11 @@ export default function Monthly() {
              
         })
 
-        await getMonthlyPrescribed.get("/thisMonth").then(res =>{
+        await getMonthlyPrescribed.get("/lastYear").then(res =>{
             setPrescr(res.data)
         })
 
-        await getMonthlyUnprescribed.get("/thisMonth").then(res => {
+        await getMonthlyUnprescribed.get("/lastYear").then(res => {
             setUnPrescr(res.data)
         })
 
@@ -54,19 +54,19 @@ export default function Monthly() {
         <div >
         <div className="bar">
             <div className="Ttle">
-                <span className="hdr">Monthly Financial Report</span>
+                <span className="hdr">Last Year's Financial Report</span>
                 </div>
                 
             </div>
             <div className="overView">
                 <span className="Ttext">Overview</span>
                 <div className="mTotal">
-                    <span className="head">Monthly visits  </span>
+                    <span className="head">Last Year's visits  </span>
                     <span className="info">{visits === null ? "0" : visits.length}  </span>
                 </div>
                 <div className="mdetails">
                     <div className="mTotal">
-                        <span className="head">The lab tests conducted this month are  </span>
+                        <span className="head">The lab tests conducted last Year are  </span>
                         <span className="info">{test}  </span>
                     </div>
                      </div>

@@ -3,7 +3,7 @@ import * as React from 'react'
 import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
@@ -30,6 +30,7 @@ export default function EditMeds(props) {
     const location = useLocation();
     const user = useContext(AuthContext);
     const token = user.user.Token;
+    const nav = useNavigate()
 
 
     const {register, handleSubmit, formState:{errors} }  = useForm({
@@ -46,6 +47,7 @@ export default function EditMeds(props) {
             })
             setWritting(false)
             setOpen(true)
+            nav('/medicines')
 
     }
 
@@ -102,8 +104,8 @@ export default function EditMeds(props) {
                 </form>
                 <>
                 <Snackbar anchorOrigin={{
-                    vertical : 'bottom',
-                    horizontal : "left"
+                    vertical : 'top',
+                    horizontal : "center"
                 }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{width:'100%'}}>
                         Medicine Updated succesifuly
