@@ -26,7 +26,10 @@ import StepNav from './stepNav';
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
 });
-
+/**
+ * @function Prescribe
+ * @returns Prescription page
+ */
 
 export default function Prescribe() {
     const [isWritting , setWritting] = React.useState(false);
@@ -49,6 +52,12 @@ export default function Prescribe() {
     const token = user.user.Token;
     const classes = useStyles();
 
+    /**
+     * @event handleClose
+     * @param {*} event 
+     * @param {*} reason 
+     * @returns 
+     */
     const handleClose = (event , reason) => {
         if(reason = 'clickaway'){
             setOpen(false)
@@ -56,7 +65,10 @@ export default function Prescribe() {
         }
         setOpen(false)
     }
-    {/** this function fetches data from the Api sets state to different variable for the page */}
+    /**
+     * @function fetchData
+     * @description this function fetches data from the Api sets state to different variable for the page 
+     **/
     const fetchData = () => {
         getMedicine.get('/').then(res => {
             setdata(res.data)
@@ -64,13 +76,18 @@ export default function Prescribe() {
     }
     
 
-    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
+    /**
+     * @description this function is called after first page render and is call the fetchdata method to fetch data from the API 
+     **/
     useEffect(() => {
         fetchData()
     }, [])
 
 
-    {/** this is array is used as a blue print to display in our datatable*/}
+    /**
+     * @constant userColumn
+     * @description this is array is used as a blue print to display in our datatable
+     **/
     const userColumn = [
         { field: 'id', headerName: 'ID', width: 90 },
         {
@@ -124,7 +141,7 @@ export default function Prescribe() {
                                 
                                 <div className="medicineTable">
                                 <div className="table">
-                                    {/** this datagrid display the avilable medications for the visit */}
+                                    {/** @description this datagrid display the avilable medications for the visit */}
                                         <DataGrid
                                             className={classes.root}
                                             rows={data}
@@ -155,7 +172,7 @@ export default function Prescribe() {
                                     Qauntity : 1,
                                     Status : 0,})
                                 ))}
-                                /** this function post the given prescription for the visit to the database */
+                                /** @description this function post the given prescription for the visit to the database */
                                     axios.post(api_URL+"/Visitation_prescriptions",{items : arr},{
                                         headers : {
                                             'Authorization' : "Bearer"+" "+token,

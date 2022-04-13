@@ -15,7 +15,7 @@ import MuiAlert from '@mui/material/Alert'
 
 /**
  * @constructor schema
- *  this is a data validation blueprint used to validate data from the form 
+ *  @description this is a data validation blueprint used to validate data from the form 
  * 
 */
 const schema = yup.object().shape({
@@ -28,7 +28,11 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
 });
 
-
+/**
+ * @function EdditPatient
+ * @param {*} props 
+ * @returns eddit patient records page
+ */
 
 export default function EdditPatient(props) {
     const [isWritting, setWritting] = React.useState(false);

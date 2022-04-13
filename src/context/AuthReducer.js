@@ -1,4 +1,7 @@
-/** defining a series of action taken when the user is being authenticated using a switch */
+/**
+ * @constant AuthReducer
+ * @description defining a series of action taken when the user is being authenticated using a switch
+ **/
 const AuthReducer = (state, action) =>{
     switch(action.type){
             case "LOGIN_START":
@@ -24,4 +27,7 @@ const AuthReducer = (state, action) =>{
                 return state    
     }
 };
+/**
+ * @exports AuthReducer
+ */
 export default AuthReducer;

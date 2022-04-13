@@ -7,11 +7,14 @@ import Sign_in from '../Sign_in/Sign_in';
 import Lab_tech from '../Lab_Technician/Lab_tech';
 import Pharma from '../pharmacist/Pharma';
 import Receptionist from '../Receptipnist/Recptionist';
-
+/**
+ * @function HomePage
+ * @returns layout for the whole web app
+ */
 export default function Homepage() {
 const [Role, setRole] = useState(null);
 
-/** this function set the value for the users role */
+/** @description this function set the value for the users role */
 const updateRole = (role) => {
         setRole(role)
 }
@@ -29,8 +32,8 @@ const updateRole = (role) => {
                             'Lab_Technician' : <Lab_tech />,
                             'Pharmacist' : <Pharma />,
                             'Receptionist' : <Receptionist />
-                          }[Role]}{/** this switch chooses what component to be called into this component based on the value of Role */}
-                      </> : <Sign_in upRole={updateRole}/>}{/** if Role is null we render the signin component meaning that the user is not signed in */}
+                          }[Role]}{/** @description this switch chooses what component to be called into this component based on the value of Role */}
+                      </> : <Sign_in upRole={updateRole}/>}{/** @description if Role is null we render the signin component meaning that the user is not signed in */}
           
       </div>
   )

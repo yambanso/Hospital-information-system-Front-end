@@ -13,11 +13,11 @@ export default function Doctor() {
   return (
       <BrowserRouter>
       <div className="doctor">
-        {/* setting the side bar*/}
+        {/* @description setting the side bar*/}
           <SideBar/>
           <div className="content">
           <Routes>
-          {/* creating the routes for the admin window to different pages*/}
+          {/* @description creating the routes for the admin window to different pages*/}
            <Route path="/" element={<Home />}/>
 
           <Route path="/Patient_history/:patient_id" element={<Patienthistory />} />

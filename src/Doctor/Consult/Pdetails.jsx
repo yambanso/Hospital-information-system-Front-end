@@ -3,18 +3,25 @@ import { PermIdentity,CalendarToday,PhoneAndroid,LocationSearching } from '@mate
 import { getPatients } from '../../apiCalls';
 import {Bloodtype,LibraryBooks} from '@mui/icons-material';
 import { useEffect } from 'react';
-
+/**
+ * @function Pdetails
+ * @param {patient_id} props 
+ * @returns patient details component
+ */
 export default function Pdetails(props) {
     const [patient ,  setPatient] = useState();
     
-    {/** this function fetches data from the Api sets state to different variable for the page */}
+    /**
+     * @funtion fetchData
+     * @description this function fetches data from the Api sets state to different variable for the page 
+     **/
     const fecthdata =() => {
         getPatients.get('/'+ props.patient_id).then(res => {
             setPatient(res.data);
         })
     }
 
-    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
+    /** @description this function is called after first page render and is call the fetchdata method to fetch data from the API */
     useEffect(() => {
         fecthdata()
     },[])

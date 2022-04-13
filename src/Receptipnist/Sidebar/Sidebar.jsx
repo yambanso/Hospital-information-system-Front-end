@@ -5,10 +5,13 @@ import {
 } from '@material-ui/icons'
 import './sidebar.css'
 import {Link, useLocation} from 'react-router-dom'
-
+/**
+ * @function SideBar
+ * @returns Side bar for the Receptionist module
+ */
 export default function Sidebar() {
     return (
-        /** creating a sidebar navigation */
+        /** @description creating a sidebar navigation */
         <div className='sidebar'>
             <div className="sidebarWrapper">
             <div className="sidebarMenu">

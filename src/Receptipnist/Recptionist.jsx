@@ -6,16 +6,20 @@ import "./receptionist.css"
 import Home from "./Home/Home"
 import Invoice from "./Invoice/invoice"
 import Print from "./Invoice/Print"
+/**
+ * 
+ * @returns routes for the receptionist module
+ */
 export default function Receptionist () {
     return(
         <BrowserRouter>
         <div className="receptionist">
-            {/** calling the receptionist sidebar nav */}
+            {/**@description calling the receptionist sidebar nav */}
             <Sidebar />
             <div className="content">
                 
                     <Routes>
-                        {/** creating routes that routes our user to different pages */}
+                        {/**@description creating routes that routes our user to different pages */}
 
                         <Route path="/" element={<Home />}/>
 

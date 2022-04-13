@@ -7,11 +7,19 @@ import { DataGrid } from '@mui/x-data-grid';
 import ClearIcon from '@mui/icons-material/Clear';
 import SearchIcon from '@mui/icons-material/Search';
 
-/** function is called wheneve the user has inserted on of the specified charecters in the function */
+/**
+ * @function escapeRegExp
+ * @description function is called wheneve the user has inserted on of the specified charecters in the function 
+ *@returns charecters not eligible in the search field
+ * */
 function escapeRegExp(value) {
   return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
-/** creating a search bar */
+/** 
+ * @function QuickSearchToolbar
+ * @descriptioncreating a search bar 
+ * @returns a search tool bar
+ * */
 function QuickSearchToolbar(props) {
   return (
     <Box
@@ -57,25 +65,38 @@ function QuickSearchToolbar(props) {
     </Box>
   );
 }
-/** this method sets the props for our search bar */
+/**
+ * @description this method sets the props for our search bar 
+ **/
 QuickSearchToolbar.propTypes = {
   clearSearch: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };
 
-
+/**
+ * @function Datatable
+ * @param {*} props 
+ * @returns a Datatabe
+ */
 export default function Datatable(props) {
-  /** calling the passed Data from parent component as props */
+  /**
+   * @constant dat
+   * @description calling the passed Data from parent component as props 
+   **/
   let dat = props.Data;
-  /** setting state for searching text */
+  /** 
+   * @description setting state for searching text 
+   **/
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(dat);
   const columns = props.columns  
 
   
 
-  /** this function is called whenever the user types something in the search bar */
+  /**
+   * @event requestSearch
+   *  @description this function is called whenever the user types something in the search bar */
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
@@ -87,13 +108,15 @@ export default function Datatable(props) {
     setRows(filteredRows);
   };
 
-  /** function is called whenever dat changes value */
+  /**
+   *  @description function is called whenever dat changes value 
+   **/
   React.useEffect(() => {
     setRows(dat);    
   }, [dat]);
 
   return (
-    /** this Datagtid component displays data in table form*/
+    /** @description this Datagtid component displays data in table form*/
       <DataGrid
         components={{ Toolbar: QuickSearchToolbar }}
         rows={rows}

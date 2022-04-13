@@ -2,7 +2,11 @@ import React, { useEffect , useState} from 'react'
 import { getReport, getMonthlyPrescribed, getMonthlyUnprescribed, getServices } from '../../apiCalls'
 import {TableContainer,Table, TableBody,TableRow,Paper,TableHead,TableCell} from '@material-ui/core'
 import './report.css'
-
+/**
+ * @function LstYrFin
+ * @returns last years financial report
+ * 
+ */
 
 export default function LstYrFin() {
     const [visits, setVisits] = useState([])
@@ -15,7 +19,11 @@ export default function LstYrFin() {
     let uTotal = 0
     const [total, setTotal] = useState(0) 
 
-    {/** this function fetches data from the Api sets state to different variable for the page */}
+    /**
+     * @function fetchData
+     * @description this function fetches data from the Api sets state to different variable for the page 
+     * 
+    */
     const fetchData = async() => {
         let T = 0
         await getReport.get("/lastYear").then(res => {
@@ -46,7 +54,9 @@ export default function LstYrFin() {
         
     }
 
-    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
+    /**
+     * @description this function is called after first page render and is call the fetchdata method to fetch data from the API 
+    */
     useEffect(()=>{
         fetchData()        
     },[])
@@ -79,7 +89,7 @@ export default function LstYrFin() {
                     <span className="TableTitleText">Most Prescribed Drugs</span>
                 </div>
                 <div className="tble">
-                    {/** creating a table to display our array of disease objects */}
+                    {/**@description creating a table to display our array of disease objects */}
                     <TableContainer component = {Paper}>
                         <Table style={{width : "100%"}} size = "medium">
                             <TableHead>

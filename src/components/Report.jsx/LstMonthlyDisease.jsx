@@ -3,7 +3,10 @@ import './report.css'
 import { getDiagnosis } from '../../apiCalls'
 import {TableContainer,Table, TableBody,TableRow,Paper,TableHead,TableCell} from '@material-ui/core'
 
-
+/**
+ * @function LstMonthyDisease
+ * @returns Last Months diseases report
+ */
 
 export default function LstMonthlyDisease() {
   const [diag, setDiag] = useState([]) 
@@ -14,7 +17,10 @@ export default function LstMonthlyDisease() {
   const [infection , setInfection] = useState([])
 
   
-  {/** this function fetches data from the Api sets state to different variable for the page */}
+  /**
+   * @function fetchData
+   * @description this function fetches data from the Api sets state to different variable for the page 
+   **/
   const fetchData = async() => {
     await getDiagnosis.get("/lastMonth").then(res =>{
           let v = res.data
@@ -30,13 +36,19 @@ export default function LstMonthlyDisease() {
           })
   }
 
-  {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
+  /**
+   * 
+   * @description this function is called after first page render and is call the fetchdata method to fetch data from the API 
+   * 
+  */
   useEffect(()=>{
     fetchData()
       },[])
   
       
-      {/** this function is called whenever the Lab variable changes  */}
+      /**
+       * @description this function is called whenever the Lab variable changes  
+       **/
       useEffect(()=>{
         setMal(Lab.filter((mal)=>{
           return mal.lab_results.toLocaleLowerCase().includes("malaria".toLocaleLowerCase())
@@ -88,7 +100,9 @@ export default function LstMonthlyDisease() {
                     <span className="TableTitleText">Monthly Cases</span>
                 </div>
                 <div className="tble">
-                  {/** creating a table to display our array of disease objects */}
+                  {/**
+                   * @description creating a table to display our array of disease objects
+                   **/}
                     <TableContainer component = {Paper}>
                         <Table style={{width : "100%"}} size = "medium">
                             <TableHead>

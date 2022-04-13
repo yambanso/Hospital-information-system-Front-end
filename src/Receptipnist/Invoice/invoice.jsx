@@ -9,10 +9,17 @@ import { useStyles } from "../../data-gridStyle";
 import Datatable from "../Home/Data-table";
 import '../Home/home.css'
 
+/**
+ * @function Invoice
+ * @returns A page with a list of invoices
+ */
 export default function Invoice (){
 
 
-  {/** this is array is used as a blue print to display in our datatable*/}
+  /**
+   * @constant Column
+   * @description this is array is used as a blue print to display in our datatable
+   **/
     const Column = [
     { field: 'id', headerName: 'ID', width: 100 },
     {
@@ -50,14 +57,19 @@ export default function Invoice (){
     const classes = useStyles()
     const [Data, setdata] =  React.useState([]); 
 
-    {/** this function fetches data from the Api sets state to different variable for the page */}
+    /**
+     * @function fetchData
+     * @description this function fetches data from the Api sets state to different variable for the page 
+     **/
     const fetchData = async() => {
         await getVisits.get('/Invoice').then(res =>{
             setdata(res.data)
         })
     }
 
-    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
+    /**
+     * @description this function is called after first page render and is call the fetchdata method to fetch data from the API 
+     **/
     useEffect(()=>{
         fetchData()
     },[])
@@ -76,7 +88,7 @@ export default function Invoice (){
 
                 <div className="homeBtm">
                     <div className="homeTable">
-                    {/** the Datagrid is used to display fetched data from the API */}
+                    {/**@description the Datagrid is used to display fetched data from the API */}
                         <DataGrid
                                                     className={classes.root}
                                                     rows={Data}

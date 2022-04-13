@@ -6,14 +6,25 @@ import { Logout } from '@mui/icons-material';
 import axios from 'axios';
 import { api_URL } from '../../apiCalls';
 
-
+/**
+ * @function TopBar
+ * @param {*} props 
+ * @returns Top bar
+ */
 export default function TopBar(props) {
-    {/** calling the AuthContext object and passing it to the user context */}
+    /**
+     * @constant user
+     * @description calling the AuthContext object and passing it to the user context 
+     **/
     const user = useContext(AuthContext);
     const token = user.user.Token;
     let nRef = createRef();
 
-    {/** this function is called whenever the user is signing out */}
+    /**
+     * @event signout
+     * @description this function is called whenever the user is signing out 
+     * 
+    */
     const signout = () => {
         axios.post(api_URL+"/sign_out","",{
             headers : {

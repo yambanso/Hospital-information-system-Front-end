@@ -6,12 +6,17 @@ import { getLab } from "../../apiCalls";
 import './home.css'
 import { useStyles } from '../../data-gridStyle';
 
-
+/**
+ * @function Home
+ * @returns home page for the lab technician
+ */
 export default function Home () {
     const [data , setData] =  React.useState([]);
     const classes = useStyles();
 
-    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
+    /**
+     * @description this function is called after first page render and is call the fetchdata method to fetch data from the API 
+     **/
     const fetchData = () => {
         getLab.get('/').then(res =>{
             setData(res.data)
@@ -23,7 +28,10 @@ export default function Home () {
     }, [])
 
 
-    {/** this is array is used as a blue print to display in our datatable*/}
+    /**
+     * @constant Column
+     * @description this is array is used as a blue print to display in our datatable
+     **/
     const Column = [
         { field: 'id', headerName: 'ID', width: 100 },
         {
@@ -68,7 +76,7 @@ export default function Home () {
             </div>
 
             <div className="table">
-                {/** the datagrid is used to display the visits have lab test orders */}
+                {/** @description the datagrid is used to display the visits have lab test orders */}
                   <DataGrid
                     className={classes.root}
                     rows={data}

@@ -9,12 +9,19 @@ import { useStyles } from '../../data-gridStyle'
 import { DataGrid, GridToolbar } from '@material-ui/data-grid'
 import { Link } from 'react-router-dom';
 
-
+/**
+ * @function ActiveVisits
+ * @returns Active visits page
+ */
 
 export default function ActiveVisits() {
 const [data , setData] =  useState([])
 
-{/** this is array is used as a blue print to display in our datatable*/}
+/**
+ * @constant userColumn
+ * @description this is array is used as a blue print to display in our datatable
+ * 
+*/
 const userColumn = [
     { field: 'id', headerName: 'ID', width: 100 },
     {
@@ -57,13 +64,19 @@ const userColumn = [
         }
     }
 ];
-{/** this function fetches data from the Api sets state to different variable for the page */}
+/**
+ * @function fetchData
+ * @description this function fetches data from the Api sets state to different variable for the page 
+ * 
+*/
     const fetchData = () => {
     getWithoutPrescriptions.get('/').then(res => {
         setData(res.data)
             })
 }
-{/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
+/**
+ * @description this function is called after first page render and is call the fetchdata method to fetch data from the API 
+ **/
 useEffect(()=>{
     fetchData()
 },[])
@@ -76,7 +89,7 @@ const classes = useStyles();
                         <span className="Textt">Visits Without Prescriptions</span>                
                 </div>
             <div className="DataTable">
-              {/** the Datagrid is a custom component that is used to Display data in a table */}                        
+              {/** @description the Datagrid is a custom component that is used to Display data in a table */}                        
             <DataGrid
                             className={classes.root}
                             rows={data}
