@@ -4,7 +4,11 @@ import { getDiagnosis } from '../../apiCalls'
 import {TableContainer,Table, TableBody,TableRow,Paper,TableHead,TableCell} from '@material-ui/core'
 
 
-
+/**
+ * 
+ * @function Disease
+ * @returns current month diseases report
+ */
 export default function Disease() {
   const [diag, setDiag] = useState([]) 
   const [Lab, setLab] = useState([])
@@ -13,7 +17,12 @@ export default function Disease() {
   const [hyper, setHyper] = useState([])
   const [infection , setInfection] = useState([])
 
-  const fetchData = async() => {
+  /**
+   *
+   *  @description this function fetches data from the Api sets state to different variable for the page 
+   * 
+   **/
+    const fetchData = async() => {
     await getDiagnosis.get("/thisMonth").then(res =>{
           let v = res.data
 
@@ -28,10 +37,17 @@ export default function Disease() {
           })
   }
 
+  /** 
+   * @description this function is called after first page render and is call the fetchdata method to fetch data from the API 
+   * 
+  */
   useEffect(()=>{
     fetchData()
       },[])
-  
+      /**
+       * @description this function is called whenever the Lab variable changes  
+       * 
+      */
       useEffect(()=>{
         setMal(Lab.filter((mal)=>{
           return mal.lab_results.toLocaleLowerCase().includes("malaria".toLocaleLowerCase())
@@ -82,6 +98,9 @@ export default function Disease() {
                     <span className="TableTitleText">Monthly Cases</span>
                 </div>
                 <div className="tble">
+                  {/**
+                   * @description creating a table to display our array of disease objects 
+                   **/}
                     <TableContainer component = {Paper}>
                         <Table style={{width : "100%"}} size = "medium">
                             <TableHead>

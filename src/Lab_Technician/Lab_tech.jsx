@@ -8,7 +8,7 @@ export default function Lab_tech (){
         <div className="labTech">
             <BrowserRouter>
             <Routes>
-                
+                {/** defining the routes the lab technician can use to navigate to different pages */}
                 <Route path= "/" element={<Home />} />
 
                 <Route path = "/lab_Results/:id" element={<Results />} />

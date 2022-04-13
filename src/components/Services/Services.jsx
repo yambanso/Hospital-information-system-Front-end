@@ -11,16 +11,19 @@ export default function Services() {
 
     const [data, setdata] = useState(servicesRows);
 
-    const fetchData = async () => {
+    {/** this function fetches data from the Api sets state to different variable for the page */}
+        const fetchData = async () => {
         getServices.get('/').then(res => {
             setdata(res.data)
         })
     }
 
+    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
     useEffect(() => {
             fetchData()
     }, [])
 
+    {/** this is array is used as a blue print to display in our datatable*/}
     const userColumn = [
         { field: 'id', headerName: 'ID', width: 90 },
         {
@@ -41,6 +44,7 @@ export default function Services() {
                 
                 return(
                     <>
+                        {/** this button takes the user to page where he can edit service info and passing medicine data as state  */}                    
                         <Link to={"/Edit_service/"+params.row.id} state={{item : params.row}}>
                             <button className="medListEdit">Edit</button>
                             </Link>
@@ -53,6 +57,7 @@ export default function Services() {
 
 
   return(
+      /** creating the view services offered by the hospital page */
   <div className='medicine'>
       <div className="medicineTop">
                 <div className="searchInput">
@@ -62,7 +67,8 @@ export default function Services() {
                 </div>
             <div className="medicineBottom">
             <div className="medicineTable">
-                        <Datatable Data={data} columns={userColumn} />
+                {/** the Datatable is a custom component that is used to Display data in a table and passing in the data and the columns */}
+                    <Datatable Data={data} columns={userColumn} />
                         </div>
                    
             </div>

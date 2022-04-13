@@ -19,11 +19,14 @@ export default function Print(){
     const [pivot, setPivots] = useState([]);
     let total = 0;
     
+    /** setting a reference object */
     const componentRef = useRef(); 
     
+    /** calling a Context object  */
     const user = useContext(AuthContext)
     const token = user.user.Token;
 
+    /** this function fetches data from the API */
     const fetchData = async() => {
         await getPivot.get("/"+location.state.item.id).then(res => {
             setPivots(res.data)
@@ -45,11 +48,12 @@ export default function Print(){
     
     }
 
-    
+    /** this function is called after first render */
     useEffect(()=>{
         fetchData()        
     }, [])
 
+    /** setting a reference object */
     const compRef = useRef();
 
     const inv = () => {
@@ -137,6 +141,7 @@ export default function Print(){
                 <div className="hder">
                     <span style={{fontWeight : "600",}}>Services</span></div>
                 <div className="tble">
+                    {/** this table displays the price breakdown for our for our client visit */}
                     <TableContainer component= {Paper}>
                         <Table style={{width : "100%"}} size = "medium">
                                 <TableHead>
@@ -227,7 +232,7 @@ export default function Print(){
             } }>Back</button>
           
             <span className="ttle"> Print Details </span>
-
+                {/** calling a print component used for printing our invoice */}
             <ReactToPrint
 
     trigger={() => <button className='displayBtn printBtn' >
@@ -235,6 +240,7 @@ export default function Print(){
             Print</button>}
             content={() => compRef.current}
             onAfterPrint={() => {
+                /** this APi call updates the visit status after printing the invoice */
                 axios.put(api_URL+"/Visitation/"+location.state.item.id,{ Status : "Complete"},{
                     headers : {
                         'Authorization' : "Bearer"+" "+token

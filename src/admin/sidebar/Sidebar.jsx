@@ -1,3 +1,4 @@
+
 import { Home , 
     PermIdentity, 
     Accessible, 
@@ -16,6 +17,9 @@ const location = useLocation;
 
 export default function Sidebar() {
     return (
+        /* 
+        * @return this div return a sidebar for the admin module
+         */
         <div className='sidebar'>
             <div className="sidebarWrapper">
                 <div className="sidebarMenu">
@@ -81,7 +85,7 @@ export default function Sidebar() {
                     <Link to="/new_patient">
                         <li className="sidebarListItem">
                             <Add className="sideBarIcon"/>
-                            Add Patients
+                            Add Clients
                         </li>
                     </Link>    
                     

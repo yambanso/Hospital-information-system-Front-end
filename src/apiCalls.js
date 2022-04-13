@@ -2,7 +2,10 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 
+/** setting our API URL */
 export const api_URL = "http://127.0.0.1:8000/api"
+
+/** setting a user authentication method */
 export const loginCall = async(userCredentials,dispatch)=> {
     dispatch({type: "LOGIN_START"});
     try{ 
@@ -14,6 +17,7 @@ export const loginCall = async(userCredentials,dispatch)=> {
     }
 }
 
+/** exporting different API routes */
 export const getUserCount = axios.create({
     baseURL : api_URL+"/user_count"
 }) 
@@ -83,8 +87,4 @@ export const getMonthlyUnprescribed = axios.create({
 
 export const getDiagnosis = axios.create({
     baseURL : api_URL + "/Diagnosis"
-})
-
-export const getLastMonthDiagnosis = axios.create({
-
 })

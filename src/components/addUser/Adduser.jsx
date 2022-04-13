@@ -11,6 +11,10 @@ import { CircularProgress } from '@material-ui/core';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
 
+/**
+ * @constructor Schema
+ * @description this is a data validation blueprint used to validate data from the form 
+ **/
 const schema = yup.object().shape({
     name : yup.string().required(),
     email: yup.string().required().email(),
@@ -19,6 +23,9 @@ const schema = yup.object().shape({
     conPassword : yup.string().oneOf([yup.ref('password'),null],"password and confirm password do not match").required("Re enter Password to confirm")
 })
 
+/**
+ * @description initializing the MuiAlert for our snackbar 
+ **/
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
 });
@@ -28,12 +35,20 @@ export default function Adduser() {
     const [isOpen, setOpen] = useState(false) 
     const [doOpen ,setOpenn] = useState(false)
 
+
+    /**
+     * @description this line declares what happens when the user clicks submit button it include form validation handleSubmit function and setForm state
+     **/
     const {register, handleSubmit, formState:{errors} }  = useForm({
         resolver : yupResolver(schema),
     });
 
     const history = useNavigate();
 
+    /**
+     * @event onSubmit
+     * @description this function sends Data to our backend after form validation 
+     * */
     const onSubmit = async (data) => {
         setWritting(true)
         let res = await addUser .post('/', {name : data.name,
@@ -51,6 +66,10 @@ export default function Adduser() {
 
     };
 
+    /**
+     *@event handleClose
+     *  @description function is called whenever the user closes the snack bar 
+     **/
     const handleClose = (event,reason) => {
         if(reason === 'clickaway'){
             return;
@@ -67,6 +86,9 @@ export default function Adduser() {
     }
 
     return (
+        /** 
+         * @return creating the add user form
+         **/
         <div className='newUser'>
 
             <div className="addUserTitle">
@@ -123,6 +145,9 @@ export default function Adduser() {
                     
                 </form>
                 <>
+                {/** 
+                 * @description this is a snackbar used to give a sucessiful feedback to the user  
+                 **/}
                 <Snackbar anchorOrigin={{
                     vertical : 'top',
                     horizontal : "center"
@@ -134,6 +159,9 @@ export default function Adduser() {
                 </>
 
                 <>
+                {/**
+                 * @description this is a snackbar used to give a error feedback to the user  
+                 **/}
                 <Snackbar anchorOrigin={{
                     vertical : 'top',
                     horizontal : "center"
@@ -147,4 +175,3 @@ export default function Adduser() {
         </div>
     )
 }
-//name,email,Role,password,confirm password

@@ -1,7 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { AccessTime} from '@material-ui/icons'
-
+/**
+ * @function PatientHistoryBtn
+ * @returns a button
+ */
 export default class PatientHistoryBtn extends React.Component{
     render (){
         const doctor = "Doctor";

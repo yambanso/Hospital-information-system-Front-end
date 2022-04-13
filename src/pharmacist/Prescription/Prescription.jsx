@@ -13,7 +13,7 @@ import MuiAlert from '@mui/material/Alert'
 import { CircularProgress } from '@material-ui/core';
 
 
-
+{/** initializing the MuiAlert for our snackbar */}
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
 });
@@ -25,8 +25,11 @@ export default function Prescription () {
     let Results = location.state.item.lab_results;
     const [pivots, setPivots] = useState([]);
     const [Prescr, setPrescription] = useState([]);
+    
+    {/** calling the AuthContext object and passing it to the user context */}
     const user = useContext(AuthContext);
     const token = user.user.Token;
+
     const [isOpen, setOpen] = useState(false);
     const [message, setMessage] = useState("Visit Prescription prescribed...");
     const [type, setType] = useState("success")
@@ -34,18 +37,20 @@ export default function Prescription () {
     
     
     
+    /** this function fetches data from our API */
     const fetchData = () => {        
          getPrescription.get('/'+location.state.item.id).then(res =>{
           setPrescription(res.data);
         });  
       }
-
+      /** this function fetches data from our API */
       const fetchInfo = async() => {
         await getPivot.get("/"+location.state.item.id).then(res => {
           setPivots(res.data)
         });
       }
 
+      /** this function is called inorder to update the status of the given prescription and the quantity given */
       const upDateStatus = () => {
         setWritting(true)
         axios.put(api_URL+"/Visitation_prescriptions",{items : pivots},{
@@ -76,12 +81,14 @@ export default function Prescription () {
       }
       
     
-      useEffect(() => {
+      {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
+       useEffect(() => {
         fetchInfo()
         fetchData()        
         
       },[])
 
+      /** this function is called whenever the user closes the snackbar*/
       const handleClose = (event , reason) => {
         if(reason = 'clickaway'){
             setOpen(false)
@@ -194,6 +201,7 @@ export default function Prescription () {
             </div>
         </div>
         <>
+        {/** this snack bar is used to provide feedback to pharmacist */}
     <Snackbar anchorOrigin={{
         vertical : 'top',
         horizontal : "center"

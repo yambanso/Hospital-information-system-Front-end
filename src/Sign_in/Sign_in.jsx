@@ -10,6 +10,7 @@ import { CircularProgress } from '@material-ui/core';
 
 
 
+{/** this is a data validation blueprint used to validate data from the form */}
 const schema = yup.object().shape({
     email : yup.string().required().email(),
     password: yup.string().required(),
@@ -17,19 +18,21 @@ const schema = yup.object().shape({
 
 
 export default function Sign_in(props) {
-    const {register, handleSubmit, formState:{errors} }  = useForm({
+    {/** this line declares what happens when the user clicks submit button it include form validation handleSubmit function and setForm state*/}
+        const {register, handleSubmit, formState:{errors} }  = useForm({
         resolver : yupResolver(schema),
     });
 
+    {/** calling our authcontext object */}
     const {user,isFetching,error, dispatch} = useContext(AuthContext);
 
-    
+    /** this function is used to authenticate the user */
     const onSubmit = (data) => {
         loginCall({email : data.email, password : data.password}, dispatch);
     }
 
     
-    
+    /** updating the state of The Role variable in the parent object */
      {user != null ? <>{props.upRole(user.user.Role)}</> : props.upRole(null)}
     
   return(

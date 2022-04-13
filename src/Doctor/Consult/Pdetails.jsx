@@ -7,11 +7,14 @@ import { useEffect } from 'react';
 export default function Pdetails(props) {
     const [patient ,  setPatient] = useState();
     
+    {/** this function fetches data from the Api sets state to different variable for the page */}
     const fecthdata =() => {
         getPatients.get('/'+ props.patient_id).then(res => {
             setPatient(res.data);
         })
     }
+
+    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
     useEffect(() => {
         fecthdata()
     },[])

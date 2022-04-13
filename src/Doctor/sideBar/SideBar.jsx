@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function SideBar() {
   return (
+      /* this div return a sidebar for the admin module */
     <div className='sidebar'>
     <div className="sidebarWrapper">
         <div className="sidebarMenu">

@@ -19,11 +19,14 @@ import LstYrFin from './lstYrFin';
 export default function Report() {
     const [ value , setValue] = useState("1")
     const [tValue, setTvalue] = useState("1")
+    {/** creating a referenvce object */}
     const compRef = useRef();
 
+    {/** this function is called whenever the tab pane changes */}
     const handleChange = (event, newValue) => {
       setValue(newValue)
     }
+    {/** this function is called whenever the tab pane changes */}
     const topHandleChange = (event, newVal) => {
       setTvalue(newVal)
     }
@@ -37,14 +40,17 @@ export default function Report() {
                 </div>
                 </div>
                 <div className="printButton">
+                  {/**  declaring the print object */}
                     <ReactToPrint
-                        trigger={() => <button className='displayBtn' style={{backgroundColor : "#1FFF63"}}>
+                    
+                        trigger={() => <button className='displayBtn' style={{backgroundColor : "#1FFF63"}}>{/** this function triggers the print object and it gets a reference to the object to print */}
                             <LocalPrintshop className='displayIcon'/>
                             Print</button>}
                         content={() => compRef.current}
                     />
                 </div>
                 <div className="homeBtm">
+                  {/** creating a tab pane to display different reports */}
                 <Box sx={{widith : '100%', typography : "body1", margin : '10px'}}> 
                 <TabContext value={tValue}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

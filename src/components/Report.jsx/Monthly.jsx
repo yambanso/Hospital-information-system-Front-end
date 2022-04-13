@@ -15,6 +15,7 @@ export default function Monthly() {
     let uTotal = 0
     const [total, setTotal] = useState(0) 
 
+    {/** this function fetches data from the Api sets state to different variable for the page */}
     const fetchData = async() => {
         let T = 0
         await getReport.get("/thisMonth").then(res => {
@@ -45,6 +46,7 @@ export default function Monthly() {
         
     }
 
+    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
     useEffect(()=>{
         fetchData()        
     },[])
@@ -77,7 +79,8 @@ export default function Monthly() {
                     <span className="TableTitleText">Most Prescribed Drugs</span>
                 </div>
                 <div className="tble">
-                    <TableContainer component = {Paper}>
+                    {/** creating a table to display our array of disease objects */}
+                                       <TableContainer component = {Paper}>
                         <Table style={{width : "100%"}} size = "medium">
                             <TableHead>
                                 <TableRow>

@@ -6,23 +6,44 @@ import { useStyles } from '../../data-gridStyle'
 import { getPatientHistory } from '../../apiCalls'
 import './patients.css'
 import { useState , useEffect} from 'react'
-
+/**
+ * 
+ * @function Patienthistory 
+ * @returns patients visitation history page
+ */
 export default function Patienthistory(props) {
 
     const [data , setConsult] = useState(consultationHistory)
 
+    /**
+     * @constant location
+     *  @description the variable is used to query data that is passed from the view patients windows 
+     * 
+    */
     const location = useLocation();
     
+    /** 
+     * @function fetchData
+     * @description this function fetches data from the Api sets state to different variable for the page
+     **/
     const fetchData = async() => {
         getPatientHistory.get('/'+location.state.item.id).then(res => {
             setConsult(res.data)
                 })
     }
 
+    /** 
+     * @description this function is called after first page render and is call the fetchdata method to fetch data from the API 
+     * 
+    */
     useEffect(() => {
         fetchData()
     }, [])
-     const userColumn = [
+    /**
+     * @constant userColumn
+     * @description this is array is used as a blue print in our datatable
+     **/
+    const userColumn = [
             { field: 'id', headerName: 'ID', width: 100 },
             {
               field: 'patient_id',
@@ -52,7 +73,10 @@ export default function Patienthistory(props) {
                                        
                     return(
                         <>
-                          <Link to={"/Visit_Details/"+params.id} state={{item : params.row}}>                          
+                        {/** 
+                         * @description this button takes the user to page where he can view the visits details info and passing medicine data as state  
+                         **/}                    
+                        <Link to={"/Visit_Details/"+params.id} state={{item : params.row}}>                          
                            <button className="displayBtn">
                                 <Visibility className='displayIcon'/>
                                     Details
@@ -68,7 +92,10 @@ export default function Patienthistory(props) {
      const classes = useStyles();
          
               
-    return (      
+    return (
+        /**
+         * @description creating the view patient medical history window 
+         **/      
         <div className="users">
             <div className="usersTop">                    
                       <span className="historyheading">Consultation History</span>
@@ -90,6 +117,9 @@ export default function Patienthistory(props) {
              </div>
             <div className="userBottom">
             <div className="userTable">
+                {/** 
+                 * @description the Datagrid is used to diplay recent patients visit to the hospital 
+                 **/}
                         <DataGrid
                             className={classes.root}
                             rows={data}

@@ -13,6 +13,7 @@ export default function ThisYrDis() {
   const [hyper, setHyper] = useState([])
   const [infection , setInfection] = useState([])
 
+  {/** this function fetches data from the Api sets state to different variable for the page */}
   const fetchData = async() => {
     await getDiagnosis.get("/thisYear").then(res =>{
           let v = res.data
@@ -28,10 +29,12 @@ export default function ThisYrDis() {
           })
   }
 
+  {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
   useEffect(()=>{
     fetchData()
       },[])
   
+      {/** this function is called whenever the Lab variable changes  */}
       useEffect(()=>{
         setMal(Lab.filter((mal)=>{
           return mal.lab_results.toLocaleLowerCase().includes("malaria".toLocaleLowerCase())
@@ -85,6 +88,7 @@ export default function ThisYrDis() {
                     <span className="TableTitleText">Yearly Cases</span>
                 </div>
                 <div className="tble">
+                   {/** creating a table to display our array of disease objects */}
                     <TableContainer component = {Paper}>
                         <Table style={{width : "100%"}} size = "medium">
                             <TableHead>

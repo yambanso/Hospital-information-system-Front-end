@@ -16,6 +16,7 @@ export default function VisitDay(props) {
   let Role = user.user.user.Role;
   let Results = location.state.item.lab_results;
 
+  {/** this function fetches data from the Api sets state to different variable for the page */}
   const fetchData = () => {
     getPrescription.get('/'+location.state.item.id).then(res =>{
       setPrescription(res.data)  
@@ -23,12 +24,14 @@ export default function VisitDay(props) {
     })
   }
 
+  {/** this function fetches data from the Api sets state to different variable for the page */}
   const fetchInfo = async() => {
     await getPivot.get("/"+location.state.item.id).then(res => {
       console.log(res.data)
     });
   }
 
+  {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
   useEffect(() => {
     fetchData()
     fetchInfo()

@@ -5,6 +5,10 @@ import { getUserCount,getPatientCount, getPatients, getUsers } from '../../apiCa
 import { useState, useEffect } from 'react'
 import Datatable from '../../Receptipnist/Home/Data-table';
 
+ /**
+  * @return Home page for the admin window
+  * @auth Lusngu gondwe
+  */
 
 export default function Home() {
     const count = 0 ;
@@ -14,6 +18,9 @@ export default function Home() {
     const [prows, setProws] = useState(patientsRows)
     const [urows, setUrows] = useState(userRows)
 
+    /** 
+    * @description this function fetches data from the Api sets state to different variable for the page
+    */
      const fetchData = async () => {
 
         getUserCount.get('/').then(res => {
@@ -34,6 +41,10 @@ export default function Home() {
 
     }
 
+    /** 
+     * @description function is called after first page render and is call the fetchdata method to fetch data from the API
+     *  
+     */
     useEffect(() => {
         fetchData()
     }, [])
@@ -81,6 +92,9 @@ export default function Home() {
                     </span>
                     <div className="userTable">
                     <div className="usersTable">
+                        {/** 
+                         * @description the Datatable is a custom component that is used to Display data in a table and passing in the data and the columns 
+                         */}
                         <Datatable Data={urows} columns={userColumns}/>
                         
                         </div>
@@ -93,6 +107,10 @@ export default function Home() {
                     </span>
                     <div className="patientsTable">
                     <div className="patientsTable">
+                    {/** 
+                     * @description the Datatable is a custom component that is used to Display data in a table and passing in the data and the columns 
+                     * 
+                    */}
                     <Datatable Data={prows} columns={patientsColumns}/>
                         
                         </div>

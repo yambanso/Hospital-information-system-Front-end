@@ -12,11 +12,15 @@ import { CircularProgress } from '@material-ui/core';
 import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
 
-
+/**
+ *
+ * @description the MuiAlert for our snackbar */
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
 });
-
+/**
+ * @constructor yup object 
+ **/
 const schema = yup.object().shape({
     })
 
@@ -26,17 +30,28 @@ export default function EditMeds(props) {
     const [isWritting, setWritting] = React.useState(false);
     const [isOpen, setOpen] = React.useState(false) 
     
-
+    /**
+     * @const react-router-dom useLocatoin 
+     **/
     const location = useLocation();
+
+    /**
+     *  @const AuthContext object
+    */
     const user = useContext(AuthContext);
     const token = user.user.Token;
     const nav = useNavigate()
 
-
+    /** 
+     * @param line declares what happens when the user clicks submit button it include form validation handleSubmit function and setForm state
+     **/
     const {register, handleSubmit, formState:{errors} }  = useForm({
         resolver : yupResolver(schema),
     });
 
+    /** 
+     * @event sends Data to our backend after form validation 
+     **/
     const onSubmit = async(data) => {
         setWritting(true)
         let res = await axios.put(api_URL+"/Medication/"+location.state.item.id,data,{
@@ -51,7 +66,9 @@ export default function EditMeds(props) {
 
     }
 
-    
+    /** 
+     * @event is called whenever the user closes the snack bar
+     **/
     const handleClose = (event,reason) => {
         if(reason === 'clickaway'){
             setOpen(false)
@@ -61,6 +78,9 @@ export default function EditMeds(props) {
 
 
   return (
+      /**
+       * @return creating the edit medicine form
+       **/
       <div className="addmeds">
                      <div className="addMedsTitle">
                 <span className="heading"> Update Medicine </span>
@@ -103,6 +123,9 @@ export default function EditMeds(props) {
                 
                 </form>
                 <>
+                {/**
+                 * @summary snackbar used to give a successiful feedback to the user
+                 **/}
                 <Snackbar anchorOrigin={{
                     vertical : 'top',
                     horizontal : "center"

@@ -7,6 +7,7 @@ export default function Pharma () {
         <div className="pharma">
             <BrowserRouter>
             <Routes>
+                {/** declaring the pages the pharmacist can navigate to */}
                 <Route path="/" element={<Home />} />
 
                 <Route path="*" element={<Home />} />

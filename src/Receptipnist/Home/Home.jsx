@@ -9,6 +9,7 @@ export default function Home (){
     
     const [Data, setdata] =  React.useState([]); 
     
+    {/** this is array is used as a blue print to display in our datatable*/}
     const patientColumns = [
         { field: 'id', headerName: 'ID', width: 90 },
         {
@@ -45,7 +46,7 @@ export default function Home (){
         }
     ];
     
-
+    /** this function fetches data from our API */
     const fetchData = async() => {
         await getPatients.get('/').then(res =>{
             setdata(res.data)
@@ -53,6 +54,7 @@ export default function Home (){
     }
 
     
+    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
     useEffect(()=>{
         fetchData()
     },[])
@@ -69,7 +71,9 @@ export default function Home (){
 
                 <div className="homeBtm">
                     <div className="homeTable">
-                          <Datatable Data={Data} columns={patientColumns}/>                        
+
+                        {/** the Datatable is a custom component that is used to Display data in a table and passing in the data and the columns */}
+                        <Datatable Data={Data} columns={patientColumns}/>                        
                     </div>
                 </div>
         </div>

@@ -10,11 +10,12 @@ export default function Receptionist () {
     return(
         <BrowserRouter>
         <div className="receptionist">
-            
+            {/** calling the receptionist sidebar nav */}
             <Sidebar />
             <div className="content">
                 
                     <Routes>
+                        {/** creating routes that routes our user to different pages */}
 
                         <Route path="/" element={<Home />}/>
 

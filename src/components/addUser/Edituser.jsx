@@ -13,11 +13,20 @@ import MuiAlert from '@mui/material/Alert'
 import { AuthContext } from '../../context/AuthContext';
 
 
+/**
+ * 
+ * @description initializing the MuiAlert for our snackbar 
+ * 
+*/
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
 });
 
 
+/**
+ * @constructor schema 
+ * @description this is a data validation blueprint used to validate data from the form
+ **/
 const schema = yup.object().shape({
     email: yup.string().email(),
     })
@@ -27,7 +36,17 @@ export default function Edituser(props) {
     const [isOpen, setOpen] = React.useState(false) 
     
 
+    /**
+     * @constant location
+     * @description the variable is used to query data that is passed from the view medicine windows
+     **/
     const location = useLocation();
+    
+    /**
+     * @constant user
+     * @description calling the AuthContext object and passing it to the user context 
+     * 
+    */
     const user = React.useContext(AuthContext);
     const token = user.user.Token;
 
@@ -37,10 +56,19 @@ export default function Edituser(props) {
 
 
 
+    /**
+     * 
+     * @description this line declares what happens when the user clicks submit button it include form validation handleSubmit function and setForm state
+     * 
+    */
     const {register, handleSubmit, formState:{errors} }  = useForm({
         resolver : yupResolver(schema),
     });
 
+    /**
+     * @event onSubmit
+     * @description this function sends Data to our backend after form validation 
+     **/
     const onSubmit = async(data) =>{
         setWritting(true)
 
@@ -60,6 +88,10 @@ export default function Edituser(props) {
 
     }
 
+    /**
+     * @event onSubmit 
+     * @description function is called whenever the user closes the snack bar 
+     **/
     const handleClose = (event,reason) => {
         if(reason === 'clickaway'){
             setOpen(false)
@@ -70,6 +102,9 @@ export default function Edituser(props) {
     
 
     return (
+        /**
+         * @return creating the edit user form 
+         **/
         <div className='newUser'>
 
             <div className="addUserTitle">
@@ -113,7 +148,10 @@ export default function Edituser(props) {
                 </form>
             </div>
             <>
-                <Snackbar anchorOrigin={{
+            {/**
+             * @description this is a snackbar used to give feedback to the user 
+             **/}
+                            <Snackbar anchorOrigin={{
                     vertical : 'top',
                     horizontal : 'center'
                 }} open={isOpen} autoHideDuration={6000} onClose = {handleClose}>
@@ -126,4 +164,3 @@ export default function Edituser(props) {
         </div>
     )
 }
-//name,email,Role,password,confirm password

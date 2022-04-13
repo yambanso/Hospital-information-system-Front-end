@@ -11,17 +11,20 @@ export default function Home() {
 
     const [Data, setdata] =  useState(patientsRows);
 
+    {/** this function fetches data from the Api sets state to different variable for the page */}
     const fetchData = () =>{
       getPatients.get('/').then(res =>{
         setdata(res.data)
     })
     }
 
+    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
     useEffect(() =>{
       fetchData();
     },[])
    
 
+    {/** this is array is used as a blue print to display in our datatable*/}
     const patientColumns = [
         { field: 'id', headerName: 'ID', width: 90 },
         {
@@ -59,6 +62,7 @@ export default function Home() {
           renderCell  : (params)=>{
            return(
                   <>
+                  {/** this button takes the doctor to a page where he can view the patients medical */}
                   <Link to={"/Patient_history/"+params.id} state={{item:params.row}}>
                     <button className="displayBtn">
                     <AccessTime className='displayIcon'/>
@@ -66,6 +70,7 @@ export default function Home() {
                  </button>
                   </Link>
 
+                        {/** this button takes the Doctor the a page where he can record patients consultation details */}
                         <Link to = {"/Consults/"+params.id} state={{item : params.row}}>
                             <button className="ListEdit">Consult
                               </button>
@@ -89,6 +94,7 @@ export default function Home() {
 
         <div className="homeBtm">
             <div className="homeTable">
+              {/** the Datatable is a custom component that is used to Display data in a table */}
             <Datatable Data={Data} columns={patientColumns}/>
             </div>
             </div>        

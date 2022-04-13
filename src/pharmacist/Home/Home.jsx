@@ -10,17 +10,20 @@ export default function Home () {
     const [data , setData] =  React.useState([]);
     const classes = useStyles();
 
+    /** this function fetches data from our API */
     const fetchData = () => {
         getVisits.get('/Prescribed').then(res =>{
             setData(res.data)
         })
     }
 
+    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
     React.useEffect(() => {
         fetchData()
     }, [])
 
 
+    {/** this is array is used as a blue print to display in our datatable*/}
     const Column = [
         { field: 'id', headerName: 'ID', width: 100 },
         {
@@ -40,6 +43,7 @@ export default function Home () {
             renderCell  : (params)=> {                                   
                 return(
                     <>
+                    {/** this button takes the user to a page where he can view and give prescription of a particular visit */}
                     <Link to={"/Prescription/"+params.row.id} state={{item : params.row}}>
                        <button className="displayBtn">
                                 <Medication className='displayIcon'/>
@@ -59,6 +63,7 @@ export default function Home () {
             </div>
 
             <div className="table">
+                {/** the Datagrid displays the visit pending assignment of prescription */}
                  <DataGrid
                     className={classes.root}
                     rows={data}

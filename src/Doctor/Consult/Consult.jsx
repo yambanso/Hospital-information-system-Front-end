@@ -29,12 +29,13 @@ import StepNav from './stepNav';
 import { ValidationError } from 'yup';
 
 
-
+{/** this is a data validation blueprint used to validate data from the form */}
 const schema = yup.object().shape({
     Description : yup.string().required(), 
     patient_id : yup.string().required(),
 })
 
+{/** initializing the MuiAlert for our snackbar */}
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
 });
@@ -56,6 +57,7 @@ export default function Consult() {
     const [desc , setDescription] = React.useState()
     const [done, isDone] = React.useState(false) 
 
+    {/** this line declares what happens when the user clicks submit button it include form validation handleSubmit function and setForm state*/}
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver : yupResolver(schema),
     });
@@ -69,6 +71,7 @@ export default function Consult() {
     const [data, setdata] = useState([]);
     const history  = useNavigate()
 
+    {/** this function is called whenever the user wants to close the snackbar */}
     const handleClose = (event , reason) => {
         if(reason = 'clickaway'){
             setOpen(false)
@@ -76,6 +79,7 @@ export default function Consult() {
         }
         setOpen(false)
     }
+    {/** this function writes visit description to the backend */}
     const onSubmit = async(data) =>{
         setWritting(true)
         setDescription(data.Description)
@@ -100,6 +104,7 @@ export default function Consult() {
         
     } 
 
+    {/** this is array is used as a blue print to display in our datatable*/}
     const userColumn = [
         { field: 'id', headerName: 'ID', width: 90 },
         {
@@ -114,6 +119,8 @@ export default function Consult() {
         
     ]
     
+    
+    {/** this function is called when the user is on step 1 of the wizard intuitive progress tracker */}
     const stepOne = () =>{
         return (
             <div className="frmItem">
@@ -140,6 +147,7 @@ export default function Consult() {
         )
     }
 
+    {/** this function is called when the user is on step 2 of the wizard intuitive progress tracker */}
     const stepTwo = () => {
         return(
         <div className="medicine">
@@ -149,6 +157,7 @@ export default function Consult() {
         
         <div className="medicineTable">
         <div className="table">
+            {/** this Datagrid component displays the availble medicine we have in our system */}
                 <DataGrid
                     className={classes.root}
                     rows={data}
@@ -157,7 +166,6 @@ export default function Consult() {
                     }}
                     columns={userColumn}
                     pageSize={8}
-                    hideFooterPagination
                     rowsPerPageOptions={[8]}
                     checkboxSelection
                     disableSelectAllCheckBox
@@ -180,6 +188,7 @@ export default function Consult() {
             Qauntity : 1,
             Status : 0,})
         ))}
+        /** here we post the prescripition to our database for the visit */
             axios.post(api_URL+"/Visitation_prescriptions",{items : arr},{
                 headers : {
                     'Authorization' : "Bearer"+" "+token,
@@ -216,6 +225,8 @@ export default function Consult() {
         )
     }
 
+    
+    {/** this function is called whenever the user wants to close the popup window */}
     const handlePopupClose = () => {
         setStage(stage+1);
         setPopOpen(false);
@@ -227,22 +238,26 @@ export default function Consult() {
     }  
 
 
+    {/** this function fetches data from the Api sets state to different variable for the page */}
     const fetchData = () => {
         getMedicine.get('/').then(res => {
             setdata(res.data)
         })        
     }
 
+    {/** this function fetches data from the Api sets state to different variable for the page */}
     useEffect(() => {
         fetchData()
     }, [])
 
+    {/** this function is called to validate input on the popup window */}
     const validationError = () => {
         setMessage("Please make sure that you have enter your lab test order")
                 setType("error")
                 setOpen(true)
     }
 
+    {/** this function sends test order for this visit to the lab technician */}
     const sendOrder = async(order) =>{
         setOrder(true)
         await axios.put(api_URL+"/Visitation/"+visit_id,{Test_Order : order},{
@@ -284,7 +299,7 @@ export default function Consult() {
           <div className="Container">
 
                     <div className="consultPatient">
-                                               
+                     {/** checking what stage the process is on an chosing what function to call */}                          
                     {stage === 0 ? stepOne() : stepTwo()}
 
                     </div>
@@ -328,6 +343,7 @@ export default function Consult() {
 
             </div>
           <>
+          {/** creating the snackbar to provide feedback to the doctor */}
                 <Snackbar anchorOrigin={{
                     vertical : 'top',
                     horizontal : "center"
@@ -337,7 +353,8 @@ export default function Consult() {
                     </Alert>
                 </Snackbar>
                 </>
-                <>                
+                <>
+                {/** creating a dialog pane used to order lab test */}                
         <Dialog open={open} onClose={handlePopupClose}>
         
         <DialogTitle>Order Test</DialogTitle>
@@ -373,7 +390,8 @@ export default function Consult() {
       </Dialog>
       </>
 
-             <>                
+             <>
+             {/** creating a dialog pane used to show visit sumary upon giving a prescription */}                
         <Dialog open={done} onClose={()=>{
             isDone(false)
             history(-1)

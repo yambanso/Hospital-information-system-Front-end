@@ -11,6 +11,7 @@ import Receptionist from '../Receptipnist/Recptionist';
 export default function Homepage() {
 const [Role, setRole] = useState(null);
 
+/** this function set the value for the users role */
 const updateRole = (role) => {
         setRole(role)
 }
@@ -18,6 +19,7 @@ const updateRole = (role) => {
   
   return (
       <div>
+
         {Role != null ? <>
                         <TopBar upRole={updateRole}/>
                         {
@@ -27,8 +29,8 @@ const updateRole = (role) => {
                             'Lab_Technician' : <Lab_tech />,
                             'Pharmacist' : <Pharma />,
                             'Receptionist' : <Receptionist />
-                          }[Role]}
-                      </> : <Sign_in upRole={updateRole}/>}
+                          }[Role]}{/** this switch chooses what component to be called into this component based on the value of Role */}
+                      </> : <Sign_in upRole={updateRole}/>}{/** if Role is null we render the signin component meaning that the user is not signed in */}
           
       </div>
   )

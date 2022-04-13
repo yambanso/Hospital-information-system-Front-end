@@ -11,6 +11,7 @@ export default function Home () {
     const [data , setData] =  React.useState([]);
     const classes = useStyles();
 
+    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
     const fetchData = () => {
         getLab.get('/').then(res =>{
             setData(res.data)
@@ -22,6 +23,7 @@ export default function Home () {
     }, [])
 
 
+    {/** this is array is used as a blue print to display in our datatable*/}
     const Column = [
         { field: 'id', headerName: 'ID', width: 100 },
         {
@@ -46,6 +48,7 @@ export default function Home () {
             renderCell  : (params)=> {                                   
                 return(
                     <>
+                    {/** this link takes the lab technician to a page where he can enter lab results and passing in the visit details as state */}
                     <Link to={"/lab_Results/"+params.row.id} state={{item : params.row}}>
                        <button className="displayBtn">
                                 <Biotech className='displayIcon'/>
@@ -65,6 +68,7 @@ export default function Home () {
             </div>
 
             <div className="table">
+                {/** the datagrid is used to display the visits have lab test orders */}
                   <DataGrid
                     className={classes.root}
                     rows={data}

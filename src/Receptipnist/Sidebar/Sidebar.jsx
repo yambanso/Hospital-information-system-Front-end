@@ -8,6 +8,7 @@ import {Link, useLocation} from 'react-router-dom'
 
 export default function Sidebar() {
     return (
+        /** creating a sidebar navigation */
         <div className='sidebar'>
             <div className="sidebarWrapper">
             <div className="sidebarMenu">

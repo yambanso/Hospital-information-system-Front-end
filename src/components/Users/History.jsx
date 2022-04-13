@@ -11,21 +11,25 @@ export default function History() {
 
     const [ data , setData] = useState(consultationHistory)
 
+    {/** the variable is used to query data that is passed from the view medicine windows */}
     const location = useLocation(); 
     
-    const fetchData = () => {
+    {/** this function fetches data from the Api sets state to different variable for the page */}
+   const fetchData = () => {
         getDoctorHistory.get('/'+location.state.item.id).then(res => {
             setData(res.data)
         })
     }
 
-    useEffect(() => {
+    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
+   useEffect(() => {
         fetchData()
         }, []);
     
 
     
-     const userColumn = [
+     {/** this is array is used as a blue print to display in our datatable*/}
+    const userColumn = [
             { field: 'id', headerName: 'ID', width: 100 },
             {
               field: 'patient_id',
@@ -56,7 +60,8 @@ export default function History() {
                     
                     return(
                         <>
-                            <Link to={"/Visit_Details/"+params.id } state={{item : params.row}}>
+                           {/** this button takes the user to page where he can view visit info in detail and passes vist data as state  */}                    
+                             <Link to={"/Visit_Details/"+params.id } state={{item : params.row}}>
                                 <button className="displayBtn">
                                 <Visibility className='displayIcon'/>
                                     Details
@@ -89,6 +94,8 @@ export default function History() {
              </div>
             <div className="userBottom">
             <div className="userTable">
+                {/** the Datagrid is a component that is used to Display data in a table */}
+                
                         <DataGrid
                             className={classes.root}
                             rows={data}

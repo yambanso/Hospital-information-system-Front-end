@@ -56,6 +56,7 @@ export default function Prescribe() {
         }
         setOpen(false)
     }
+    {/** this function fetches data from the Api sets state to different variable for the page */}
     const fetchData = () => {
         getMedicine.get('/').then(res => {
             setdata(res.data)
@@ -63,11 +64,13 @@ export default function Prescribe() {
     }
     
 
+    {/** this function is called after first page render and is call the fetchdata method to fetch data from the API */}
     useEffect(() => {
         fetchData()
     }, [])
 
 
+    {/** this is array is used as a blue print to display in our datatable*/}
     const userColumn = [
         { field: 'id', headerName: 'ID', width: 90 },
         {
@@ -121,6 +124,7 @@ export default function Prescribe() {
                                 
                                 <div className="medicineTable">
                                 <div className="table">
+                                    {/** this datagrid display the avilable medications for the visit */}
                                         <DataGrid
                                             className={classes.root}
                                             rows={data}
@@ -129,7 +133,6 @@ export default function Prescribe() {
                                             }}
                                             columns={userColumn}
                                             pageSize={8}
-                                            hideFooterPagination
                                             rowsPerPageOptions={[8]}
                                             checkboxSelection
                                             disableSelectAllCheckBox
@@ -152,6 +155,7 @@ export default function Prescribe() {
                                     Qauntity : 1,
                                     Status : 0,})
                                 ))}
+                                /** this function post the given prescription for the visit to the database */
                                     axios.post(api_URL+"/Visitation_prescriptions",{items : arr},{
                                         headers : {
                                             'Authorization' : "Bearer"+" "+token,

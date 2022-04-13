@@ -8,10 +8,12 @@ import { api_URL } from '../../apiCalls';
 
 
 export default function TopBar(props) {
+    {/** calling the AuthContext object and passing it to the user context */}
     const user = useContext(AuthContext);
     const token = user.user.Token;
     let nRef = createRef();
 
+    {/** this function is called whenever the user is signing out */}
     const signout = () => {
         axios.post(api_URL+"/sign_out","",{
             headers : {

@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 
 export default function Step(props) {
-    let status = props.Selected;
+    let status = props.Selected; /** calling the passed selected stage from the parent component */
     return (
         <div className={"stepBlock"+" " + ( status ? "active" : "")}>
             <div className="cicleWrapper">

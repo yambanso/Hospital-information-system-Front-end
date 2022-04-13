@@ -1,6 +1,6 @@
 import {createStyles, makeStyles} from "@material-ui/core/styles"
 
-
+/** creating custom styles for our materia ui datagrid */
 export const useStyles = makeStyles((theme) => createStyles({
     root: {
         "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer" : {

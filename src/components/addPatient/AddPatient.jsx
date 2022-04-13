@@ -12,6 +12,11 @@ import {Snackbar } from "@mui/material"
 import MuiAlert from '@mui/material/Alert'
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * 
+ * @constructor schema
+ * @description this is a data validation blueprint used to validate data from the form 
+ **/
 const schema = yup.object().shape({
   firstname : yup.string().required(),
   surname: yup.string().required(),
@@ -23,6 +28,9 @@ const schema = yup.object().shape({
   address : yup.string().required(),
 })
 
+/**
+ * @description initializing the MuiAlert for our snackbar 
+ **/
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation = {6} ref ={ref} variant="filled" {...props}/>
 });
@@ -34,13 +42,23 @@ export default function AddPatient() {
     const [doOpen ,setOpenn] = React.useState(false)
     const nav = useNavigate()
 
+    /**
+     * @constant AuthContext object 
+     **/
     const user = useContext(AuthContext);
     const token = user.user.Token;
-  const {register, handleSubmit, formState:{errors} }  = useForm({
+    /**
+     * @description this line declares what happens when the user clicks submit button it include form validation handleSubmit function and setForm state
+     * */
+    const {register, handleSubmit, formState:{errors} }  = useForm({
     resolver : yupResolver(schema),
-});
+        });
 
-const onSubmit = async(data) => {
+        /** 
+         * @event onSubmit
+         * @description sends Data to our backend after form validation 
+         **/
+        const onSubmit = async(data) => {
     setWritting(true)
     let res = await axios.post(api_URL+"/patients",data,{
         headers : {
@@ -57,6 +75,10 @@ const onSubmit = async(data) => {
 
 }
 
+/**
+ * @event handleClose
+ * @description called whenever the user closes the snack bar 
+ **/
 const handleClose = (event,reason) => {
     if(reason === 'clickaway'){
         return;
@@ -65,6 +87,11 @@ const handleClose = (event,reason) => {
     
     
 }
+
+/**
+ * @event doClose
+ * @description called whenever the user closes the snack bar 
+ **/
 const doClose = (event,reason) => {
     if(reason ==='clickaway'){
         return;
@@ -74,6 +101,9 @@ const doClose = (event,reason) => {
 
 
   return (
+      /**
+       * @return add patient form
+       * */
         <div className='addPatient'>
                         <div className="addUserTitle">
                 <span className="heading"> New Patient Record </span>
@@ -156,6 +186,9 @@ const doClose = (event,reason) => {
             </div>
 
             <>
+            {/** 
+             * @description this is a snackbar used to give a sucessiful feedback to the user
+             **/}
                 <Snackbar anchorOrigin={{
                     vertical : 'top',
                     horizontal : "center"
@@ -167,6 +200,9 @@ const doClose = (event,reason) => {
                 </>
 
                 <>
+                {/**
+                 * @description this is a snackbar used to give a error feedback to the user
+                 **/}
                 <Snackbar anchorOrigin={{
                     vertical : 'top',
                     horizontal : "center"

@@ -19,14 +19,17 @@ import Home from './home/Home'
 import Sidebar from './sidebar/Sidebar'
 
 
+ /**
+  * @name admin routing page
+  */
 export default function Admin() {
     return (
         <BrowserRouter> 
             <div className='admin'>
-                
+                {/* setting the side bar*/}
                 <Sidebar className='sidebar'/>
                 <Routes>
-                    
+                    {/* creating the routes for the admin window to different pages*/}
                     <Route path="/" element={<Home />}/>
 
                     <Route path='*' element={<Home />}/>
