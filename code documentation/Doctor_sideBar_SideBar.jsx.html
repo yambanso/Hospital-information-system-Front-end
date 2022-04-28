@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Doctor/sideBar/SideBar.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Doctor/sideBar/SideBar.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Accessible, Home } from '@material-ui/icons';
+import '../../admin/sidebar/sidebar.css'
+import { Link } from 'react-router-dom';
+/**
+ * @function SideBar
+ * @returns Sider bar for the doctors module
+ */
+export default function SideBar() {
+  return (
+      /* @description this div return a sidebar for the admin module */
+    &lt;div className='sidebar'>
+    &lt;div className="sidebarWrapper">
+        &lt;div className="sidebarMenu">
+            &lt;h3 className="siderTitle">Quick Menu&lt;/h3>
+            &lt;ul className="sidebarLst">
+                
+            &lt;Link to="/" >
+                &lt;li className="sidebarListItem">                            
+                        &lt;Home className="sideBarIcon"/>
+                        Home
+                &lt;/li>    
+            &lt;/Link>
+                   
+          
+                &lt;Link to="/prescriptions">
+                    &lt;li className="sidebarListItem">
+                        &lt;Accessible className="sideBarIcon"/>
+                        Create Prescription
+                    &lt;/li>
+                &lt;/Link>    
+            
+            &lt;/ul>
+        &lt;/div>
+
+
+    &lt;/div>
+&lt;/div>
+  )
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-addUser.html">addUser</a></li><li><a href="module-api_URL.html">api_URL</a></li><li><a href="module-AuthContext.html">AuthContext</a></li><li><a href="module-AuthContextProvider.html">AuthContextProvider</a></li><li><a href="module-AuthReducer.html">AuthReducer</a></li><li><a href="module-getDiagnosis.html">getDiagnosis</a></li><li><a href="module-getDoctorHistory.html">getDoctorHistory</a></li><li><a href="module-getLab.html">getLab</a></li><li><a href="module-getMedicine.html">getMedicine</a></li><li><a href="module-getMonthlyPrescribed.html">getMonthlyPrescribed</a></li><li><a href="module-getMonthlyUnprescribed.html">getMonthlyUnprescribed</a></li><li><a href="module-getPatientCount.html">getPatientCount</a></li><li><a href="module-getPatientHistory.html">getPatientHistory</a></li><li><a href="module-getPatients.html">getPatients</a></li><li><a href="module-getPivot.html">getPivot</a></li><li><a href="module-getPrescription.html">getPrescription</a></li><li><a href="module-getReport.html">getReport</a></li><li><a href="module-getServices.html">getServices</a></li><li><a href="module-getUserCount.html">getUserCount</a></li><li><a href="module-getUsers.html">getUsers</a></li><li><a href="module-getVisits.html">getVisits</a></li><li><a href="module-getWithoutPrescriptions.html">getWithoutPrescriptions</a></li><li><a href="module-loginCall.html">loginCall</a></li><li><a href="module-LoginFailure.html">LoginFailure</a></li><li><a href="module-LoginStart.html">LoginStart</a></li></ul><h3>Classes</h3><ul><li><a href="global.html#schema">schema</a></li><li><a href="Schema.html">Schema</a></li><li><a href="schema%250D%2520this%2520is%2520a%2520data%2520validation%2520blueprint%2520used%2520to%2520validate%2520data%2520from%2520the%2520form.html">schema this is a data validation blueprint used to validate data from the form</a></li><li><a href="yup%2520object.html">yup object</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:doClose">doClose</a></li><li><a href="global.html#event:functioniscalledwhenevertheuserclosesthesnackbar">function is called whenever the user closes the snack bar</a></li><li><a href="global.html#event:functionsendsDatatoourbackendafterformvalidation">function sends Data to our backend after form validation</a></li><li><a href="global.html#event:handleChange">handleChange</a></li><li><a href="global.html#event:handleClose">handleClose</a></li><li><a href="global.html#event:iscalledwhenevertheuserclosesthesnackbar">is called whenever the user closes the snack bar</a></li><li><a href="global.html#event:onSubmit">onSubmit</a></li><li><a href="global.html#event:requestSearch">requestSearch</a></li><li><a href="global.html#event:sendOrder">sendOrder</a></li><li><a href="global.html#event:sendsDatatoourbackendafterformvalidation">sends Data to our backend after form validation</a></li><li><a href="global.html#event:signout">signout</a></li><li><a href="global.html#event:topHandleChange">topHandleChange</a></li><li><a href="global.html#event:handleDeletethisfunctioniscalledwhenevertheuserdeleteanobjectfromthetable">handleDelete this function is called whenever the user delete an object from the table</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ActiveVisits">ActiveVisits</a></li><li><a href="global.html#adminroutingpage">admin routing page</a></li><li><a href="global.html#Alert">Alert</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AuthReducer">AuthReducer</a></li><li><a href="global.html#Column">Column</a></li><li><a href="global.html#compRef">compRef</a></li><li><a href="global.html#Consult">Consult</a></li><li><a href="global.html#dat">dat</a></li><li><a href="global.html#Datatable">Datatable</a></li><li><a href="global.html#Disease">Disease</a></li><li><a href="global.html#EdditPatient">EdditPatient</a></li><li><a href="global.html#editService">editService</a></li><li><a href="global.html#escapeRegExp">escapeRegExp</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#fetchInfo">fetchInfo</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#INITIAL_STATE">INITIAL_STATE</a></li><li><a href="global.html#Invoice">Invoice</a></li><li><a href="global.html#Lab_tech">Lab_tech</a></li><li><a href="global.html#location">location</a></li><li><a href="global.html#LstMonthFin">LstMonthFin</a></li><li><a href="global.html#LstMonthyDisease">LstMonthyDisease</a></li><li><a href="global.html#LstYrDis">LstYrDis</a></li><li><a href="global.html#LstYrFin">LstYrFin</a></li><li><a href="global.html#Monthly">Monthly</a></li><li><a href="global.html#patientColumns">patientColumns</a></li><li><a href="global.html#Patienthistory">Patienthistory</a></li><li><a href="global.html#PatientHistoryBtn">PatientHistoryBtn</a></li><li><a href="global.html#patients">patients</a></li><li><a href="global.html#Pdetails">Pdetails</a></li><li><a href="global.html#Pharma">Pharma</a></li><li><a href="global.html#Prescribe">Prescribe</a></li><li><a href="global.html#Prescription">Prescription</a></li><li><a href="global.html#QuickSearchToolbar">QuickSearchToolbar</a></li><li><a href="global.html#react-router-dom">react-router-dom</a></li><li><a href="global.html#Results">Results</a></li><li><a href="global.html#Services">Services</a></li><li><a href="global.html#SideBar">SideBar</a></li><li><a href="global.html#Sign_in">Sign_in</a></li><li><a href="global.html#stepOne">stepOne</a></li><li><a href="global.html#stepTwo">stepTwo</a></li><li><a href="global.html#ThisYrDis">ThisYrDis</a></li><li><a href="global.html#ThisYrFin">ThisYrFin</a></li><li><a href="global.html#TopBar">TopBar</a></li><li><a href="global.html#upDateStatus">upDateStatus</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userColumn">userColumn</a></li><li><a href="global.html#useStyles">useStyles</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Apr 26 2022 14:38:52 GMT+0200 (South Africa Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
